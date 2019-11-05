@@ -1,0 +1,1189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{94DDE1DF-F0F5-4E3C-82EE-15892F7B5423}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ApiManager.Web</RootNamespace>
+    <AssemblyName>ApiManager.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44354</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>enabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr3.Runtime.3.5.1\lib\net40-client\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Flash.Mvc5, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Flash.Mvc5.1.0.0\lib\net46\Flash.Mvc5.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Iesi.Collections.4.0.4\lib\net461\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=5.2.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\NHibernate.5.2.6\lib\net461\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Remotion.Linq, Version=2.2.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Remotion.Linq.2.2.0\lib\net45\Remotion.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="Remotion.Linq.EagerFetching, Version=2.2.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Remotion.Linq.EagerFetching.2.2.0\lib\net45\Remotion.Linq.EagerFetching.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Net.Http.Formatting">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.7\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.7\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\Api\UserController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PasswordHashingApiModel.cs" />
+    <Compile Include="Models\ServiceApiModel.cs" />
+    <Compile Include="Models\UserApiModel.cs" />
+    <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Models\UserViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="dist\assets\css\pages\blog\grid-v2.css" />
+    <Content Include="dist\assets\css\pages\blog\grid-v2.js" />
+    <Content Include="dist\assets\css\pages\blog\grid.css" />
+    <Content Include="dist\assets\css\pages\blog\grid.js" />
+    <Content Include="dist\assets\css\pages\blog\list.css" />
+    <Content Include="dist\assets\css\pages\blog\list.js" />
+    <Content Include="dist\assets\css\pages\blog\post.css" />
+    <Content Include="dist\assets\css\pages\blog\post.js" />
+    <Content Include="dist\assets\css\pages\error\404-v1.css" />
+    <Content Include="dist\assets\css\pages\error\404-v1.js" />
+    <Content Include="dist\assets\css\pages\error\404-v2.css" />
+    <Content Include="dist\assets\css\pages\error\404-v2.js" />
+    <Content Include="dist\assets\css\pages\error\404-v3.css" />
+    <Content Include="dist\assets\css\pages\error\404-v3.js" />
+    <Content Include="dist\assets\css\pages\error\404-v4.css" />
+    <Content Include="dist\assets\css\pages\error\404-v4.js" />
+    <Content Include="dist\assets\css\pages\inbox\inbox.css" />
+    <Content Include="dist\assets\css\pages\inbox\inbox.js" />
+    <Content Include="dist\assets\css\pages\invoice\invoice-v1.css" />
+    <Content Include="dist\assets\css\pages\invoice\invoice-v1.js" />
+    <Content Include="dist\assets\css\pages\invoice\invoice-v2.css" />
+    <Content Include="dist\assets\css\pages\invoice\invoice-v2.js" />
+    <Content Include="dist\assets\css\pages\login\login-v1.css" />
+    <Content Include="dist\assets\css\pages\login\login-v1.js" />
+    <Content Include="dist\assets\css\pages\login\login-v2.css" />
+    <Content Include="dist\assets\css\pages\login\login-v2.js" />
+    <Content Include="dist\assets\css\pages\login\profile-v1.css" />
+    <Content Include="dist\assets\css\pages\login\profile-v1.js" />
+    <Content Include="dist\assets\css\pages\pricing\pricing-v1.css" />
+    <Content Include="dist\assets\css\pages\pricing\pricing-v1.js" />
+    <Content Include="dist\assets\css\pages\pricing\pricing-v2.css" />
+    <Content Include="dist\assets\css\pages\pricing\pricing-v2.js" />
+    <Content Include="dist\assets\css\pages\wizards\wizard-v1.css" />
+    <Content Include="dist\assets\css\pages\wizards\wizard-v1.js" />
+    <Content Include="dist\assets\css\pages\wizards\wizard-v2.css" />
+    <Content Include="dist\assets\css\pages\wizards\wizard-v2.js" />
+    <Content Include="dist\assets\css\pages\wizards\wizard-v3.css" />
+    <Content Include="dist\assets\css\pages\wizards\wizard-v3.js" />
+    <Content Include="dist\assets\css\skins\aside\brand.css" />
+    <Content Include="dist\assets\css\skins\aside\brand.js" />
+    <Content Include="dist\assets\css\skins\aside\light.css" />
+    <Content Include="dist\assets\css\skins\aside\light.js" />
+    <Content Include="dist\assets\css\skins\aside\navy.css" />
+    <Content Include="dist\assets\css\skins\aside\navy.js" />
+    <Content Include="dist\assets\css\skins\brand\brand.css" />
+    <Content Include="dist\assets\css\skins\brand\brand.js" />
+    <Content Include="dist\assets\css\skins\brand\light.css" />
+    <Content Include="dist\assets\css\skins\brand\light.js" />
+    <Content Include="dist\assets\css\skins\brand\navy.css" />
+    <Content Include="dist\assets\css\skins\brand\navy.js" />
+    <Content Include="dist\assets\css\skins\header\base\brand.css" />
+    <Content Include="dist\assets\css\skins\header\base\brand.js" />
+    <Content Include="dist\assets\css\skins\header\base\light.css" />
+    <Content Include="dist\assets\css\skins\header\base\light.js" />
+    <Content Include="dist\assets\css\skins\header\base\navy.css" />
+    <Content Include="dist\assets\css\skins\header\base\navy.js" />
+    <Content Include="dist\assets\css\skins\header\menu\dark.css" />
+    <Content Include="dist\assets\css\skins\header\menu\dark.js" />
+    <Content Include="dist\assets\css\skins\header\menu\light.css" />
+    <Content Include="dist\assets\css\skins\header\menu\light.js" />
+    <Content Include="dist\assets\css\style.bundle.css" />
+    <Content Include="dist\assets\css\style.bundle.js" />
+    <Content Include="dist\assets\js\global\components\base\app.js" />
+    <Content Include="dist\assets\js\global\components\base\avatar.js" />
+    <Content Include="dist\assets\js\global\components\base\datatable\core.datatable.js" />
+    <Content Include="dist\assets\js\global\components\base\datatable\datatable.checkbox.js" />
+    <Content Include="dist\assets\js\global\components\base\datatable\datatable.rtl.js" />
+    <Content Include="dist\assets\js\global\components\base\dialog.js" />
+    <Content Include="dist\assets\js\global\components\base\header.js" />
+    <Content Include="dist\assets\js\global\components\base\menu.js" />
+    <Content Include="dist\assets\js\global\components\base\offcanvas.js" />
+    <Content Include="dist\assets\js\global\components\base\portlet.js" />
+    <Content Include="dist\assets\js\global\components\base\scrolltop.js" />
+    <Content Include="dist\assets\js\global\components\base\toggle.js" />
+    <Content Include="dist\assets\js\global\components\base\util.js" />
+    <Content Include="dist\assets\js\global\components\base\wizard.js" />
+    <Content Include="dist\assets\js\global\integration\plugins\bootstrap-datepicker.init.js" />
+    <Content Include="dist\assets\js\global\integration\plugins\bootstrap-markdown.init.js" />
+    <Content Include="dist\assets\js\global\integration\plugins\bootstrap-notify.init.js" />
+    <Content Include="dist\assets\js\global\integration\plugins\bootstrap-switch.init.js" />
+    <Content Include="dist\assets\js\global\integration\plugins\bootstrap-timepicker.init.js" />
+    <Content Include="dist\assets\js\global\integration\plugins\datatables.init.js" />
+    <Content Include="dist\assets\js\global\integration\plugins\dropzone.init.js" />
+    <Content Include="dist\assets\js\global\integration\plugins\jquery-validation.init.js" />
+    <Content Include="dist\assets\js\global\integration\plugins\sweetalert2.init.js" />
+    <Content Include="dist\assets\js\global\layout\aside-secondary.js" />
+    <Content Include="dist\assets\js\global\layout\demo-panel.js" />
+    <Content Include="dist\assets\js\global\layout\layout.js" />
+    <Content Include="dist\assets\js\global\layout\lib.js" />
+    <Content Include="dist\assets\js\global\layout\offcanvas-panel.js" />
+    <Content Include="dist\assets\js\global\layout\quick-panel.js" />
+    <Content Include="dist\assets\js\global\layout\quick-search.js" />
+    <Content Include="dist\assets\js\pages\builder.js" />
+    <Content Include="dist\assets\js\pages\components\base\popovers.js" />
+    <Content Include="dist\assets\js\pages\components\base\toasts.js" />
+    <Content Include="dist\assets\js\pages\components\base\tooltips.js" />
+    <Content Include="dist\assets\js\pages\components\calendar\agenda-week.js" />
+    <Content Include="dist\assets\js\pages\components\calendar\basic.js" />
+    <Content Include="dist\assets\js\pages\components\calendar\external.js" />
+    <Content Include="dist\assets\js\pages\components\calendar\google.js" />
+    <Content Include="dist\assets\js\pages\components\calendar\list-view.js" />
+    <Content Include="dist\assets\js\pages\components\calendar\rendering.js" />
+    <Content Include="dist\assets\js\pages\components\charts\chart-js.js" />
+    <Content Include="dist\assets\js\pages\components\charts\flotcharts.js" />
+    <Content Include="dist\assets\js\pages\components\charts\google-charts.js" />
+    <Content Include="dist\assets\js\pages\components\charts\morris-charts.js" />
+    <Content Include="dist\assets\js\pages\components\datatables\advanced\column-rendering.js" />
+    <Content Include="dist\assets\js\pages\components\datatables\advanced\column-visibility.js" />
+    <Content Include="dist\assets\js\pages\components\datatables\advanced\footer-callback.js" />
+    <Content Include="dist\assets\js\pages\components\datatables\advanced\multiple-controls.js" />
+    <Content Include="dist\assets\js\pages\components\datatables\advanced\row-callback.js" />
+    <Content Include="dist\assets\js\pages\components\datatables\advanced\row-grouping.js" />
+    <Content Include="dist\assets\js\pages\components\datatables\basic\basic.js" />
+    <Content Include="dist\assets\js\pages\components\datatables\basic\headers.js" />
+    <Content Include="dist\assets\js\pages\components\datatables\basic\paginations.js" />
+    <Content Include="dist\assets\js\pages\components\datatables\basic\scrollable.js" />
+    <Content Include="dist\assets\js\pages\components\datatables\data-sources\ajax-client-side.js" />
+    <Content Include="dist\assets\js\pages\components\datatables\data-sources\ajax-server-side.js" />
+    <Content Include="dist\assets\js\pages\components\datatables\data-sources\html.js" />
+    <Content Include="dist\assets\js\pages\components\datatables\data-sources\javascript.js" />
+    <Content Include="dist\assets\js\pages\components\datatables\extensions\buttons.js" />
+    <Content Include="dist\assets\js\pages\components\datatables\extensions\colreorder.js" />
+    <Content Include="dist\assets\js\pages\components\datatables\extensions\fixedcolumns.js" />
+    <Content Include="dist\assets\js\pages\components\datatables\extensions\fixedheader.js" />
+    <Content Include="dist\assets\js\pages\components\datatables\extensions\keytable.js" />
+    <Content Include="dist\assets\js\pages\components\datatables\extensions\responsive.js" />
+    <Content Include="dist\assets\js\pages\components\datatables\extensions\rowgroup.js" />
+    <Content Include="dist\assets\js\pages\components\datatables\extensions\rowreorder.js" />
+    <Content Include="dist\assets\js\pages\components\datatables\extensions\scroller.js" />
+    <Content Include="dist\assets\js\pages\components\datatables\extensions\select.js" />
+    <Content Include="dist\assets\js\pages\components\datatables\search-options\advanced-search.js" />
+    <Content Include="dist\assets\js\pages\components\datatables\search-options\column-search.js" />
+    <Content Include="dist\assets\js\pages\components\extended\blockui.js" />
+    <Content Include="dist\assets\js\pages\components\extended\dual-listbox.js" />
+    <Content Include="dist\assets\js\pages\components\extended\idle-timer.js" />
+    <Content Include="dist\assets\js\pages\components\extended\session-timeout.js" />
+    <Content Include="dist\assets\js\pages\components\extended\sticky-panels.js" />
+    <Content Include="dist\assets\js\pages\components\extended\sweetalert2.js" />
+    <Content Include="dist\assets\js\pages\components\extended\toastr.js" />
+    <Content Include="dist\assets\js\pages\components\extended\treeview.js" />
+    <Content Include="dist\assets\js\pages\components\extended\uppy.js" />
+    <Content Include="dist\assets\js\pages\components\forms\controls\avatar.js" />
+    <Content Include="dist\assets\js\pages\components\forms\file-upload\dropzonejs.js" />
+    <Content Include="dist\assets\js\pages\components\forms\file-upload\uppy.js" />
+    <Content Include="dist\assets\js\pages\components\forms\layouts\repeater.js" />
+    <Content Include="dist\assets\js\pages\components\forms\validation\controls.js" />
+    <Content Include="dist\assets\js\pages\components\forms\validation\widgets.js" />
+    <Content Include="dist\assets\js\pages\components\forms\widgets\autosize.js" />
+    <Content Include="dist\assets\js\pages\components\forms\widgets\bootstrap-datepicker.js" />
+    <Content Include="dist\assets\js\pages\components\forms\widgets\bootstrap-daterangepicker.js" />
+    <Content Include="dist\assets\js\pages\components\forms\widgets\bootstrap-datetimepicker.js" />
+    <Content Include="dist\assets\js\pages\components\forms\widgets\bootstrap-markdown.js" />
+    <Content Include="dist\assets\js\pages\components\forms\widgets\bootstrap-maxlength.js" />
+    <Content Include="dist\assets\js\pages\components\forms\widgets\bootstrap-multipleselectsplitter.js" />
+    <Content Include="dist\assets\js\pages\components\forms\widgets\bootstrap-select.js" />
+    <Content Include="dist\assets\js\pages\components\forms\widgets\bootstrap-timepicker.js" />
+    <Content Include="dist\assets\js\pages\components\forms\widgets\bootstrap-touchspin.js" />
+    <Content Include="dist\assets\js\pages\components\forms\widgets\clipboard.js" />
+    <Content Include="dist\assets\js\pages\components\forms\widgets\dropzone.js" />
+    <Content Include="dist\assets\js\pages\components\forms\widgets\input-mask.js" />
+    <Content Include="dist\assets\js\pages\components\forms\widgets\nouislider.js" />
+    <Content Include="dist\assets\js\pages\components\forms\widgets\quill.js" />
+    <Content Include="dist\assets\js\pages\components\forms\widgets\summernote.js" />
+    <Content Include="dist\assets\js\pages\components\forms\widgets\tagify.js" />
+    <Content Include="dist\assets\js\pages\components\forms\widgets\typeahead.js" />
+    <Content Include="dist\assets\js\pages\components\keen-datatable\advanced\column-rendering.js" />
+    <Content Include="dist\assets\js\pages\components\keen-datatable\advanced\column-width.js" />
+    <Content Include="dist\assets\js\pages\components\keen-datatable\advanced\modal.js" />
+    <Content Include="dist\assets\js\pages\components\keen-datatable\advanced\record-selection.js" />
+    <Content Include="dist\assets\js\pages\components\keen-datatable\advanced\row-details.js" />
+    <Content Include="dist\assets\js\pages\components\keen-datatable\api\events.js" />
+    <Content Include="dist\assets\js\pages\components\keen-datatable\api\methods.js" />
+    <Content Include="dist\assets\js\pages\components\keen-datatable\base\data-ajax.js" />
+    <Content Include="dist\assets\js\pages\components\keen-datatable\base\data-json.js" />
+    <Content Include="dist\assets\js\pages\components\keen-datatable\base\data-local.js" />
+    <Content Include="dist\assets\js\pages\components\keen-datatable\base\html-table.js" />
+    <Content Include="dist\assets\js\pages\components\keen-datatable\base\local-sort.js" />
+    <Content Include="dist\assets\js\pages\components\keen-datatable\base\translation.js" />
+    <Content Include="dist\assets\js\pages\components\keen-datatable\child\data-ajax.js" />
+    <Content Include="dist\assets\js\pages\components\keen-datatable\child\data-local.js" />
+    <Content Include="dist\assets\js\pages\components\keen-datatable\locked\both.js" />
+    <Content Include="dist\assets\js\pages\components\keen-datatable\locked\html-table.js" />
+    <Content Include="dist\assets\js\pages\components\keen-datatable\locked\left.js" />
+    <Content Include="dist\assets\js\pages\components\keen-datatable\locked\right.js" />
+    <Content Include="dist\assets\js\pages\components\keen-datatable\scrolling\vertical.js" />
+    <Content Include="dist\assets\js\pages\components\portlets\draggable.js" />
+    <Content Include="dist\assets\js\pages\components\portlets\tools.js" />
+    <Content Include="dist\assets\js\pages\custom\inbox.php" />
+    <Content Include="dist\assets\js\pages\custom\inbox\inbox.js" />
+    <Content Include="dist\assets\js\pages\custom\profile\overview-1.js" />
+    <Content Include="dist\assets\js\pages\custom\profile\overview-2.js" />
+    <Content Include="dist\assets\js\pages\custom\profile\overview-3.js" />
+    <Content Include="dist\assets\js\pages\custom\profile\profile.js" />
+    <Content Include="dist\assets\js\pages\custom\users\add.js" />
+    <Content Include="dist\assets\js\pages\custom\users\edit.js" />
+    <Content Include="dist\assets\js\pages\custom\users\list-columns.js" />
+    <Content Include="dist\assets\js\pages\custom\users\list-datatable.js" />
+    <Content Include="dist\assets\js\pages\custom\users\list-row.js" />
+    <Content Include="dist\assets\js\pages\custom\user\login.js" />
+    <Content Include="dist\assets\js\pages\custom\user\profile.js" />
+    <Content Include="dist\assets\js\pages\custom\wizards\wizard-v1.js" />
+    <Content Include="dist\assets\js\pages\custom\wizards\wizard-v2.js" />
+    <Content Include="dist\assets\js\pages\custom\wizards\wizard-v3.js" />
+    <Content Include="dist\assets\js\pages\custom\wizards\wizard-v4.js" />
+    <Content Include="dist\assets\js\pages\dashboard.js" />
+    <Content Include="dist\assets\js\scripts.bundle.js" />
+    <Content Include="dist\assets\media\blog\1.jpg" />
+    <Content Include="dist\assets\media\blog\10.jpg" />
+    <Content Include="dist\assets\media\blog\11.jpg" />
+    <Content Include="dist\assets\media\blog\12.jpg" />
+    <Content Include="dist\assets\media\blog\1200x600\2.jpg" />
+    <Content Include="dist\assets\media\blog\1200x600\3.jpg" />
+    <Content Include="dist\assets\media\blog\1200x600\6.jpg" />
+    <Content Include="dist\assets\media\blog\2.jpg" />
+    <Content Include="dist\assets\media\blog\3.jpg" />
+    <Content Include="dist\assets\media\blog\4.jpg" />
+    <Content Include="dist\assets\media\blog\5.jpg" />
+    <Content Include="dist\assets\media\blog\500x600\29.jpg" />
+    <Content Include="dist\assets\media\blog\6.jpg" />
+    <Content Include="dist\assets\media\blog\7.jpg" />
+    <Content Include="dist\assets\media\blog\8.jpg" />
+    <Content Include="dist\assets\media\blog\9.jpg" />
+    <Content Include="dist\assets\media\blog\900x600\24.jpg" />
+    <Content Include="dist\assets\media\blog\900x600\25.jpg" />
+    <Content Include="dist\assets\media\blog\900x600\5.jpg" />
+    <Content Include="dist\assets\media\blog\900x600\8.jpg" />
+    <Content Include="dist\assets\media\blog\blog-1.jpg" />
+    <Content Include="dist\assets\media\blog\blog-2.jpg" />
+    <Content Include="dist\assets\media\blog\blog-3.jpg" />
+    <Content Include="dist\assets\media\blog\blog-4.jpg" />
+    <Content Include="dist\assets\media\blog\blog-5.jpg" />
+    <Content Include="dist\assets\media\blog\blog-6.jpg" />
+    <Content Include="dist\assets\media\blog\blog-7.jpg" />
+    <Content Include="dist\assets\media\client-logos\logo1.png" />
+    <Content Include="dist\assets\media\client-logos\logo2.png" />
+    <Content Include="dist\assets\media\client-logos\logo3.png" />
+    <Content Include="dist\assets\media\client-logos\logo4.png" />
+    <Content Include="dist\assets\media\client-logos\logo5.png" />
+    <Content Include="dist\assets\media\company-logos\logo-1.png" />
+    <Content Include="dist\assets\media\company-logos\logo-2.png" />
+    <Content Include="dist\assets\media\company-logos\logo-3.png" />
+    <Content Include="dist\assets\media\company-logos\logo-4.png" />
+    <Content Include="dist\assets\media\company-logos\logo_client_color.png" />
+    <Content Include="dist\assets\media\company-logos\logo_client_white.png" />
+    <Content Include="dist\assets\media\company-logos\logo_invoice_dark.png" />
+    <Content Include="dist\assets\media\company-logos\logo_invoice_white.png" />
+    <Content Include="dist\assets\media\demos\preview\demo1.png" />
+    <Content Include="dist\assets\media\demos\preview\demo2.png" />
+    <Content Include="dist\assets\media\demos\preview\demo3.png" />
+    <Content Include="dist\assets\media\demos\preview\demo4.png" />
+    <Content Include="dist\assets\media\demos\preview\demo5.png" />
+    <Content Include="dist\assets\media\demos\preview\demo6.jpg" />
+    <Content Include="dist\assets\media\demos\preview\demo7.jpg" />
+    <Content Include="dist\assets\media\demos\preview\demo8.jpg" />
+    <Content Include="dist\assets\media\demos\preview\demo9.jpg" />
+    <Content Include="dist\assets\media\files\css.svg" />
+    <Content Include="dist\assets\media\files\csv.svg" />
+    <Content Include="dist\assets\media\files\doc.svg" />
+    <Content Include="dist\assets\media\files\html.svg" />
+    <Content Include="dist\assets\media\files\javascript.svg" />
+    <Content Include="dist\assets\media\files\jpg.svg" />
+    <Content Include="dist\assets\media\files\mp4.svg" />
+    <Content Include="dist\assets\media\files\pdf.svg" />
+    <Content Include="dist\assets\media\files\xml.svg" />
+    <Content Include="dist\assets\media\files\zip.svg" />
+    <Content Include="dist\assets\media\flags\001-austria.svg" />
+    <Content Include="dist\assets\media\flags\002-belgium.svg" />
+    <Content Include="dist\assets\media\flags\003-switzerland.svg" />
+    <Content Include="dist\assets\media\flags\004-indonesia.svg" />
+    <Content Include="dist\assets\media\flags\005-portugal.svg" />
+    <Content Include="dist\assets\media\flags\006-turkey.svg" />
+    <Content Include="dist\assets\media\flags\007-malasya.svg" />
+    <Content Include="dist\assets\media\flags\008-saudi-arabia.svg" />
+    <Content Include="dist\assets\media\flags\009-australia.svg" />
+    <Content Include="dist\assets\media\flags\010-india.svg" />
+    <Content Include="dist\assets\media\flags\011-brazil.svg" />
+    <Content Include="dist\assets\media\flags\012-uk.svg" />
+    <Content Include="dist\assets\media\flags\013-russia.svg" />
+    <Content Include="dist\assets\media\flags\014-japan.svg" />
+    <Content Include="dist\assets\media\flags\015-china.svg" />
+    <Content Include="dist\assets\media\flags\016-spain.svg" />
+    <Content Include="dist\assets\media\flags\017-germany.svg" />
+    <Content Include="dist\assets\media\flags\018-south-korea.svg" />
+    <Content Include="dist\assets\media\flags\019-france.svg" />
+    <Content Include="dist\assets\media\flags\020-flag.svg" />
+    <Content Include="dist\assets\media\icons\exchange.svg" />
+    <Content Include="dist\assets\media\icons\iconbox_bg.svg" />
+    <Content Include="dist\assets\media\icons\logout.svg" />
+    <Content Include="dist\assets\media\icons\question.svg" />
+    <Content Include="dist\assets\media\icons\warning.svg" />
+    <Content Include="dist\assets\media\layout\footer-bg-demo3.jpg" />
+    <Content Include="dist\assets\media\layout\footer-bg-demo4.jpg" />
+    <Content Include="dist\assets\media\layout\header-bg-demo3.jpg" />
+    <Content Include="dist\assets\media\layout\header-bg-demo4.jpg" />
+    <Content Include="dist\assets\media\logos\favicon.ico" />
+    <Content Include="dist\assets\media\logos\logo-1.png" />
+    <Content Include="dist\assets\media\logos\logo-2.png" />
+    <Content Include="dist\assets\media\logos\logo-3.png" />
+    <Content Include="dist\assets\media\logos\logo-4-sticky.png" />
+    <Content Include="dist\assets\media\logos\logo-4.png" />
+    <Content Include="dist\assets\media\logos\logo-5.png" />
+    <Content Include="dist\assets\media\logos\logo-6.png" />
+    <Content Include="dist\assets\media\logos\logo-7.png" />
+    <Content Include="dist\assets\media\logos\logo-8.png" />
+    <Content Include="dist\assets\media\logos\logo-9.png" />
+    <Content Include="dist\assets\media\logos\logo-launcher-1.png" />
+    <Content Include="dist\assets\media\logos\logo-launcher-2.png" />
+    <Content Include="dist\assets\media\misc\404-bg1.jpg" />
+    <Content Include="dist\assets\media\misc\404-bg2.jpg" />
+    <Content Include="dist\assets\media\misc\404-bg3.jpg" />
+    <Content Include="dist\assets\media\misc\404-bg4.jpg" />
+    <Content Include="dist\assets\media\misc\bg-mobile-2.jpg" />
+    <Content Include="dist\assets\media\misc\bg-mobile-3.jpg" />
+    <Content Include="dist\assets\media\misc\bg-mobile-4.jpg" />
+    <Content Include="dist\assets\media\misc\bg_1.jpg" />
+    <Content Include="dist\assets\media\misc\bg_icon.svg" />
+    <Content Include="dist\assets\media\misc\clouds.png" />
+    <Content Include="dist\assets\media\misc\head_bg.jpg" />
+    <Content Include="dist\assets\media\misc\head_bg_sm.jpg" />
+    <Content Include="dist\assets\media\misc\iconbox_bg-white.png" />
+    <Content Include="dist\assets\media\misc\iconbox_bg.png" />
+    <Content Include="dist\assets\media\misc\invoice1-bg.png" />
+    <Content Include="dist\assets\media\misc\invoice1-logo.png" />
+    <Content Include="dist\assets\media\misc\invoice2-logo.png" />
+    <Content Include="dist\assets\media\misc\owl.video.play.png" />
+    <Content Include="dist\assets\media\plugins\jstree\32px.png" />
+    <Content Include="dist\assets\media\product-logos\logo1.png" />
+    <Content Include="dist\assets\media\product-logos\logo2.png" />
+    <Content Include="dist\assets\media\product-logos\logo3.png" />
+    <Content Include="dist\assets\media\product-logos\logo4.png" />
+    <Content Include="dist\assets\media\product-logos\logo5.png" />
+    <Content Include="dist\assets\media\project-logos\1.png" />
+    <Content Include="dist\assets\media\project-logos\2.png" />
+    <Content Include="dist\assets\media\project-logos\3.png" />
+    <Content Include="dist\assets\media\project-logos\4.png" />
+    <Content Include="dist\assets\media\project-logos\5.png" />
+    <Content Include="dist\assets\media\project-logos\6.png" />
+    <Content Include="dist\assets\media\project-logos\7.png" />
+    <Content Include="dist\assets\media\users\100_1.jpg" />
+    <Content Include="dist\assets\media\users\100_10.jpg" />
+    <Content Include="dist\assets\media\users\100_11.jpg" />
+    <Content Include="dist\assets\media\users\100_12.jpg" />
+    <Content Include="dist\assets\media\users\100_13.jpg" />
+    <Content Include="dist\assets\media\users\100_14.jpg" />
+    <Content Include="dist\assets\media\users\100_2.jpg" />
+    <Content Include="dist\assets\media\users\100_3.jpg" />
+    <Content Include="dist\assets\media\users\100_4.jpg" />
+    <Content Include="dist\assets\media\users\100_5.jpg" />
+    <Content Include="dist\assets\media\users\100_6.jpg" />
+    <Content Include="dist\assets\media\users\100_7.jpg" />
+    <Content Include="dist\assets\media\users\100_8.jpg" />
+    <Content Include="dist\assets\media\users\100_9.jpg" />
+    <Content Include="dist\assets\media\users\300_1.jpg" />
+    <Content Include="dist\assets\media\users\300_10.jpg" />
+    <Content Include="dist\assets\media\users\300_11.jpg" />
+    <Content Include="dist\assets\media\users\300_12.jpg" />
+    <Content Include="dist\assets\media\users\300_13.jpg" />
+    <Content Include="dist\assets\media\users\300_14.jpg" />
+    <Content Include="dist\assets\media\users\300_15.jpg" />
+    <Content Include="dist\assets\media\users\300_16.jpg" />
+    <Content Include="dist\assets\media\users\300_17.jpg" />
+    <Content Include="dist\assets\media\users\300_18.jpg" />
+    <Content Include="dist\assets\media\users\300_19.jpg" />
+    <Content Include="dist\assets\media\users\300_2.jpg" />
+    <Content Include="dist\assets\media\users\300_20.jpg" />
+    <Content Include="dist\assets\media\users\300_21.jpg" />
+    <Content Include="dist\assets\media\users\300_22.jpg" />
+    <Content Include="dist\assets\media\users\300_23.jpg" />
+    <Content Include="dist\assets\media\users\300_24.jpg" />
+    <Content Include="dist\assets\media\users\300_25.jpg" />
+    <Content Include="dist\assets\media\users\300_3.jpg" />
+    <Content Include="dist\assets\media\users\300_4.jpg" />
+    <Content Include="dist\assets\media\users\300_5.jpg" />
+    <Content Include="dist\assets\media\users\300_6.jpg" />
+    <Content Include="dist\assets\media\users\300_7.jpg" />
+    <Content Include="dist\assets\media\users\300_8.jpg" />
+    <Content Include="dist\assets\media\users\300_9.jpg" />
+    <Content Include="dist\assets\media\users\default.jpg" />
+    <Content Include="dist\assets\media\wizard\undraw_checklist_7q37.svg" />
+    <Content Include="dist\assets\media\wizard\undraw_hiring_cyhs.svg" />
+    <Content Include="dist\assets\media\wizard\undraw_live_collaboration_2r4y.svg" />
+    <Content Include="dist\assets\media\wizard\undraw_resume_folder_2_arse.svg" />
+    <Content Include="dist\assets\plugins\bootstrap-multiselectsplitter\bootstrap-multiselectsplitter.js" />
+    <Content Include="dist\assets\plugins\bootstrap-multiselectsplitter\bootstrap-multiselectsplitter.min.js" />
+    <Content Include="dist\assets\plugins\bootstrap-session-timeout\dist\bootstrap-session-timeout.js" />
+    <Content Include="dist\assets\plugins\bootstrap-session-timeout\dist\bootstrap-session-timeout.min.js" />
+    <Content Include="dist\assets\plugins\bootstrap-session-timeout\examples\basic.html" />
+    <Content Include="dist\assets\plugins\bootstrap-session-timeout\examples\countdown-bar.html" />
+    <Content Include="dist\assets\plugins\bootstrap-session-timeout\examples\countdown-timer.html" />
+    <Content Include="dist\assets\plugins\bootstrap-session-timeout\examples\custom-callback.html" />
+    <Content Include="dist\assets\plugins\bootstrap-session-timeout\examples\keep-alive.html" />
+    <Content Include="dist\assets\plugins\bootstrap-session-timeout\examples\locked.html" />
+    <Content Include="dist\assets\plugins\bootstrap-session-timeout\examples\login.html" />
+    <Content Include="dist\assets\plugins\bootstrap-session-timeout\Gruntfile.js" />
+    <Content Include="dist\assets\plugins\bootstrap-session-timeout\index.html" />
+    <Content Include="dist\assets\plugins\custom\datatables\datatables.bundle.css" />
+    <Content Include="dist\assets\plugins\custom\datatables\datatables.bundle.js" />
+    <Content Include="dist\assets\plugins\custom\flot\flot.bundle.js" />
+    <Content Include="dist\assets\plugins\custom\fullcalendar\fullcalendar.bundle.css" />
+    <Content Include="dist\assets\plugins\custom\fullcalendar\fullcalendar.bundle.js" />
+    <Content Include="dist\assets\plugins\custom\gmaps\gmaps.js" />
+    <Content Include="dist\assets\plugins\custom\jquery-ui\images\ui-icons_444444_256x240.png" />
+    <Content Include="dist\assets\plugins\custom\jquery-ui\images\ui-icons_555555_256x240.png" />
+    <Content Include="dist\assets\plugins\custom\jquery-ui\images\ui-icons_777620_256x240.png" />
+    <Content Include="dist\assets\plugins\custom\jquery-ui\images\ui-icons_777777_256x240.png" />
+    <Content Include="dist\assets\plugins\custom\jquery-ui\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="dist\assets\plugins\custom\jquery-ui\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="dist\assets\plugins\custom\jquery-ui\jquery-ui.bundle.css" />
+    <Content Include="dist\assets\plugins\custom\jquery-ui\jquery-ui.bundle.js" />
+    <Content Include="dist\assets\plugins\custom\jqvmap\jqvmap.bundle.css" />
+    <Content Include="dist\assets\plugins\custom\jqvmap\jqvmap.bundle.js" />
+    <Content Include="dist\assets\plugins\custom\jstree\images\32px.png" />
+    <Content Include="dist\assets\plugins\custom\jstree\images\40px.png" />
+    <Content Include="dist\assets\plugins\custom\jstree\images\throbber.gif" />
+    <Content Include="dist\assets\plugins\custom\jstree\jstree.bundle.css" />
+    <Content Include="dist\assets\plugins\custom\jstree\jstree.bundle.js" />
+    <Content Include="dist\assets\plugins\custom\uppy\uppy.bundle.css" />
+    <Content Include="dist\assets\plugins\custom\uppy\uppy.bundle.js" />
+    <Content Include="dist\assets\plugins\flaticon2\flaticon.css" />
+    <Content Include="dist\assets\plugins\flaticon2\font\Flaticon2.svg" />
+    <Content Include="dist\assets\plugins\flaticon2\license.html" />
+    <Content Include="dist\assets\plugins\flaticon\flaticon.css" />
+    <Content Include="dist\assets\plugins\flaticon\font\Flaticon.svg" />
+    <Content Include="dist\assets\plugins\flaticon\license.html" />
+    <Content Include="dist\assets\plugins\global\fonts\fa-brands-400.svg" />
+    <Content Include="dist\assets\plugins\global\fonts\fa-regular-400.svg" />
+    <Content Include="dist\assets\plugins\global\fonts\fa-solid-900.svg" />
+    <Content Include="dist\assets\plugins\global\fonts\Flaticon.svg" />
+    <Content Include="dist\assets\plugins\global\fonts\Flaticon2.svg" />
+    <Content Include="dist\assets\plugins\global\fonts\line-awesome.svg" />
+    <Content Include="dist\assets\plugins\global\fonts\socicon.svg" />
+    <Content Include="dist\assets\plugins\global\plugins.bundle.css" />
+    <Content Include="dist\assets\plugins\global\plugins.bundle.js" />
+    <Content Include="dist\assets\plugins\jquery-idletimer\idle-timer.js" />
+    <Content Include="dist\assets\plugins\jquery-idletimer\idle-timer.min.js" />
+    <Content Include="dist\assets\plugins\jquery-ui\images\ui-icons_444444_256x240.png" />
+    <Content Include="dist\assets\plugins\jquery-ui\images\ui-icons_555555_256x240.png" />
+    <Content Include="dist\assets\plugins\jquery-ui\images\ui-icons_777620_256x240.png" />
+    <Content Include="dist\assets\plugins\jquery-ui\images\ui-icons_777777_256x240.png" />
+    <Content Include="dist\assets\plugins\jquery-ui\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="dist\assets\plugins\jquery-ui\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="dist\assets\plugins\jquery-ui\jquery-ui.min.css" />
+    <Content Include="dist\assets\plugins\jquery-ui\jquery-ui.min.js" />
+    <Content Include="dist\assets\plugins\jquery-ui\jquery-ui.min.rtl.css" />
+    <Content Include="dist\assets\plugins\jquery-ui\LICENSE.txt" />
+    <Content Include="dist\assets\plugins\line-awesome\css\line-awesome.css" />
+    <Content Include="dist\assets\plugins\line-awesome\fonts\line-awesome.svg" />
+    <Content Include="dist\assets\plugins\mapplic\hammer.min.js" />
+    <Content Include="dist\assets\plugins\mapplic\html5shiv.js" />
+    <Content Include="dist\assets\plugins\mapplic\images\alpha20.png" />
+    <Content Include="dist\assets\plugins\mapplic\images\alpha50.png" />
+    <Content Include="dist\assets\plugins\mapplic\images\arrow-down%402x.png" />
+    <Content Include="dist\assets\plugins\mapplic\images\arrow-down.png" />
+    <Content Include="dist\assets\plugins\mapplic\images\arrow-up%402x.png" />
+    <Content Include="dist\assets\plugins\mapplic\images\arrow-up.png" />
+    <Content Include="dist\assets\plugins\mapplic\images\closedhand.cur" />
+    <Content Include="dist\assets\plugins\mapplic\images\cross%402x.png" />
+    <Content Include="dist\assets\plugins\mapplic\images\cross-light%402x.png" />
+    <Content Include="dist\assets\plugins\mapplic\images\cross-light.png" />
+    <Content Include="dist\assets\plugins\mapplic\images\cross.png" />
+    <Content Include="dist\assets\plugins\mapplic\images\error-icon.png" />
+    <Content Include="dist\assets\plugins\mapplic\images\fullscreen-exit.png" />
+    <Content Include="dist\assets\plugins\mapplic\images\fullscreen.png" />
+    <Content Include="dist\assets\plugins\mapplic\images\loader.gif" />
+    <Content Include="dist\assets\plugins\mapplic\images\minus%402x.png" />
+    <Content Include="dist\assets\plugins\mapplic\images\minus.png" />
+    <Content Include="dist\assets\plugins\mapplic\images\openhand.cur" />
+    <Content Include="dist\assets\plugins\mapplic\images\pin%402x.png" />
+    <Content Include="dist\assets\plugins\mapplic\images\pin-blue%402x.png" />
+    <Content Include="dist\assets\plugins\mapplic\images\pin-blue.png" />
+    <Content Include="dist\assets\plugins\mapplic\images\pin-filled.png" />
+    <Content Include="dist\assets\plugins\mapplic\images\pin-green%402x.png" />
+    <Content Include="dist\assets\plugins\mapplic\images\pin-green.png" />
+    <Content Include="dist\assets\plugins\mapplic\images\pin-orange%402x.png" />
+    <Content Include="dist\assets\plugins\mapplic\images\pin-orange.png" />
+    <Content Include="dist\assets\plugins\mapplic\images\pin-purple%402x.png" />
+    <Content Include="dist\assets\plugins\mapplic\images\pin-purple.png" />
+    <Content Include="dist\assets\plugins\mapplic\images\pin-yellow%402x.png" />
+    <Content Include="dist\assets\plugins\mapplic\images\pin-yellow.png" />
+    <Content Include="dist\assets\plugins\mapplic\images\pin.png" />
+    <Content Include="dist\assets\plugins\mapplic\images\plus%402x.png" />
+    <Content Include="dist\assets\plugins\mapplic\images\plus.png" />
+    <Content Include="dist\assets\plugins\mapplic\images\reset%402x.png" />
+    <Content Include="dist\assets\plugins\mapplic\images\reset-light.png" />
+    <Content Include="dist\assets\plugins\mapplic\images\reset.png" />
+    <Content Include="dist\assets\plugins\mapplic\images\viewer%402x.png" />
+    <Content Include="dist\assets\plugins\mapplic\images\viewer.png" />
+    <Content Include="dist\assets\plugins\mapplic\jquery.mousewheel.js" />
+    <Content Include="dist\assets\plugins\mapplic\magnific-popup.js" />
+    <Content Include="dist\assets\plugins\mapplic\mapplic-ie.css" />
+    <Content Include="dist\assets\plugins\mapplic\mapplic.css" />
+    <Content Include="dist\assets\plugins\mapplic\mapplic.js" />
+    <Content Include="dist\components\base\accordions.html" />
+    <Content Include="dist\components\base\alert.html" />
+    <Content Include="dist\components\base\badge.html" />
+    <Content Include="dist\components\base\breadcrumb.html" />
+    <Content Include="dist\components\base\button-group.html" />
+    <Content Include="dist\components\base\buttons.html" />
+    <Content Include="dist\components\base\card.html" />
+    <Content Include="dist\components\base\collapse.html" />
+    <Content Include="dist\components\base\dropdown.html" />
+    <Content Include="dist\components\base\list-group.html" />
+    <Content Include="dist\components\base\modal.html" />
+    <Content Include="dist\components\base\navs.html" />
+    <Content Include="dist\components\base\pagination.html" />
+    <Content Include="dist\components\base\popovers.html" />
+    <Content Include="dist\components\base\progress.html" />
+    <Content Include="dist\components\base\spinners.html" />
+    <Content Include="dist\components\base\table.html" />
+    <Content Include="dist\components\base\tabs\base.html" />
+    <Content Include="dist\components\base\tabs\button.html" />
+    <Content Include="dist\components\base\tabs\line.html" />
+    <Content Include="dist\components\base\toasts.html" />
+    <Content Include="dist\components\base\tooltips.html" />
+    <Content Include="dist\components\calendar\agenda-week.html" />
+    <Content Include="dist\components\calendar\basic.html" />
+    <Content Include="dist\components\calendar\external.html" />
+    <Content Include="dist\components\calendar\google.html" />
+    <Content Include="dist\components\calendar\list-view.html" />
+    <Content Include="dist\components\calendar\rendering.html" />
+    <Content Include="dist\components\charts\chart-js.html" />
+    <Content Include="dist\components\charts\flotcharts.html" />
+    <Content Include="dist\components\charts\google-charts.html" />
+    <Content Include="dist\components\charts\morris-charts.html" />
+    <Content Include="dist\components\custom\colors.html" />
+    <Content Include="dist\components\custom\head.html" />
+    <Content Include="dist\components\custom\lists.html" />
+    <Content Include="dist\components\custom\media.html" />
+    <Content Include="dist\components\custom\navs.html" />
+    <Content Include="dist\components\custom\notes.html" />
+    <Content Include="dist\components\custom\notifications.html" />
+    <Content Include="dist\components\custom\pagination.html" />
+    <Content Include="dist\components\custom\spinners.html" />
+    <Content Include="dist\components\custom\timeline.html" />
+    <Content Include="dist\components\custom\typography.html" />
+    <Content Include="dist\components\datatables\advanced\column-rendering.html" />
+    <Content Include="dist\components\datatables\advanced\column-visibility.html" />
+    <Content Include="dist\components\datatables\advanced\footer-callback.html" />
+    <Content Include="dist\components\datatables\advanced\multiple-controls.html" />
+    <Content Include="dist\components\datatables\advanced\row-callback.html" />
+    <Content Include="dist\components\datatables\advanced\row-grouping.html" />
+    <Content Include="dist\components\datatables\basic\basic.html" />
+    <Content Include="dist\components\datatables\basic\headers.html" />
+    <Content Include="dist\components\datatables\basic\paginations.html" />
+    <Content Include="dist\components\datatables\basic\scrollable.html" />
+    <Content Include="dist\components\datatables\data-sources\ajax-client-side.html" />
+    <Content Include="dist\components\datatables\data-sources\ajax-server-side.html" />
+    <Content Include="dist\components\datatables\data-sources\html.html" />
+    <Content Include="dist\components\datatables\data-sources\javascript.html" />
+    <Content Include="dist\components\datatables\extensions\buttons.html" />
+    <Content Include="dist\components\datatables\extensions\colreorder.html" />
+    <Content Include="dist\components\datatables\extensions\keytable.html" />
+    <Content Include="dist\components\datatables\extensions\responsive.html" />
+    <Content Include="dist\components\datatables\extensions\rowgroup.html" />
+    <Content Include="dist\components\datatables\extensions\rowreorder.html" />
+    <Content Include="dist\components\datatables\extensions\scroller.html" />
+    <Content Include="dist\components\datatables\extensions\select.html" />
+    <Content Include="dist\components\datatables\search-options\advanced-search.html" />
+    <Content Include="dist\components\datatables\search-options\column-search.html" />
+    <Content Include="dist\components\extended\blockui.html" />
+    <Content Include="dist\components\extended\dual-listbox.html" />
+    <Content Include="dist\components\extended\idle-timer.html" />
+    <Content Include="dist\components\extended\scroll.html" />
+    <Content Include="dist\components\extended\session-timeout.html" />
+    <Content Include="dist\components\extended\sticky-panels.html" />
+    <Content Include="dist\components\extended\sweetalert2.html" />
+    <Content Include="dist\components\extended\toastr.html" />
+    <Content Include="dist\components\extended\treeview.html" />
+    <Content Include="dist\components\extended\uppy.html" />
+    <Content Include="dist\components\forms\controls\avatar.html" />
+    <Content Include="dist\components\forms\controls\base.html" />
+    <Content Include="dist\components\forms\controls\checkbox.html" />
+    <Content Include="dist\components\forms\controls\input-group.html" />
+    <Content Include="dist\components\forms\controls\option.html" />
+    <Content Include="dist\components\forms\controls\radio.html" />
+    <Content Include="dist\components\forms\controls\switch.html" />
+    <Content Include="dist\components\forms\file-upload\dropzonejs.html" />
+    <Content Include="dist\components\forms\file-upload\uppy.html" />
+    <Content Include="dist\components\forms\layouts\action-bars.html" />
+    <Content Include="dist\components\forms\layouts\basic.html" />
+    <Content Include="dist\components\forms\layouts\multi-column.html" />
+    <Content Include="dist\components\forms\layouts\repeater.html" />
+    <Content Include="dist\components\forms\layouts\sticky-action-bars.html" />
+    <Content Include="dist\components\forms\validation\controls.html" />
+    <Content Include="dist\components\forms\validation\states.html" />
+    <Content Include="dist\components\forms\validation\widgets.html" />
+    <Content Include="dist\components\forms\widgets\autosize.html" />
+    <Content Include="dist\components\forms\widgets\bootstrap-datepicker.html" />
+    <Content Include="dist\components\forms\widgets\bootstrap-daterangepicker.html" />
+    <Content Include="dist\components\forms\widgets\bootstrap-datetimepicker.html" />
+    <Content Include="dist\components\forms\widgets\bootstrap-markdown.html" />
+    <Content Include="dist\components\forms\widgets\bootstrap-maxlength.html" />
+    <Content Include="dist\components\forms\widgets\bootstrap-multipleselectsplitter.html" />
+    <Content Include="dist\components\forms\widgets\bootstrap-select.html" />
+    <Content Include="dist\components\forms\widgets\bootstrap-timepicker.html" />
+    <Content Include="dist\components\forms\widgets\bootstrap-touchspin.html" />
+    <Content Include="dist\components\forms\widgets\clipboard.html" />
+    <Content Include="dist\components\forms\widgets\dropzone.html" />
+    <Content Include="dist\components\forms\widgets\input-mask.html" />
+    <Content Include="dist\components\forms\widgets\nouislider.html" />
+    <Content Include="dist\components\forms\widgets\quill.html" />
+    <Content Include="dist\components\forms\widgets\recaptcha.html" />
+    <Content Include="dist\components\forms\widgets\summernote.html" />
+    <Content Include="dist\components\forms\widgets\tagify.html" />
+    <Content Include="dist\components\forms\widgets\typeahead.html" />
+    <Content Include="dist\components\icons\flaticon.html" />
+    <Content Include="dist\components\icons\fontawesome5.html" />
+    <Content Include="dist\components\icons\lineawesome.html" />
+    <Content Include="dist\components\icons\socicons.html" />
+    <Content Include="dist\components\keen-datatable\advanced\column-rendering.html" />
+    <Content Include="dist\components\keen-datatable\advanced\column-width.html" />
+    <Content Include="dist\components\keen-datatable\advanced\modal.html" />
+    <Content Include="dist\components\keen-datatable\advanced\record-selection.html" />
+    <Content Include="dist\components\keen-datatable\advanced\row-details.html" />
+    <Content Include="dist\components\keen-datatable\api\events.html" />
+    <Content Include="dist\components\keen-datatable\api\methods.html" />
+    <Content Include="dist\components\keen-datatable\base\data-ajax.html" />
+    <Content Include="dist\components\keen-datatable\base\data-json.html" />
+    <Content Include="dist\components\keen-datatable\base\data-local.html" />
+    <Content Include="dist\components\keen-datatable\base\html-table.html" />
+    <Content Include="dist\components\keen-datatable\base\local-sort.html" />
+    <Content Include="dist\components\keen-datatable\base\translation.html" />
+    <Content Include="dist\components\keen-datatable\child\data-ajax.html" />
+    <Content Include="dist\components\keen-datatable\child\data-local.html" />
+    <Content Include="dist\components\keen-datatable\scrolling\vertical.html" />
+    <Content Include="dist\components\portlets\base.html" />
+    <Content Include="dist\components\portlets\draggable.html" />
+    <Content Include="dist\components\portlets\sticky.html" />
+    <Content Include="dist\components\portlets\tools.html" />
+    <Content Include="dist\components\widgets\charts.html" />
+    <Content Include="dist\components\widgets\general.html" />
+    <Content Include="dist\custom\blog\grid-v2.html" />
+    <Content Include="dist\custom\blog\grid.html" />
+    <Content Include="dist\custom\blog\list.html" />
+    <Content Include="dist\custom\blog\post.html" />
+    <Content Include="dist\custom\error\404-v1.html" />
+    <Content Include="dist\custom\error\404-v2.html" />
+    <Content Include="dist\custom\error\404-v3.html" />
+    <Content Include="dist\custom\error\404-v4.html" />
+    <Content Include="dist\custom\faq\faq-v1.html" />
+    <Content Include="dist\custom\faq\faq-v2.html" />
+    <Content Include="dist\custom\faq\faq-v3.html" />
+    <Content Include="dist\custom\faq\faq-v4.html" />
+    <Content Include="dist\custom\inbox.html" />
+    <Content Include="dist\custom\invoices\invoice-v1.html" />
+    <Content Include="dist\custom\invoices\invoice-v2.html" />
+    <Content Include="dist\custom\login\login-v1.html" />
+    <Content Include="dist\custom\login\login-v2.html" />
+    <Content Include="dist\custom\pricing\pricing-v1.html" />
+    <Content Include="dist\custom\pricing\pricing-v2.html" />
+    <Content Include="dist\custom\profile\account-settings.html" />
+    <Content Include="dist\custom\profile\change-password.html" />
+    <Content Include="dist\custom\profile\overview-1.html" />
+    <Content Include="dist\custom\profile\overview-2.html" />
+    <Content Include="dist\custom\profile\overview-3.html" />
+    <Content Include="dist\custom\profile\personal-information.html" />
+    <Content Include="dist\custom\profile\user-settings.html" />
+    <Content Include="dist\custom\users\add.html" />
+    <Content Include="dist\custom\users\edit.html" />
+    <Content Include="dist\custom\users\list-columns-1.html" />
+    <Content Include="dist\custom\users\list-columns-2.html" />
+    <Content Include="dist\custom\users\list-columns-3.html" />
+    <Content Include="dist\custom\users\list-datatable.html" />
+    <Content Include="dist\custom\users\list-row.html" />
+    <Content Include="dist\custom\wizards\wizard-v1.html" />
+    <Content Include="dist\custom\wizards\wizard-v2.html" />
+    <Content Include="dist\custom\wizards\wizard-v3.html" />
+    <Content Include="dist\custom\wizards\wizard-v4.html" />
+    <Content Include="dist\dashboards\brand-aside.html" />
+    <Content Include="dist\dashboards\brand-header.html" />
+    <Content Include="dist\dashboards\light-aside.html" />
+    <Content Include="dist\dashboards\navy-header.html" />
+    <Content Include="dist\index.html" />
+    <Content Include="dist\layout\features\aside\dropdown-menu.html" />
+    <Content Include="dist\layout\features\aside\minimized.html" />
+    <Content Include="dist\layout\features\aside\no-aside-fixed-content.html" />
+    <Content Include="dist\layout\features\aside\no-aside.html" />
+    <Content Include="dist\layout\features\aside\non-fixed.html" />
+    <Content Include="dist\layout\features\header\menu-removed.html" />
+    <Content Include="dist\layout\features\header\non-fixed.html" />
+    <Content Include="dist\layout\features\misc\blank-page.html" />
+    <Content Include="dist\layout\features\misc\fixed-content-subheader.html" />
+    <Content Include="dist\layout\features\misc\fixed-content.html" />
+    <Content Include="dist\layout\features\misc\fixed-footer.html" />
+    <Content Include="dist\layout\features\misc\secondary-aside.html" />
+    <Content Include="dist\layout\features\subheader\fixed.html" />
+    <Content Include="dist\layout\features\subheader\removed.html" />
+    <Content Include="dist\layout\features\subheader\subheader-v2.html" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <None Include="Views\Shared\partials\_footer\base.cshtml" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout_old.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\User\Create.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="dist\assets\js\users\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="package.json" />
+    <Content Include="dist\assets\plugins\bootstrap-multiselectsplitter\LICENCE" />
+    <Content Include="dist\assets\plugins\bootstrap-session-timeout\.gitignore" />
+    <Content Include="dist\assets\plugins\bootstrap-session-timeout\.jshintrc" />
+    <Content Include="dist\assets\plugins\bootstrap-session-timeout\bower.json" />
+    <Content Include="dist\assets\plugins\bootstrap-session-timeout\LICENSE.md" />
+    <Content Include="dist\assets\plugins\bootstrap-session-timeout\package.json" />
+    <Content Include="dist\assets\plugins\bootstrap-session-timeout\README.md" />
+    <Content Include="dist\assets\plugins\flaticon2\font\Flaticon2.eot" />
+    <Content Include="dist\assets\plugins\flaticon2\font\Flaticon2.ttf" />
+    <Content Include="dist\assets\plugins\flaticon2\font\Flaticon2.woff" />
+    <Content Include="dist\assets\plugins\flaticon2\font\Flaticon2.woff2" />
+    <Content Include="dist\assets\plugins\flaticon\font\Flaticon.eot" />
+    <Content Include="dist\assets\plugins\flaticon\font\Flaticon.ttf" />
+    <Content Include="dist\assets\plugins\flaticon\font\Flaticon.woff" />
+    <Content Include="dist\assets\plugins\global\fonts\fa-brands-400.eot" />
+    <Content Include="dist\assets\plugins\global\fonts\fa-brands-400.ttf" />
+    <Content Include="dist\assets\plugins\global\fonts\fa-brands-400.woff" />
+    <Content Include="dist\assets\plugins\global\fonts\fa-brands-400.woff2" />
+    <Content Include="dist\assets\plugins\global\fonts\fa-regular-400.eot" />
+    <Content Include="dist\assets\plugins\global\fonts\fa-regular-400.ttf" />
+    <Content Include="dist\assets\plugins\global\fonts\fa-regular-400.woff" />
+    <Content Include="dist\assets\plugins\global\fonts\fa-regular-400.woff2" />
+    <Content Include="dist\assets\plugins\global\fonts\fa-solid-900.eot" />
+    <Content Include="dist\assets\plugins\global\fonts\fa-solid-900.ttf" />
+    <Content Include="dist\assets\plugins\global\fonts\fa-solid-900.woff" />
+    <Content Include="dist\assets\plugins\global\fonts\fa-solid-900.woff2" />
+    <Content Include="dist\assets\plugins\global\fonts\Flaticon.eot" />
+    <Content Include="dist\assets\plugins\global\fonts\Flaticon.ttf" />
+    <Content Include="dist\assets\plugins\global\fonts\Flaticon.woff" />
+    <Content Include="dist\assets\plugins\global\fonts\Flaticon2.eot" />
+    <Content Include="dist\assets\plugins\global\fonts\Flaticon2.ttf" />
+    <Content Include="dist\assets\plugins\global\fonts\Flaticon2.woff" />
+    <Content Include="dist\assets\plugins\global\fonts\line-awesome.eot" />
+    <Content Include="dist\assets\plugins\global\fonts\line-awesome.ttf" />
+    <Content Include="dist\assets\plugins\global\fonts\line-awesome.woff" />
+    <Content Include="dist\assets\plugins\global\fonts\line-awesome.woff2" />
+    <Content Include="dist\assets\plugins\global\fonts\socicon.eot" />
+    <Content Include="dist\assets\plugins\global\fonts\socicon.ttf" />
+    <Content Include="dist\assets\plugins\global\fonts\socicon.woff" />
+    <Content Include="dist\assets\plugins\global\fonts\summernote.eot" />
+    <Content Include="dist\assets\plugins\global\fonts\summernote.ttf" />
+    <Content Include="dist\assets\plugins\global\fonts\summernote.woff" />
+    <Content Include="dist\assets\plugins\jquery-idletimer\LICENSE-MIT" />
+    <Content Include="dist\assets\plugins\line-awesome\fonts\line-awesome.eot" />
+    <Content Include="dist\assets\plugins\line-awesome\fonts\line-awesome.ttf" />
+    <Content Include="dist\assets\plugins\line-awesome\fonts\line-awesome.woff" />
+    <Content Include="dist\assets\plugins\line-awesome\fonts\line-awesome.woff2" />
+    <Content Include="dist\assets\sass\global\components\base\mixins\_burger-menu.scss" />
+    <Content Include="dist\assets\sass\global\components\base\mixins\_grid.scss" />
+    <Content Include="dist\assets\sass\global\components\base\mixins\_menu-horizontal.scss" />
+    <Content Include="dist\assets\sass\global\components\base\mixins\_menu-vertical.scss" />
+    <Content Include="dist\assets\sass\global\components\base\mixins\_offcanvas.scss" />
+    <Content Include="dist\assets\sass\global\components\base\mixins\_spinner.scss" />
+    <Content Include="dist\assets\sass\global\components\base\mixins\_wave.scss" />
+    <Content Include="dist\assets\sass\global\components\base\_animations.scss" />
+    <Content Include="dist\assets\sass\global\components\base\_avatar.scss" />
+    <Content Include="dist\assets\sass\global\components\base\_checkbox.scss" />
+    <Content Include="dist\assets\sass\global\components\base\_container.scss" />
+    <Content Include="dist\assets\sass\global\components\base\_datatable.scss" />
+    <Content Include="dist\assets\sass\global\components\base\_dialog.scss" />
+    <Content Include="dist\assets\sass\global\components\base\_form.scss" />
+    <Content Include="dist\assets\sass\global\components\base\_grid.scss" />
+    <Content Include="dist\assets\sass\global\components\base\_helpers.scss" />
+    <Content Include="dist\assets\sass\global\components\base\_input-icon.scss" />
+    <Content Include="dist\assets\sass\global\components\base\_loader.scss" />
+    <Content Include="dist\assets\sass\global\components\base\_normalize.scss" />
+    <Content Include="dist\assets\sass\global\components\base\_option.scss" />
+    <Content Include="dist\assets\sass\global\components\base\_page-loader.scss" />
+    <Content Include="dist\assets\sass\global\components\base\_portlet.scss" />
+    <Content Include="dist\assets\sass\global\components\base\_pulse.scss" />
+    <Content Include="dist\assets\sass\global\components\base\_radio.scss" />
+    <Content Include="dist\assets\sass\global\components\base\_scrolltop.scss" />
+    <Content Include="dist\assets\sass\global\components\base\_spinner.scss" />
+    <Content Include="dist\assets\sass\global\components\base\_switch.scss" />
+    <Content Include="dist\assets\sass\global\components\general\mixins\_media.scss" />
+    <Content Include="dist\assets\sass\global\components\general\_grid-nav-v2.scss" />
+    <Content Include="dist\assets\sass\global\components\general\_grid-nav.scss" />
+    <Content Include="dist\assets\sass\global\components\general\_head.scss" />
+    <Content Include="dist\assets\sass\global\components\general\_iconbox.scss" />
+    <Content Include="dist\assets\sass\global\components\general\_list.scss" />
+    <Content Include="dist\assets\sass\global\components\general\_media.scss" />
+    <Content Include="dist\assets\sass\global\components\general\_nav.scss" />
+    <Content Include="dist\assets\sass\global\components\general\_notes.scss" />
+    <Content Include="dist\assets\sass\global\components\general\_notification-v2.scss" />
+    <Content Include="dist\assets\sass\global\components\general\_notification.scss" />
+    <Content Include="dist\assets\sass\global\components\general\_pagination.scss" />
+    <Content Include="dist\assets\sass\global\components\general\_scroll.scss" />
+    <Content Include="dist\assets\sass\global\components\general\_slider.scss" />
+    <Content Include="dist\assets\sass\global\components\general\_timeline.scss" />
+    <Content Include="dist\assets\sass\global\components\general\_user-card-v2.scss" />
+    <Content Include="dist\assets\sass\global\components\general\_user-card-v3.scss" />
+    <Content Include="dist\assets\sass\global\components\general\_user-card-v4.scss" />
+    <Content Include="dist\assets\sass\global\components\general\_user-card.scss" />
+    <Content Include="dist\assets\sass\global\components\layout\mixins\_app.scss" />
+    <Content Include="dist\assets\sass\global\components\layout\_app.scss" />
+    <Content Include="dist\assets\sass\global\components\layout\_demo-panel.scss" />
+    <Content Include="dist\assets\sass\global\components\layout\_offcanvas-panel.scss" />
+    <Content Include="dist\assets\sass\global\components\layout\_quick-search.scss" />
+    <Content Include="dist\assets\sass\global\components\layout\_sticky-toolbar.scss" />
+    <Content Include="dist\assets\sass\global\components\layout\_subheader.scss" />
+    <Content Include="dist\assets\sass\global\components\typography\mixins\_link.scss" />
+    <Content Include="dist\assets\sass\global\components\typography\_badge.scss" />
+    <Content Include="dist\assets\sass\global\components\typography\_code.scss" />
+    <Content Include="dist\assets\sass\global\components\typography\_demo.scss" />
+    <Content Include="dist\assets\sass\global\components\typography\_divider.scss" />
+    <Content Include="dist\assets\sass\global\components\typography\_heading.scss" />
+    <Content Include="dist\assets\sass\global\components\typography\_link.scss" />
+    <Content Include="dist\assets\sass\global\components\typography\_section.scss" />
+    <Content Include="dist\assets\sass\global\components\typography\_separator.scss" />
+    <Content Include="dist\assets\sass\global\components\widgets\dashboard\_widget-1.scss" />
+    <Content Include="dist\assets\sass\global\components\widgets\dashboard\_widget-10.scss" />
+    <Content Include="dist\assets\sass\global\components\widgets\dashboard\_widget-11.scss" />
+    <Content Include="dist\assets\sass\global\components\widgets\dashboard\_widget-12.scss" />
+    <Content Include="dist\assets\sass\global\components\widgets\dashboard\_widget-13.scss" />
+    <Content Include="dist\assets\sass\global\components\widgets\dashboard\_widget-14.scss" />
+    <Content Include="dist\assets\sass\global\components\widgets\dashboard\_widget-15.scss" />
+    <Content Include="dist\assets\sass\global\components\widgets\dashboard\_widget-16.scss" />
+    <Content Include="dist\assets\sass\global\components\widgets\dashboard\_widget-17.scss" />
+    <Content Include="dist\assets\sass\global\components\widgets\dashboard\_widget-18.scss" />
+    <Content Include="dist\assets\sass\global\components\widgets\dashboard\_widget-19.scss" />
+    <Content Include="dist\assets\sass\global\components\widgets\dashboard\_widget-2.scss" />
+    <Content Include="dist\assets\sass\global\components\widgets\dashboard\_widget-20.scss" />
+    <Content Include="dist\assets\sass\global\components\widgets\dashboard\_widget-21.scss" />
+    <Content Include="dist\assets\sass\global\components\widgets\dashboard\_widget-22.scss" />
+    <Content Include="dist\assets\sass\global\components\widgets\dashboard\_widget-23.scss" />
+    <Content Include="dist\assets\sass\global\components\widgets\dashboard\_widget-3.scss" />
+    <Content Include="dist\assets\sass\global\components\widgets\dashboard\_widget-4.scss" />
+    <Content Include="dist\assets\sass\global\components\widgets\dashboard\_widget-5.scss" />
+    <Content Include="dist\assets\sass\global\components\widgets\dashboard\_widget-6.scss" />
+    <Content Include="dist\assets\sass\global\components\widgets\dashboard\_widget-7.scss" />
+    <Content Include="dist\assets\sass\global\components\widgets\dashboard\_widget-9.scss" />
+    <Content Include="dist\assets\sass\global\components\widgets\general\_general-1.scss" />
+    <Content Include="dist\assets\sass\global\components\widgets\general\_general-2.scss" />
+    <Content Include="dist\assets\sass\global\components\widgets\general\_general-3.scss" />
+    <Content Include="dist\assets\sass\global\components\widgets\general\_general-4.scss" />
+    <Content Include="dist\assets\sass\global\components\widgets\general\_profile.scss" />
+    <Content Include="dist\assets\sass\global\integration\frameworks\bootstrap\bootstrap.scss" />
+    <Content Include="dist\assets\sass\global\integration\frameworks\bootstrap\_accordion.scss" />
+    <Content Include="dist\assets\sass\global\integration\frameworks\bootstrap\_alert.scss" />
+    <Content Include="dist\assets\sass\global\integration\frameworks\bootstrap\_badge.scss" />
+    <Content Include="dist\assets\sass\global\integration\frameworks\bootstrap\_button-group.scss" />
+    <Content Include="dist\assets\sass\global\integration\frameworks\bootstrap\_buttons.scss" />
+    <Content Include="dist\assets\sass\global\integration\frameworks\bootstrap\_code.scss" />
+    <Content Include="dist\assets\sass\global\integration\frameworks\bootstrap\_dropdown.scss" />
+    <Content Include="dist\assets\sass\global\integration\frameworks\bootstrap\_forms.scss" />
+    <Content Include="dist\assets\sass\global\integration\frameworks\bootstrap\_grid.scss" />
+    <Content Include="dist\assets\sass\global\integration\frameworks\bootstrap\_modal.scss" />
+    <Content Include="dist\assets\sass\global\integration\frameworks\bootstrap\_pagination.scss" />
+    <Content Include="dist\assets\sass\global\integration\frameworks\bootstrap\_popover.scss" />
+    <Content Include="dist\assets\sass\global\integration\frameworks\bootstrap\_progress.scss" />
+    <Content Include="dist\assets\sass\global\integration\frameworks\bootstrap\_table.scss" />
+    <Content Include="dist\assets\sass\global\integration\frameworks\bootstrap\_tabs-btn.scss" />
+    <Content Include="dist\assets\sass\global\integration\frameworks\bootstrap\_tabs-line.scss" />
+    <Content Include="dist\assets\sass\global\integration\frameworks\bootstrap\_tabs.scss" />
+    <Content Include="dist\assets\sass\global\integration\frameworks\bootstrap\_toasts.scss" />
+    <Content Include="dist\assets\sass\global\integration\frameworks\bootstrap\_tooltip.scss" />
+    <Content Include="dist\assets\sass\global\integration\frameworks\bootstrap\_variables.scss" />
+    <Content Include="dist\assets\sass\global\integration\plugins\mixins\_perfect-scrollbar.scss" />
+    <Content Include="dist\assets\sass\global\integration\plugins\_blockui.scss" />
+    <Content Include="dist\assets\sass\global\integration\plugins\_bootstrap-datepicker.scss" />
+    <Content Include="dist\assets\sass\global\integration\plugins\_bootstrap-daterangepicker.scss" />
+    <Content Include="dist\assets\sass\global\integration\plugins\_bootstrap-datetimepicker.scss" />
+    <Content Include="dist\assets\sass\global\integration\plugins\_bootstrap-markdown.scss" />
+    <Content Include="dist\assets\sass\global\integration\plugins\_bootstrap-maxlength.scss" />
+    <Content Include="dist\assets\sass\global\integration\plugins\_bootstrap-notify.scss" />
+    <Content Include="dist\assets\sass\global\integration\plugins\_bootstrap-select.scss" />
+    <Content Include="dist\assets\sass\global\integration\plugins\_bootstrap-session-timeout.scss" />
+    <Content Include="dist\assets\sass\global\integration\plugins\_bootstrap-switch.scss" />
+    <Content Include="dist\assets\sass\global\integration\plugins\_bootstrap-timepicker.scss" />
+    <Content Include="dist\assets\sass\global\integration\plugins\_bootstrap-touchspin.scss" />
+    <Content Include="dist\assets\sass\global\integration\plugins\_datatables.scss" />
+    <Content Include="dist\assets\sass\global\integration\plugins\_dropzone.scss" />
+    <Content Include="dist\assets\sass\global\integration\plugins\_duallistbox.scss" />
+    <Content Include="dist\assets\sass\global\integration\plugins\_fontawesome5.scss" />
+    <Content Include="dist\assets\sass\global\integration\plugins\_fullcalendar.scss" />
+    <Content Include="dist\assets\sass\global\integration\plugins\_gmaps.scss" />
+    <Content Include="dist\assets\sass\global\integration\plugins\_ion-range-slider.scss" />
+    <Content Include="dist\assets\sass\global\integration\plugins\_jquery-repeater.scss" />
+    <Content Include="dist\assets\sass\global\integration\plugins\_jqvmap.scss" />
+    <Content Include="dist\assets\sass\global\integration\plugins\_jstree.scss" />
+    <Content Include="dist\assets\sass\global\integration\plugins\_nouislider.scss" />
+    <Content Include="dist\assets\sass\global\integration\plugins\_perfect-scrollbar.scss" />
+    <Content Include="dist\assets\sass\global\integration\plugins\_quill.scss" />
+    <Content Include="dist\assets\sass\global\integration\plugins\_recaptcha.scss" />
+    <Content Include="dist\assets\sass\global\integration\plugins\_select2.scss" />
+    <Content Include="dist\assets\sass\global\integration\plugins\_summernote.scss" />
+    <Content Include="dist\assets\sass\global\integration\plugins\_sweetalert2.scss" />
+    <Content Include="dist\assets\sass\global\integration\plugins\_tagify.scss" />
+    <Content Include="dist\assets\sass\global\integration\plugins\_toastr.scss" />
+    <Content Include="dist\assets\sass\global\integration\plugins\_typeahead.scss" />
+    <Content Include="dist\assets\sass\global\integration\plugins\_uppy.scss" />
+    <Content Include="dist\assets\sass\global\layout\aside-secondary\_aside-secondary.scss" />
+    <Content Include="dist\assets\sass\global\layout\aside-secondary\_config.scss" />
+    <Content Include="dist\assets\sass\global\layout\aside\skins\brand.scss" />
+    <Content Include="dist\assets\sass\global\layout\aside\skins\light.scss" />
+    <Content Include="dist\assets\sass\global\layout\aside\skins\navy.scss" />
+    <Content Include="dist\assets\sass\global\layout\aside\_aside.scss" />
+    <Content Include="dist\assets\sass\global\layout\aside\_config.scss" />
+    <Content Include="dist\assets\sass\global\layout\base\_base.scss" />
+    <Content Include="dist\assets\sass\global\layout\brand\skins\brand.scss" />
+    <Content Include="dist\assets\sass\global\layout\brand\skins\light.scss" />
+    <Content Include="dist\assets\sass\global\layout\brand\skins\navy.scss" />
+    <Content Include="dist\assets\sass\global\layout\brand\_brand.scss" />
+    <Content Include="dist\assets\sass\global\layout\brand\_config.scss" />
+    <Content Include="dist\assets\sass\global\layout\content\_content.scss" />
+    <Content Include="dist\assets\sass\global\layout\footer\_config.scss" />
+    <Content Include="dist\assets\sass\global\layout\footer\_footer.scss" />
+    <Content Include="dist\assets\sass\global\layout\header\skins\base\brand.scss" />
+    <Content Include="dist\assets\sass\global\layout\header\skins\base\light.scss" />
+    <Content Include="dist\assets\sass\global\layout\header\skins\base\navy.scss" />
+    <Content Include="dist\assets\sass\global\layout\header\skins\menu\dark.scss" />
+    <Content Include="dist\assets\sass\global\layout\header\skins\menu\light.scss" />
+    <Content Include="dist\assets\sass\global\layout\header\_config.scss" />
+    <Content Include="dist\assets\sass\global\layout\header\_header-mobile.scss" />
+    <Content Include="dist\assets\sass\global\layout\header\_header.scss" />
+    <Content Include="dist\assets\sass\global\layout\header\_menu.scss" />
+    <Content Include="dist\assets\sass\global\layout\header\_topbar.scss" />
+    <Content Include="dist\assets\sass\global\layout\_config.scss" />
+    <Content Include="dist\assets\sass\global\_functions.scss" />
+    <Content Include="dist\assets\sass\global\_include.scss" />
+    <Content Include="dist\assets\sass\global\_init.scss" />
+    <Content Include="dist\assets\sass\global\_mixins.scss" />
+    <Content Include="dist\assets\sass\pages\blog\grid-v2.scss" />
+    <Content Include="dist\assets\sass\pages\blog\grid.scss" />
+    <Content Include="dist\assets\sass\pages\blog\list.scss" />
+    <Content Include="dist\assets\sass\pages\blog\post.scss" />
+    <Content Include="dist\assets\sass\pages\error\404-v1.scss" />
+    <Content Include="dist\assets\sass\pages\error\404-v2.scss" />
+    <Content Include="dist\assets\sass\pages\error\404-v3.scss" />
+    <Content Include="dist\assets\sass\pages\error\404-v4.scss" />
+    <Content Include="dist\assets\sass\pages\inbox\inbox.scss" />
+    <Content Include="dist\assets\sass\pages\invoice\invoice-v1.scss" />
+    <Content Include="dist\assets\sass\pages\invoice\invoice-v2.scss" />
+    <Content Include="dist\assets\sass\pages\login\login-v1.scss" />
+    <Content Include="dist\assets\sass\pages\login\login-v2.scss" />
+    <Content Include="dist\assets\sass\pages\login\profile-v1.scss" />
+    <Content Include="dist\assets\sass\pages\pricing\pricing-v1.scss" />
+    <Content Include="dist\assets\sass\pages\pricing\pricing-v2.scss" />
+    <Content Include="dist\assets\sass\pages\wizards\wizard-v1.scss" />
+    <Content Include="dist\assets\sass\pages\wizards\wizard-v2.scss" />
+    <Content Include="dist\assets\sass\pages\wizards\wizard-v3.scss" />
+    <Content Include="dist\assets\sass\style.scss" />
+    <Content Include="dist\assets\sass\_config.scss" />
+    <None Include="packages.config" />
+    <Content Include="Views\Shared\_layout.cshtml" />
+    <Content Include="Views\Shared\partials\_content\base.cshtml" />
+    <Content Include="Views\Shared\partials\_demo-panel.cshtml" />
+    <Content Include="Views\Shared\partials\_header\base-mobile.cshtml" />
+    <Content Include="Views\Shared\partials\_header\base.cshtml" />
+    <Content Include="Views\Shared\partials\_header\topbar\_base.cshtml" />
+    <Content Include="Views\Shared\partials\_header\topbar\_notifications.cshtml" />
+    <Content Include="Views\Shared\partials\_header\topbar\_quick-panel.cshtml" />
+    <Content Include="Views\Shared\partials\_header\topbar\_user.cshtml" />
+    <Content Include="Views\Shared\partials\_header\_menu.cshtml" />
+    <Content Include="Views\Shared\partials\_page-loader.cshtml" />
+    <Content Include="Views\Shared\partials\_quick-panel.cshtml" />
+    <Content Include="Views\Shared\partials\_scrolltop.cshtml" />
+    <Content Include="Views\Shared\partials\_toolbar.cshtml" />
+    <Content Include="Views\Shared\partials\_topbar\dropdown\notifications-solid.cshtml" />
+    <Content Include="Views\Shared\partials\_topbar\dropdown\user-solid.cshtml" />
+    <Content Include="Views\Shared\partials\_topbar\offcanvas\quick-actions.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ApiManager.Logic\ApiManager.Logic.csproj">
+      <Project>{3d1aec67-2c37-4a1f-9926-243810aa503a}</Project>
+      <Name>ApiManager.Logic</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>58022</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44354/</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>https://localhost:44354/</IISAppRootUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

@@ -1,0 +1,172 @@
+﻿<!DOCTYPE html>
+
+<!--
+Theme: Keen - The Ultimate Bootstrap Admin Theme
+Author: KeenThemes
+Website: http://www.keenthemes.com/
+Contact: support@keenthemes.com
+Follow: www.twitter.com/keenthemes
+Dribbble: www.dribbble.com/keenthemes
+Like: www.facebook.com/keenthemes
+License: You must have a valid license purchased only from https://themes.getbootstrap.com/product/keen-the-ultimate-bootstrap-admin-theme/ in order to legally use the theme for your project.
+-->
+<html>
+
+<!-- begin::Head -->
+<head>
+    <base href="">
+    <meta charset="utf-8" />
+    <title>API Manager | @ViewBag.Title</title>
+    <meta name="description" content="Latest updates and statistic charts">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!--begin::Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700">
+
+    <!--end::Fonts -->
+    <!--begin::Page Vendors Styles(used by this page) -->
+    @RenderSection("Styles", required: false)
+
+    <!--end::Page Vendors Styles -->
+    <!--begin::Global Theme Styles(used by all pages) -->
+    <link href="~/dist/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="~/dist/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+
+    <!--end::Global Theme Styles -->
+    <!--begin::Layout Skins(used by all pages) -->
+    <link href="~/dist/assets/css/skins/header/base/light.css" rel="stylesheet" type="text/css" />
+    <link href="~/dist/assets/css/skins/header/menu/light.css" rel="stylesheet" type="text/css" />
+    <link href="~/dist/assets/css/skins/brand/light.css" rel="stylesheet" type="text/css" />
+    <link href="~/dist/assets/css/skins/aside/navy.css" rel="stylesheet" type="text/css" />
+
+    <!--end::Layout Skins -->
+    <link rel="shortcut icon" href="~/dist/assets/media/logos/favicon.ico" />
+
+    <!-- Hotjar Tracking Code for keenthemes.com -->
+    <script>
+    (function (h, o, t, j, a, r) {
+            h.hj = h.hj || function () {
+                (h.hj.q = h.hj.q || []).push(arguments)
+            };
+            h._hjSettings = {
+                hjid: 1070954,
+                hjsv: 6
+            };
+            a = o.getElementsByTagName('head')[0];
+            r = o.createElement('script');
+            r.async = 1;
+            r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
+            a.appendChild(r);
+        })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');</script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-37564768-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'UA-37564768-1');</script>
+</head>
+
+<!-- end::Head -->
+<!-- begin::Body -->
+<body class="kt-page--loading-enabled kt-page--loading kt-quick-panel--right kt-demo-panel--right kt-offcanvas-panel--right kt-header--fixed kt-header-mobile--fixed kt-subheader--transparent kt-page--loading">
+
+    @Html.Partial("~/Views/Shared/partials/_page-loader.cshtml")
+    @Html.Partial("~/Views/Shared/partials/_header/base-mobile.cshtml")
+    <!-- begin:: Root -->
+    <div class="kt-grid kt-grid--hor kt-grid--root">
+
+        <!-- begin:: Page -->
+        <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--ver kt-page">
+
+            <!-- begin:: Wrapper -->
+            <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-wrapper" id="kt_wrapper">
+
+                @Html.Partial("~/Views/Shared/partials/_header/base.cshtml")
+                <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+
+
+                    <!-- begin:: Content -->
+                    <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+                        @foreach (var flash in Request.GetFlashMessages())
+                        {
+                            <div class="alert alert-light @(flash.Type == "success" ? "alert-success" : "alert-danger")" role="alert">
+                                <div class="alert-icon"><i class="flaticon-warning kt-font-brand"></i></div>
+                                <div class="alert-text">
+                                    @flash.Message
+                                </div>
+                            </div>
+
+                        }
+                        @RenderBody()
+                    </div>
+
+                    <!-- end:: Content -->
+                </div>
+
+                @Html.Partial("~/Views/Shared/partials/_footer/base.cshtml")
+            </div>
+
+            <!-- end:: Wrapper -->
+        </div>
+
+        <!-- end:: Page -->
+    </div>
+
+    <!-- end:: Root -->
+    <!-- begin:: Topbar Offcanvas Panels -->
+    @Html.Partial("~/Views/Shared/partials/_topbar/offcanvas/quick-actions.cshtml")
+    <!-- end:: Topbar Offcanvas Panels -->
+    @Html.Partial("~/Views/Shared/partials/_quick-panel.cshtml")
+    @Html.Partial("~/Views/Shared/partials/_scrolltop.cshtml")
+    <!-- begin::Global Config(global config for global JS sciprts) -->
+    <script>
+        var KTAppOptions = {
+            "colors": {
+                "state": {
+                    "brand": "#5d78ff",
+                    "metal": "#c4c5d6",
+                    "light": "#ffffff",
+                    "accent": "#00c5dc",
+                    "primary": "#5867dd",
+                    "success": "#34bfa3",
+                    "info": "#36a3f7",
+                    "warning": "#ffb822",
+                    "danger": "#fd3995",
+                    "focus": "#9816f4"
+                },
+                "base": {
+                    "label": [
+                        "#c5cbe3",
+                        "#a1a8c3",
+                        "#3d4465",
+                        "#3e4466"
+                    ],
+                    "shape": [
+                        "#f0f3ff",
+                        "#d9dffa",
+                        "#afb4d4",
+                        "#646c9a"
+                    ]
+                }
+            }
+        };</script>
+
+    <!-- end::Global Config -->
+    <!--begin::Global Theme Bundle(used by all pages) -->
+    <script src="~/dist/assets/plugins/global/plugins.bundle.js" type="text/javascript"></script>
+    <script src="~/dist/assets/js/scripts.bundle.js" type="text/javascript"></script>
+
+    <!--end::Global Theme Bundle -->
+    <!--begin::Page Scripts(used by this page) -->
+    @RenderSection("Scripts", required: false)
+
+    <!--end::Page Scripts -->
+</body>
+
+<!-- end::Body -->
+</html>

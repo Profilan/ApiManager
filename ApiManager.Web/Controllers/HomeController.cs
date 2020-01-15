@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace ApiManager.Web.Controllers
 {
+    [Authorize(Roles = "Domain Admins")]
     public class HomeController : Controller
     {
         public ActionResult Index()

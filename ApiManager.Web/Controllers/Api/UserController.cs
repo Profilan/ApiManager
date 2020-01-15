@@ -1,5 +1,6 @@
 ﻿using ApiManager.Logic.Repositories;
 using ApiManager.Web.Models;
+using ApiManager.Web.Models.Api;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace ApiManager.Web.Controllers.Api
         private readonly UserRepository userRepository = new UserRepository();
         private readonly UrlRepository urlRepository = new UrlRepository();
 
-        [Route("api/users")]
+        [Route("api/user")]
         [HttpGet]
         public IHttpActionResult Get()
         {
@@ -25,11 +26,6 @@ namespace ApiManager.Web.Controllers.Api
             List<UserApiModel> users = new List<UserApiModel>();
             foreach (var item in items)
             {
-                var passwordHashing = new PasswordHashingApiModel()
-                {
-                    Code = item.PasswordHashing.Code
-                };
-
                 var service = new ServiceApiModel()
                 {
                     Code = item.Service.Code
@@ -42,16 +38,16 @@ namespace ApiManager.Web.Controllers.Api
                     DisplayName = item.DisplayName,
                     Email = item.Email,
                     Role = item.Role,
-                    PasswordHashing = passwordHashing,
                     Enabled = item.Enabled,
-                    Service = service
+                    Service = service,
+                    SysCreated = item.SysCreated.ToString("dd-MM-yyyy HH:mm:ss")
                 });
             }
 
             return Ok(users);
         }
 
-        [Route("api/users")]
+        [Route("api/user")]
         [HttpPost]
         public IHttpActionResult Get(FormDataCollection data)
         {
@@ -63,15 +59,6 @@ namespace ApiManager.Web.Controllers.Api
             List<UserApiModel> users = new List<UserApiModel>();
             foreach (var item in items)
             {
-                var passwordHashing = new PasswordHashingApiModel();
-                try
-                {
-                    passwordHashing.Code = item.PasswordHashing.Code;
-                }
-                catch
-                {
-
-                }
                 var service = new ServiceApiModel();
                 try
                 {
@@ -89,16 +76,16 @@ namespace ApiManager.Web.Controllers.Api
                     DisplayName = item.DisplayName,
                     Email = item.Email,
                     Role = item.Role,
-                    PasswordHashing = passwordHashing,
                     Enabled = item.Enabled,
-                    Service = service
+                    Service = service,
+                    SysCreated = item.SysCreated.ToString("dd-MM-yyyy HH:mm:ss")
                 });
             }
 
             return Ok(users);
         }
 
-        [Route("api/users/edit")]
+        [Route("api/user/edit")]
         [HttpPost]
         public IHttpActionResult Edit(UserViewModel data)
         {

@@ -58,6 +58,12 @@ namespace ApiManager.Logic.Repositories
 
                 switch (sortOrder)
                 {
+                    case "created.asc":
+                        query = query.OrderBy(x => x.SysCreated);
+                        break;
+                    case "created.desc":
+                        query = query.OrderByDescending(x => x.SysCreated);
+                        break;
                     case "email.asc":
                         query = query.OrderBy(x => x.Email);
                         break;

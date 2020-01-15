@@ -68,8 +68,6 @@ var KTUsersEdit = function () {
         btn.on('click', function (e) {
             e.preventDefault();
 
-            console.log($('.kt-repeater').repeaterVal());
-
             if (validator.form()) {
                 // See: src\js\framework\base\app.js
                 KTApp.progress(btn);
@@ -77,7 +75,7 @@ var KTUsersEdit = function () {
 
                 // See: http://malsup.com/jquery/form/#ajaxSubmit
                 formEl.ajaxSubmit({
-                    url: '/api/users/edit',
+                    url: '/api/user/edit',
                     success: function () {
                         KTApp.unprogress(btn);
                         //KTApp.unblock(formEl);

@@ -94,6 +94,47 @@ namespace ApiManager.Logic.Repositories
             }
         }
 
+        public IEnumerable<Url> List(string sortOrder, string searchString)
+        {
+            using (ISession session = SessionFactory.GetNewSession("db1"))
+            {
+                var query = from l in session.Query<Url>()
+                            select l;
+
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    query = query.Where(x => x.Name.Contains(searchString)
+                                           || x.Address.Contains(searchString));
+                }
+
+                switch (sortOrder)
+                {
+                    case "hits.asc":
+                        query = query.OrderBy(x => x.Hits);
+                        break;
+                    case "hits.desc":
+                        query = query.OrderByDescending(x => x.Hits);
+                        break;
+                    case "address.asc":
+                        query = query.OrderBy(x => x.Address);
+                        break;
+                    case "address.desc":
+                        query = query.OrderByDescending(x => x.Address);
+                        break;
+                    case "name.desc":
+                        query = query.OrderByDescending(x => x.Name);
+                        break;
+                    case "name.asc":
+                    default:
+                        query = query.OrderBy(x => x.Name);
+                        break;
+                }
+
+                return query.ToList();
+            }
+
+        }
+
         public IEnumerable<Url> ListTopFive()
         {
             using (ISession session = SessionFactory.GetNewSession("db1"))

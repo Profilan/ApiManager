@@ -15,7 +15,7 @@ var KTUsersListDatatable = function() {
                 type: 'remote',
                 source: {
                     read: {
-                        url: '/api/users',
+                        url: '/api/user',
                     }
                 },
                 pageSize: 10, // display 20 records per page
@@ -60,7 +60,7 @@ var KTUsersListDatatable = function() {
                 field: 'created',
                 title: 'Creation Date',
                 type: 'date',
-                format: 'MM/DD/YYYY'
+                    format: 'YYYY-MM-DDThh:mm:ss'
             }, {
                 field: 'role',
                 title: 'Role'
@@ -71,7 +71,7 @@ var KTUsersListDatatable = function() {
                 sortable: false,
                 autoHide: false,
                 overflow: 'visible',
-                template: function () {
+                template: function (row) {
                     return '\
 							<div class="dropdown">\
 								<a href="javascript:;" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="dropdown">\
@@ -80,27 +80,15 @@ var KTUsersListDatatable = function() {
 								<div class="dropdown-menu dropdown-menu-right">\
 									<ul class="kt-nav">\
 										<li class="kt-nav__item">\
-											<a href="#" class="kt-nav__link">\
-												<i class="kt-nav__link-icon flaticon2-expand"></i>\
-												<span class="kt-nav__link-text">View</span>\
-											</a>\
-										</li>\
-										<li class="kt-nav__item">\
-											<a href="#" class="kt-nav__link">\
+											<a href="/user/edit/' + row.id + '" class="kt-nav__link">\
 												<i class="kt-nav__link-icon flaticon2-contract"></i>\
 												<span class="kt-nav__link-text">Edit</span>\
 											</a>\
 										</li>\
 										<li class="kt-nav__item">\
-											<a href="#" class="kt-nav__link">\
+											<a href="/user/delete/' + row.id + '" class="kt-nav__link">\
 												<i class="kt-nav__link-icon flaticon2-trash"></i>\
 												<span class="kt-nav__link-text">Delete</span>\
-											</a>\
-										</li>\
-										<li class="kt-nav__item">\
-											<a href="#" class="kt-nav__link">\
-												<i class="kt-nav__link-icon flaticon2-mail-1"></i>\
-												<span class="kt-nav__link-text">Export</span>\
 											</a>\
 										</li>\
 									</ul>\
@@ -114,8 +102,8 @@ var KTUsersListDatatable = function() {
 
 	// search
     var search = function () {
-        $('#kt_form_status').on('change', function () {
-            datatable.search($(this).val().toLowerCase(), 'Status');
+        $('#kt_form_role').on('change', function () {
+            datatable.search($(this).val().toLowerCase(), 'RoleId');
         });
     };
 
@@ -123,6 +111,7 @@ var KTUsersListDatatable = function() {
     var selection = function () {
         // init form controls
         //$('#kt_form_status, #kt_form_type').selectpicker();
+        $('#kt_form_role').selectpicker();
 
         // event handler on check and uncheck on records
         datatable.on('kt-datatable--on-check kt-datatable--on-uncheck kt-datatable--on-layout-updated', function (e) {

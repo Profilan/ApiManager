@@ -30,5 +30,13 @@ namespace ApiManager.LogicTests
 
             var debtors = rep.List();
         }
+
+        [TestMethod]
+        public void ListLogs()
+        {
+            var rep = new LogRepository();
+
+            //var logs = rep.List("timestamp.desc", "", 1, 10, "");
+        }
     }
 }

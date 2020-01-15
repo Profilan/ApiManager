@@ -6,9 +6,9 @@ using System.Web;
 
 namespace ApiManager.Web.Models
 {
-    public class PasswordHashingApiModel
+    public class PasswordHashingModel
     {
-        [JsonProperty("code")]
+       
         public string Code { get; set; }
     }
 }

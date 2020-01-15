@@ -14,7 +14,10 @@ namespace ApiManager.Logic.Mappings
 
             Id(x => x.Id).GeneratedBy.Identity();
 
+            References(x => x.PasswordHashing).Column("PasswordHashingId").LazyLoad().Not.Cascade.SaveUpdate();
+
             Map(x => x.Code);
+            Map(x => x.ExternalUrl);
         }
     }
 }

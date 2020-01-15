@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace ApiManager.Web.Models
+namespace ApiManager.Web.Models.Api
 {
     public class UserApiModel
     {
@@ -32,14 +32,12 @@ namespace ApiManager.Web.Models
         public string Description { get; set; }
         [JsonProperty("service")]
         public ServiceApiModel Service { get; set; }
-        [JsonProperty("password_hashing")]
-        public PasswordHashingApiModel PasswordHashing { get; set; }
         [JsonProperty("created")]
-        public DateTime SysCreated { get; set; }
+        public string SysCreated { get; set; }
         [JsonProperty("creator")]
         public int SysCreator { get; set; }
         [JsonProperty("modified")]
-        public DateTime SysModified { get; set; }
+        public string SysModified { get; set; }
         [JsonProperty("modifier")]
         public int SysModifier { get; set; }
     }

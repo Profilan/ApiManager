@@ -20,8 +20,7 @@ namespace ApiManager.Logic.Models
         public virtual int State { get; set; }
         public virtual string Description { get; set; }
         public virtual Service Service { get; set; }
-        public virtual PasswordHashing PasswordHashing { get; set; }
-        public virtual DateTime SysCreated { get; set; }
+         public virtual DateTime SysCreated { get; set; }
         public virtual int SysCreator { get; set; }
         public virtual DateTime SysModified { get; set; }
         public virtual int SysModifier { get; set; }

@@ -22,10 +22,11 @@ namespace ApiManager.Logic.Mappings
             {
                 m.Map(x => x.Seconds).Column("InactivityTimeout");
             });
-            Map(x => x.ExternalUrl);
             Map(x => x.MonitorInactivity);
             Map(x => x.Hits);
             Map(x => x.ShowInStatistics);
+
+            References(x => x.Service).Column("ServiceId").LazyLoad().Not.Cascade.SaveUpdate();
         }
     }
 }

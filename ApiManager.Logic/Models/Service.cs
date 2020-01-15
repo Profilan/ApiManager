@@ -8,6 +8,8 @@ namespace ApiManager.Logic.Models
     public class Service : Entity<int>
     {
         public virtual string Code { get; set; }
+        public virtual PasswordHashing PasswordHashing { get; set; }
+        public virtual string ExternalUrl { get; set; }
 
         protected Service() { }
 

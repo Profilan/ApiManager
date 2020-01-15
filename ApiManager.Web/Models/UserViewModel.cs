@@ -22,6 +22,7 @@ namespace ApiManager.Web.Models
         public string Password { get; set; }
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "The new password and confirmation password do not match.")]
+        [Display(Name = "Confirm Password")]
         public string ConfirmPassword { get; set; }
         [Required]
         public string Apikey { get; set; }
@@ -38,10 +39,8 @@ namespace ApiManager.Web.Models
         public int State { get; set; }
         
         public string Description { get; set; }
-        
-        public ServiceApiModel Service { get; set; }
-        
-        public PasswordHashingApiModel PasswordHashing { get; set; }
+
+        public Service Service { get; set; }
         
         public DateTime SysCreated { get; set; }
         

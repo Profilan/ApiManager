@@ -26,10 +26,10 @@ namespace ApiManager.Logic.Mappings
             Map(x => x.Enabled);
             Map(x => x.State);
             Map(x => x.Description);
+            Map(x => x.SysCreated);
 
             References(x => x.Service).Column("ServiceId").LazyLoad().Not.Cascade.SaveUpdate();
-            References(x => x.PasswordHashing).Column("PasswordHashingId").LazyLoad().Not.Cascade.SaveUpdate();
-
+ 
             HasManyToMany(x => x.Debtors)
                 .Table("EEK_API_WOOOD_USER_DEBTORS")
                 .ParentKeyColumn("USER_ID")

@@ -70,12 +70,14 @@
     <Compile Include="Common\SessionFactory.cs" />
     <Compile Include="Common\ValueObject.cs" />
     <Compile Include="Mappings\DebtorMap.cs" />
+    <Compile Include="Mappings\LogMap.cs" />
     <Compile Include="Mappings\PasswordHashingMap.cs" />
     <Compile Include="Mappings\ServiceMap.cs" />
     <Compile Include="Mappings\UrlMap.cs" />
     <Compile Include="Mappings\UserMap.cs" />
     <Compile Include="Models\Debtor.cs" />
     <Compile Include="Models\Interval.cs" />
+    <Compile Include="Models\Log.cs" />
     <Compile Include="Models\PasswordHashing.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Service.cs" />
@@ -83,6 +85,9 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\DebtorRepository.cs" />
+    <Compile Include="Repositories\LogRepository.cs" />
+    <Compile Include="Repositories\PasswordHashingRepository.cs" />
+    <Compile Include="Repositories\ServiceRepository.cs" />
     <Compile Include="Repositories\UrlRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
   </ItemGroup>

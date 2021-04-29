@@ -1,0 +1,12 @@
+﻿@model ApiManager.Web.Models.TaskViewModel
+
+<div class="form-group row">
+    <div class="col-lg-6">
+        @Html.LabelFor(model => model.SenderViewModel.MailViewModel.MailSender)
+        @Html.EditorFor(model => model.SenderViewModel.MailViewModel.MailSender, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+    <div class="col-lg-6">
+        @Html.LabelFor(model => model.SenderViewModel.MailViewModel.MailRecipient)
+        @Html.EditorFor(model => model.SenderViewModel.MailViewModel.MailRecipient, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+</div>

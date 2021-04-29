@@ -86,6 +86,12 @@ var KTUsersListDatatable = function() {
 											</a>\
 										</li>\
 										<li class="kt-nav__item">\
+											<a href="/user/changepassword/' + row.id + '" class="kt-nav__link">\
+												<i class="kt-nav__link-icon flaticon2-contract"></i>\
+												<span class="kt-nav__link-text">Change password</span>\
+											</a>\
+										</li>\
+										<li class="kt-nav__item">\
 											<a href="/user/delete/' + row.id + '" class="kt-nav__link">\
 												<i class="kt-nav__link-icon flaticon2-trash"></i>\
 												<span class="kt-nav__link-text">Delete</span>\

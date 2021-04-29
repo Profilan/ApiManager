@@ -1,0 +1,62 @@
+﻿@model ApiManager.Web.Models.TaskViewModel
+
+<div class="form-group row">
+    <div class="col-lg-6">
+        @Html.LabelFor(model => model.SenderViewModel.AuthenticationViewModel.AuthenticationType)
+        @Html.EnumDropDownListFor(x => Model.SenderViewModel.AuthenticationViewModel.AuthenticationType, htmlAttributes: new { @class = "form-control" })
+    </div>
+    <div class="col-lg-6">
+        
+    </div>
+</div>
+
+<div id="basicSendSection">
+    <div class="form-group row">
+        <div class="col-lg-6">
+            @Html.LabelFor(model => model.SenderViewModel.AuthenticationViewModel.Username)
+            @Html.EditorFor(model => model.SenderViewModel.AuthenticationViewModel.Username, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+        <div class="col-lg-6">
+            @Html.LabelFor(model => model.SenderViewModel.AuthenticationViewModel.Password)
+            @Html.EditorFor(model => model.SenderViewModel.AuthenticationViewModel.Password, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+</div>
+
+<div id="apiKeySendSection">
+    <div class="form-group row">
+        <div class="col-lg-6">
+            @Html.LabelFor(model => model.SenderViewModel.AuthenticationViewModel.ApiKey)
+            @Html.EditorFor(model => model.SenderViewModel.AuthenticationViewModel.ApiKey, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+</div>
+
+<div id="oAuthSendSection">
+    <div class="form-group row">
+        <div class="col-lg-6">
+            @Html.LabelFor(model => model.SenderViewModel.AuthenticationViewModel.GrantType)
+            @Html.EditorFor(model => model.SenderViewModel.AuthenticationViewModel.GrantType, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+        <div class="col-lg-6">
+            @Html.LabelFor(model => model.SenderViewModel.AuthenticationViewModel.Scope)
+            @Html.EditorFor(model => model.SenderViewModel.AuthenticationViewModel.Scope, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-md-10">
+            @Html.LabelFor(model => model.SenderViewModel.AuthenticationViewModel.OAuthUrl)
+            @Html.EditorFor(model => model.SenderViewModel.AuthenticationViewModel.OAuthUrl, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-md-10">
+            @Html.LabelFor(model => model.SenderViewModel.AuthenticationViewModel.OAuthAudience)
+            @Html.EditorFor(model => model.SenderViewModel.AuthenticationViewModel.OAuthAudience, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+</div>
+
+

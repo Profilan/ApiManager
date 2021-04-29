@@ -1,6 +1,11 @@
-﻿using ApiManager.Logic.Repositories;
+﻿using ApiManager.Logic.Common;
+using ApiManager.Logic.Models;
+using ApiManager.Logic.Repositories;
+using ApiManager.Web.Helpers;
 using ApiManager.Web.Models;
 using ApiManager.Web.Models.Api;
+using ApiManager.Web.Services;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +20,10 @@ namespace ApiManager.Web.Controllers.Api
     {
         private readonly UserRepository userRepository = new UserRepository();
         private readonly UrlRepository urlRepository = new UrlRepository();
+        private readonly ServiceRepository serviceRepository = new ServiceRepository();
+        private readonly PasswordHashingRepository passwordHashingRepository = new PasswordHashingRepository();
+        private readonly DebtorRepository debtorRepository = new DebtorRepository();
+        private readonly LogRepository logRepository = new LogRepository();
 
         [Route("api/user")]
         [HttpGet]
@@ -62,7 +71,10 @@ namespace ApiManager.Web.Controllers.Api
                 var service = new ServiceApiModel();
                 try
                 {
-                    service.Code = item.Service.Code;
+                    if (item.Service != null)
+                    {
+                        service.Code = item.Service.Code;
+                    }
                 }
                 catch
                 {
@@ -87,11 +99,13 @@ namespace ApiManager.Web.Controllers.Api
 
         [Route("api/user/edit")]
         [HttpPost]
-        public IHttpActionResult Edit(UserViewModel data)
+        public IHttpActionResult Edit(UserModel data)
         {
             try
             {
                 var user = userRepository.GetById(data.Id);
+
+                var service = serviceRepository.GetById(data.ServiceId);
 
                 user.Username = data.Username;
                 user.DisplayName = data.DisplayName;
@@ -100,12 +114,29 @@ namespace ApiManager.Web.Controllers.Api
                 user.Role = data.Role;
                 user.AllowedIP = data.AllowedIP;
                 user.Enabled = data.Enabled;
+                user.Service = service;
+
                 user.Urls.Clear();
                 foreach (var urlItem in data.Urls)
                 {
                     var url = urlRepository.GetByName(urlItem.Name);
                     user.Urls.Add(url);
                 }
+
+                user.Debtors.Clear();
+                foreach (var debtor in data.Debtors)
+                {
+                    var id = debtor.NAAM.Split(new char[] { ' ' })[0];
+                    user.Debtors.Add(debtorRepository.GetById(id));
+                }
+
+
+                var sysCreated = user.SysCreated.ToShortDateString();
+                if (sysCreated == "01/01/0001")
+                {
+                    user.SysCreated = DateTime.Now;
+                }
+                user.SysModified = DateTime.Now;
 
                 userRepository.Update(user);
 
@@ -117,6 +148,178 @@ namespace ApiManager.Web.Controllers.Api
 
                 return BadRequest(e.Message);
             }
+        }
+
+        [Route("api/user/create")]
+        [HttpPost]
+        public HttpResponseMessage Create(UserModel data)
+        {
+               
+            var user = new User()
+            {
+                Username = data.Username,
+                DisplayName = data.DisplayName,
+                Email = data.Email,
+                Apikey = data.Apikey,
+                Role = data.Role,
+                AllowedIP = data.AllowedIP,
+                Enabled = data.Enabled,
+            };
+
+            var service = serviceRepository.GetById(data.ServiceId);
+            user.Service = service;
+
+            var passwordHashing = passwordHashingRepository.GetById(service.PasswordHashing.Id);
+
+            IPasswordHasher hasher;
+            switch (passwordHashing.Code)
+            {
+                case "MD5 (Apache)":
+                    hasher = new MD5ApachePasswordHasher();
+                    var htpasswdService = new HtpasswdService(service.HTPasswordLocation);
+                    htpasswdService.GetUserList();
+                    htpasswdService.AddUser(data.Username, data.Password);
+                    break;
+                case "SHA1 (ZF1)":
+                    hasher = new SHA1ZF1PasswordHasher();
+                    break;
+                case "Bcrypt":
+                default:
+                    hasher = new BcryptHasher();
+                    break;
+            };
+
+            user.HashedPassword = hasher.HashPassword(data.Password);
+            user.RawPassword = data.Password;
+
+            foreach (var debtor in data.Debtors)
+            {
+                var id = debtor.NAAM.Split(new char[] { ' ' })[0];
+                user.Debtors.Add(debtorRepository.GetById(id));
+            }
+
+            foreach (var url in data.Urls)
+
+            {
+                user.Urls.Add(urlRepository.GetByName(url.Name));
+            }
+
+            user.SysCreated = DateTime.Now;
+            user.SysModified = user.SysCreated;
+
+            userRepository.Insert(user);
+            
+
+            return new HttpResponseMessage(HttpStatusCode.Created);
+        }
+
+        [Route("api/user/changepassword")]
+        [HttpPost]
+        public HttpResponseMessage ChangePassword(PasswordViewModel data)
+        {
+
+            var user = userRepository.GetById(data.Id);
+            var service = serviceRepository.GetById(user.Service.Id);
+            var passwordHashing = passwordHashingRepository.GetById(service.PasswordHashing.Id);
+
+            IPasswordHasher hasher;
+            switch (passwordHashing.Code)
+            {
+                case "MD5 (Apache)":
+                    hasher = new MD5ApachePasswordHasher();
+                    var htpasswdService = new HtpasswdService(service.HTPasswordLocation);
+                    htpasswdService.GetUserList();
+                    htpasswdService.UpdateUser(user.Username, data.Password1);
+                    break;
+                case "SHA1 (ZF1)":
+                    hasher = new SHA1ZF1PasswordHasher();
+                    break;
+                case "Bcrypt":
+                default:
+                    hasher = new BcryptHasher();
+                    break;
+            };
+
+            user.HashedPassword = hasher.HashPassword(data.Password1);
+            user.RawPassword = data.Password1;
+
+            userRepository.Update(user);
+
+
+            return new HttpResponseMessage(HttpStatusCode.Created);
+        }
+
+        [Route("api/user/visits")]
+        [HttpPost]
+        public IHttpActionResult Visits(FormDataCollection data)
+        {
+            var user = userRepository.GetById(Convert.ToInt32(data["userId"]));
+
+            var urls = urlRepository.List().Where(x => x.ShowInStatistics == true);
+            var visitedUrls = new List<UrlApiModel>();
+            foreach (var url in urls)
+            {
+                var logs = logRepository.ListByUserAndUrl(user, url, (Period)Enum.Parse(typeof(Period), data["period"], true));
+                if (logs.Count() > 0)
+                {
+                    double totalDuration = 0;
+                    foreach (var log in logs)
+                    {
+                        totalDuration += log.Duration;
+                    }
+
+                    visitedUrls.Add(new UrlApiModel()
+                    {
+                        Id = url.Id,
+                        Name = url.Name,
+                        Hits = logs.Count(),
+                        AverageDuration = totalDuration / logs.Count(),
+                        LatestVisitDate = logs.Count() > 0 ? logs.Last().TimeStamp.ToString() : ""
+                    });
+                }
+            }
+
+            string sortOrder = data["sort[field]"] + "." + data["sort[sort]"];
+            var sortedUrls = new List<UrlApiModel>();
+            switch (sortOrder)
+            {
+                case "latest_visit_date.desc":
+                    sortedUrls = visitedUrls.OrderByDescending(x => x.LatestVisitDate).ToList();
+                    break;
+                case "latest_visit_date.asc":
+                    sortedUrls = visitedUrls.OrderBy(x => x.LatestVisitDate).ToList();
+                    break;
+                case "hits.asc":
+                    sortedUrls = visitedUrls.OrderBy(x => x.Hits).ToList();
+                    break;
+                case "hits.desc":
+                    sortedUrls = visitedUrls.OrderByDescending(x => x.Hits).ToList();
+                    break;
+                case "avg_duration.asc":
+                    sortedUrls = visitedUrls.OrderBy(x => x.AverageDuration).ToList();
+                    break;
+                case "avg_duration.desc":
+                    sortedUrls = visitedUrls.OrderByDescending(x => x.AverageDuration).ToList();
+                    break;
+                case "name.desc":
+                    sortedUrls = visitedUrls.OrderByDescending(x => x.Name).ToList();
+                    break;
+                case "name.asc":
+                default:
+                    sortedUrls = visitedUrls.OrderBy(x => x.Name).ToList();
+                    break;
+            }
+
+            return Ok(sortedUrls);
+        }
+
+        [Route("api/user/top5")]
+        [HttpGet]
+        public IHttpActionResult Top5(Period period)
+        {
+            var items = userRepository.ListTopFive(period);
+
+            return Ok(DashboardService.GetTopFiveUsersData(items));
         }
     }
 }

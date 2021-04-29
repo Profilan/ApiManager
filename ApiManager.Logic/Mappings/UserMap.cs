@@ -20,13 +20,11 @@ namespace ApiManager.Logic.Mappings
             Map(x => x.HashedPassword).Column("password");
             Map(x => x.RawPassword).Column("rawPassword");
             Map(x => x.Apikey);
-            Map(x => x.Debcode);
             Map(x => x.Role);
             Map(x => x.AllowedIP).Column("ip_from");
             Map(x => x.Enabled);
-            Map(x => x.State);
-            Map(x => x.Description);
             Map(x => x.SysCreated);
+            Map(x => x.SysModified);
 
             References(x => x.Service).Column("ServiceId").LazyLoad().Not.Cascade.SaveUpdate();
  

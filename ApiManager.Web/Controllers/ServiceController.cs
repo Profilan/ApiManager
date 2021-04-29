@@ -39,7 +39,8 @@ namespace ApiManager.Web.Controllers
                     Id = item.Id,
                     Code = item.Code,
                     HashingId = item.PasswordHashing != null ? item.PasswordHashing.Id : 0,
-                    ExternalUrl = item.ExternalUrl
+                    ExternalUrl = item.ExternalUrl,
+                    HTPasswdLocation = item.HTPasswordLocation
                 };
 
                 return View(service);

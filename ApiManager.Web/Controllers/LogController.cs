@@ -18,7 +18,7 @@ namespace ApiManager.Web.Controllers
 
             DateTime start, end;
 
-            start = DateTime.Now.AddDays(-7).Date;
+            start = DateTime.Now.AddDays(-3).Date;
             end = DateTime.Now.AddDays(1).Date;
 
             ViewBag.StartDate = start.ToString("dd-MM-yyyy");

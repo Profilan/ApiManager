@@ -1,4 +1,5 @@
-﻿using ApiManager.Logic.Repositories;
+﻿using ApiManager.Logic.Models;
+using ApiManager.Logic.Repositories;
 using ApiManager.Web.Models;
 using System;
 using System.Collections.Generic;
@@ -29,9 +30,13 @@ namespace ApiManager.Web.Controllers
         public ActionResult Edit(int id)
         {
             var item = userRepository.GetById(id);
+ 
+            int serviceId = -1;
+            if (item.Service !=  null)
+            {
+                serviceId = item.Service.Id;
+            }
             
-            ViewBag.Services = serviceRepository.List();
-
             var user = new UserViewModel()
             {
                 Id = item.Id,
@@ -43,10 +48,23 @@ namespace ApiManager.Web.Controllers
                 AllowedIP = item.AllowedIP,
                 Debtors = item.Debtors,
                 Urls = item.Urls,
-                Service = item.Service
+                Enabled = item.Enabled,
+                ServiceId = serviceId,
+                Services = serviceRepository.List()
             };
 
             return View(user);
+        }
+        public ActionResult ChangePassword(int id)
+        {
+                var item = userRepository.GetById(id);
+
+                var model = new PasswordViewModel()
+                {
+                    Id = item.Id
+                };
+
+                return View(model);
         }
     }
 }

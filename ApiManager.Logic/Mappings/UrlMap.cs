@@ -1,4 +1,5 @@
-﻿using ApiManager.Logic.Models;
+﻿using ApiManager.Logic.Common;
+using ApiManager.Logic.Models;
 using FluentNHibernate.Mapping;
 using System;
 using System.Collections.Generic;
@@ -17,10 +18,12 @@ namespace ApiManager.Logic.Mappings
             Id(x => x.Id).GeneratedBy.Identity();
 
             Map(x => x.Name);
-            Map(x => x.Address);
+            Map(x => x.Address).Nullable();
+            Map(x => x.ExternalUrl).Nullable();
+            Map(x => x.AccessType).CustomType(typeof(AccessType)).Nullable();
             Component(x => x.InactivityTimeout, m =>
             {
-                m.Map(x => x.Seconds).Column("InactivityTimeout");
+                m.Map(x => x.Seconds).Column("InactivityTimeout").Nullable();
             });
             Map(x => x.MonitorInactivity);
             Map(x => x.Hits);

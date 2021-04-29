@@ -17,5 +17,8 @@ namespace ApiManager.Web.Models
         [Required]
         [Display(Name = "Password Hashing")]
         public int HashingId { get; set; }
+
+        [Display(Name = "Htpasswd Lovation")]
+        public string HTPasswdLocation { get; set; }
     }
 }

@@ -27,7 +27,15 @@ namespace ApiManager.Logic.Repositories
 
         public void Insert(User entity)
         {
-            throw new NotImplementedException();
+            using (ISession session = SessionFactory.GetNewSession("db1"))
+            {
+                using (ITransaction transaction = session.BeginTransaction())
+                {
+
+                    session.Save(entity);
+                    transaction.Commit();
+                }
+            }
         }
 
         public IEnumerable<User> List()
@@ -93,6 +101,16 @@ namespace ApiManager.Logic.Repositories
                     session.SaveOrUpdate(entity);
                     transaction.Commit();
                 }
+            }
+        }
+
+        public IEnumerable<UserStatistics> ListTopFive(Period period)
+        {
+            using (ISession session = SessionFactory.GetNewSession("db1"))
+            {
+                return session.CreateSQLQuery("EXEC EEK_sp_API_TOP5_USERS @period=" + (int)period)
+                                    .AddEntity(typeof(UserStatistics))
+                                    .List<UserStatistics>();
             }
         }
     }

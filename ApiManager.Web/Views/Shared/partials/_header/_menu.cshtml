@@ -12,11 +12,20 @@
     </div>
     <div id="kt_header_menu" class="kt-header-menu kt-header-menu-mobile  kt-header-menu--layout-default ">
         <ul class="kt-menu__nav ">
+            <li class="kt-menu__item  kt-menu__item--submenu kt-menu__item--rel @(pageName == "monitor" ? "kt-menu__item--active" : "")" data-ktmenu-submenu-toggle="click" aria-haspopup="true">
+                <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><span class="kt-menu__link-text">Monitor</span><i class="kt-menu__hor-arrow la la-angle-down"></i><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--left">
+                    <ul class="kt-menu__subnav">
+                        <li class="kt-menu__item " aria-haspopup="true"><a href="/monitor/index" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">API Task Scheduler</span></a></li>
+                        <li class="kt-menu__item " aria-haspopup="true"><a href="/monitor/apiqueue?taskId=00000000-0000-0000-0000-000000000000" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">API Queue</span></a></li>
+                    </ul>
+                </div>
+            </li>
             <li class="kt-menu__item  kt-menu__item--submenu kt-menu__item--rel @(pageName == "user" ? "kt-menu__item--active" : "")" data-ktmenu-submenu-toggle="click" aria-haspopup="true">
                 <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><span class="kt-menu__link-text">Users</span><i class="kt-menu__hor-arrow la la-angle-down"></i><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
                 <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--left">
                     <ul class="kt-menu__subnav">
-                        <li class="kt-menu__item " aria-haspopup="true"><a href="/user" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">List Users</span></a></li>
+                        <li class="kt-menu__item " aria-haspopup="true"><a href="/user/index" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">List Users</span></a></li>
                         <li class="kt-menu__item " aria-haspopup="true"><a href="/user/create" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Create New User</span></a></li>
                     </ul>
                 </div>
@@ -25,8 +34,17 @@
                 <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><span class="kt-menu__link-text">Urls</span><i class="kt-menu__hor-arrow la la-angle-down"></i><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
                 <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--left">
                     <ul class="kt-menu__subnav">
-                        <li class="kt-menu__item " aria-haspopup="true"><a href="/url" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">List Urls</span></a></li>
+                        <li class="kt-menu__item " aria-haspopup="true"><a href="/url/index" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">List Urls</span></a></li>
                         <li class="kt-menu__item " aria-haspopup="true"><a href="/url/create" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Create New Url</span></a></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="kt-menu__item  kt-menu__item--submenu kt-menu__item--rel @(pageName == "share" ? "kt-menu__item--active" : "")" data-ktmenu-submenu-toggle="click" aria-haspopup="true">
+                <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><span class="kt-menu__link-text">Shares</span><i class="kt-menu__hor-arrow la la-angle-down"></i><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--left">
+                    <ul class="kt-menu__subnav">
+                        <li class="kt-menu__item " aria-haspopup="true"><a href="/share/index" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">List Shares</span></a></li>
+                        <li class="kt-menu__item " aria-haspopup="true"><a href="/share/create" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Create New Share</span></a></li>
                     </ul>
                 </div>
             </li>
@@ -36,6 +54,31 @@
                     <ul class="kt-menu__subnav">
                         <li class="kt-menu__item " aria-haspopup="true"><a href="/service" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">List Services</span></a></li>
                         <li class="kt-menu__item " aria-haspopup="true"><a href="/service/create" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Create New Service</span></a></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="kt-menu__item  kt-menu__item--submenu kt-menu__item--rel @(pageName == "task" ? "kt-menu__item--active" : "")" data-ktmenu-submenu-toggle="click" aria-haspopup="true">
+                <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><span class="kt-menu__link-text">Tasks</span><i class="kt-menu__hor-arrow la la-angle-down"></i><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--left">
+                    <ul class="kt-menu__subnav">
+                        <li class="kt-menu__item " aria-haspopup="true"><a href="/task" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">List Tasks</span></a></li>
+                        <li class="kt-menu__item " aria-haspopup="true"><a href="/task/create" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Create New Task</span></a></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="kt-menu__item  kt-menu__item--submenu kt-menu__item--rel @(pageName == "log" ? "kt-menu__item--active" : "")" data-ktmenu-submenu-toggle="click" aria-haspopup="true">
+                <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><span class="kt-menu__link-text">Log</span><i class="kt-menu__hor-arrow la la-angle-down"></i><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--left">
+                    <ul class="kt-menu__subnav">
+                        <li class="kt-menu__item " aria-haspopup="true"><a href="/log/index" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">List Log</span></a></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="kt-menu__item  kt-menu__item--submenu kt-menu__item--rel @(pageName == "home" ? "kt-menu__item--active" : "")" data-ktmenu-submenu-toggle="click" aria-haspopup="true">
+                <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><span class="kt-menu__link-text">Statistics</span><i class="kt-menu__hor-arrow la la-angle-down"></i><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--left">
+                    <ul class="kt-menu__subnav">
+                        <li class="kt-menu__item " aria-haspopup="true"><a href="/home/index" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Charts</span></a></li>
                     </ul>
                 </div>
             </li>

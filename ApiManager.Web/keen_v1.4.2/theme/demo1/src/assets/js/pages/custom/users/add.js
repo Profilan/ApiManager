@@ -30,16 +30,20 @@ var KTUsersAdd = function () {
                 },
                 AllowedIP: {
                     required: true
+                },
+                Password: {
+                    required: true
+                },
+                ConfirmPassword: {
+                    required: true,
+                    equalTo: "#Password"
                 }
             },
 
             // Validation messages
             messages: {
-                'account_communication[]': {
-                    required: 'You must select at least one communication option'
-                },
-                accept: {
-                    required: "You must accept the Terms and Conditions agreement!"
+                ConfirmPassword: {
+                    equalTo: "Please enter the same password"
                 }
             },
 
@@ -66,6 +70,7 @@ var KTUsersAdd = function () {
         var btn = formEl.find('[data-ktwizard-action="action-submit"]');
 
         btn.on('click', function (e) {
+            
             e.preventDefault();
 
             if (validator.form()) {
@@ -85,6 +90,10 @@ var KTUsersAdd = function () {
                             "text": "User saved.",
                             "type": "success",
                             "confirmButtonClass": "btn btn-secondary"
+                        }).then((result) => {
+                            if (result.value) {
+                                window.location = '/user';
+                            }
                         });
                     }
                 });
@@ -92,14 +101,112 @@ var KTUsersAdd = function () {
         });
     };
 
+    var initApikeyGenerator = function () {
+        var btn = $('#generate-apikey-btn');
+
+        btn.on('click', function (e) {
+            e.preventDefault();
+
+            sarr = new Array("abcdefghijkmnopqrstuvwxyz", "ABCDEFGHJKLMNPQRSTUVWXYZ",
+                "23456789", "~!#$%^&*()_+-=\[]{};:,./<>?");
+            s = new String();
+            pw = new String();
+            s = sarr[0] + sarr[1] + sarr[2];
+            for (var i = 0; i < 40; i++) {
+                pw += s.charAt(Math.floor(Math.random() * s.length));
+            }
+            $('#Apikey').val(pw);
+        });
+    };
+
+    var initAutocomplete = function () {
+        $('.urlpicker').autocomplete({
+            source: function (request, response) {
+                $.getJSON("/api/url/" + request.term, function (data) {
+                    response($.map(data, function (item) {
+                        return item.name;
+                    }));
+                });
+            },
+            minLength: 2
+        });
+
+        $('.debtorpicker').autocomplete({
+            source: function (request, response) {
+                $.getJSON("/api/debtor/" + request.term, function (data) {
+                    response($.map(data, function (item) {
+                        return item.DEBITEURNR + " " + item.NAAM;
+                    }));
+                });
+            },
+            minLength: 2
+        });
+    };
+
+    var initRepeaters = function () {
+        
+        $('#UrlRepeater').repeater({
+                show: function () {
+                    var input = $(this).find('input').autocomplete({
+                        source: function (request, response) {
+                            $.getJSON("/api/url/" + request.term, function (data) {
+                                response($.map(data, function (item) {
+                                    return item.name;
+                                }));
+                            });
+                        },
+                        minLength: 2
+                    });
+                     $(this).slideDown();
+                },
+                // Enable the option below to have a 2-step remove button
+                /*
+                hide: function (deleteElement) {
+                    if(confirm('Are you sure you want to delete this element?')) {
+                        $(this).slideUp(deleteElement);
+                    }
+                },
+                */
+                isFirstItemUndeletable: true
+            });
+      
+        $('#DebtorRepeater').repeater({
+            show: function () {
+                $(this).find('input').autocomplete({
+                    source: function (request, response) {
+                        $.getJSON("/api/debtor/" + request.term, function (data) {
+                            response($.map(data, function (item) {
+                                return item.DEBITEURNR + " " + item.NAAM;
+                            }));
+                        });
+                    },
+                    minLength: 2
+                });
+                $(this).slideDown();
+            },
+            // Enable the option below to have a 2-step remove button
+            /*
+            hide: function (deleteElement) {
+                if(confirm('Are you sure you want to delete this element?')) {
+                    $(this).slideUp(deleteElement);
+                }
+            },
+            */
+            isFirstItemUndeletable: true
+        });
+    };
+
     return {
         // public functions
         init: function() {
             wizardEl = KTUtil.get('kt_wizard_v3');
-            formEl = $('#kt_form');
+            formEl = $('#kt_user_form');
 
             initValidation();
             initSubmit();
+            initApikeyGenerator();
+            initAutocomplete();
+            initRepeaters();
         }
     };
 }();

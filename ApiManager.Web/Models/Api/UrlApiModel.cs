@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using ApiManager.Logic.Common;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,5 +25,12 @@ namespace ApiManager.Web.Models.Api
         public int Hits { get; set; }
         [JsonProperty("show_in_statistics")]
         public bool ShowInStatistics { get; set; }
+        [JsonProperty("avg_duration")]
+        public double AverageDuration { get; set; }
+        [JsonProperty("latest_visit_date")]
+        public string LatestVisitDate { get; set; }
+        [JsonProperty("access_type")]
+        public AccessType AccessType { get; set; }
+
     }
 }

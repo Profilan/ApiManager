@@ -1,0 +1,10 @@
+﻿@model ApiManager.Web.Models.TaskViewModel
+
+<div class="row">
+    <div class="col-lg-6">
+        @{Html.RenderPartial("_Receive", Model); }
+    </div>
+    <div class="col-lg-6">
+        @{Html.RenderPartial("_Send", Model); }
+    </div>
+</div>

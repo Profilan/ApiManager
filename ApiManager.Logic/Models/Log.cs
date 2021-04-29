@@ -1,9 +1,5 @@
 ﻿using ApiManager.Logic.Common;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ApiManager.Logic.Models
 {
@@ -16,8 +12,10 @@ namespace ApiManager.Logic.Models
         public virtual string Url { get; protected set; }
         public virtual string Detail { get; protected set; }
         public virtual bool Acknowledged { get; set; }
-        public virtual User User { get; set; }
         public virtual double Duration { get; set; }
+
+        public virtual User User { get; set; }
+         public virtual SchedulerTask Task { get; set; }
 
         // Needed for NHibernate
         public Log()
@@ -33,7 +31,9 @@ namespace ApiManager.Logic.Models
             string detail,
             bool acknowledged,
             User user,
-            double duration = 0)
+            SchedulerTask task,
+            double duration = 0
+            )
         {
             TimeStamp = timeStamp;
             Priority = priority;
@@ -44,6 +44,7 @@ namespace ApiManager.Logic.Models
             Acknowledged = acknowledged;
             User = user;
             Duration = duration;
+            Task = task;
         }
 
         // requestId, targetId, response, properties, referenceId

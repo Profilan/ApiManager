@@ -1,0 +1,15 @@
+﻿@{
+    var period = Model;
+}
+
+@using ApiManager.Logic.Common
+
+<div class="btn-group" role="group">
+
+    <a href="#" class="btn @(period == Period.Hour ? "btn-dark" : "btn-primary") period-button" data-period="1">hour</a>
+    <a href="#" class="btn @(period == Period.Day ? "btn-dark" : "btn-primary") period-button" data-period="2">day</a>
+    <a href="#" class="btn @(period == Period.Week ? "btn-dark" : "btn-primary") period-button" data-period="3">week</a>
+    <a href="#" class="btn @(period == Period.Month ? "btn-dark" : "btn-primary") period-button" data-period="4">30 days</a>
+    <input type="hidden" id="Period" name="Period" value="@period" />
+</div>
+

@@ -1,6 +1,12 @@
 ﻿
 @{
     ViewBag.Title = "Urls";
+
+    var accessTypeList = new SelectList(new List<SelectListItem>()
+    {
+        new SelectListItem { Selected = false, Text = "Inbound", Value = "1" },
+        new SelectListItem { Selected = false, Text = "Outbound", Value = "2" }
+    }, "Value", "Text");
 }
 
 <div class="kt-portlet kt-portlet--mobile">
@@ -13,7 +19,7 @@
         </div>
         <div class="kt-portlet__head-toolbar">
             <div class="kt-portlet__head-wrapper">
-                <a href="/service/create" class="btn btn-brand btn-bold btn-upper btn-font-sm">
+                <a href="/url/create" class="btn btn-brand btn-bold btn-upper btn-font-sm">
                     <i class="la la-plus"></i>
                     New Url
                 </a>
@@ -37,34 +43,8 @@
                         </div>
                         <div class="col-md-4 kt-margin-b-20-tablet-and-mobile">
                             <div class="kt-form__group kt-form__group--inline">
-                                <div class="kt-form__label">
-                                    <label>Status:</label>
-                                </div>
                                 <div class="kt-form__control">
-                                    <select class="form-control bootstrap-select" id="kt_form_status">
-                                        <option value="">All</option>
-                                        <option value="1">Pending</option>
-                                        <option value="2">Delivered</option>
-                                        <option value="3">Canceled</option>
-                                        <option value="4">Success</option>
-                                        <option value="5">Info</option>
-                                        <option value="6">Danger</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 kt-margin-b-20-tablet-and-mobile">
-                            <div class="kt-form__group kt-form__group--inline">
-                                <div class="kt-form__label">
-                                    <label>Type:</label>
-                                </div>
-                                <div class="kt-form__control">
-                                    <select class="form-control bootstrap-select" id="kt_form_type">
-                                        <option value="">All</option>
-                                        <option value="1">Online</option>
-                                        <option value="2">Retail</option>
-                                        <option value="3">Direct</option>
-                                    </select>
+                                    @Html.DropDownList("AccessType", accessTypeList, "- Select an access type -", new { @class = "form-control bootstrap-select", @id = "kt_form_access_type" })
                                 </div>
                             </div>
                         </div>
@@ -72,7 +52,7 @@
                 </div>
                 <div class="col-xl-4 order-1 order-xl-2 kt-align-right">
                     <a href="/url/create" class="btn btn-default kt-hidden">
-                        <i class="la la-cart-plus"></i> New Order
+                        <i class="la la-cart-plus"></i> New Url
                     </a>
                     <div class="kt-separator kt-separator--border-dashed kt-separator--space-lg d-xl-none"></div>
                 </div>

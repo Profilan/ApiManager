@@ -22,12 +22,12 @@
             <!--begin::Form-->
             @using (Html.BeginForm("Create", "Url", FormMethod.Post, new { @class = "kt-form kt-form--label-right", @id = "kt_url_form" }))
             {
-                 <div class="kt-portlet__body">
+                <div class="kt-portlet__body">
                     <div class="form-group row">
                         <div class="col-lg-6">
                             @Html.LabelFor(model => model.Name)
                             @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                         </div>
+                        </div>
                         <div class="col-lg-6">
                             @Html.LabelFor(model => model.ServiceId)
                             @Html.DropDownListFor(model => model.ServiceId, serviceList, "- Select a service -", new { @class = "form-control" })
@@ -35,8 +35,8 @@
                     </div>
                     <div class="form-group row">
                         <div class="col-lg-6">
-                            @Html.LabelFor(model => model.Address)
-                            @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.LabelFor(model => model.AccessType)
+                            @Html.EnumDropDownListFor(x => Model.AccessType, htmlAttributes: new { @class = "form-control" })
                         </div>
                     </div>
                     <div class="form-group row">
@@ -54,7 +54,6 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        
                         <div class="col-lg-2">
                             <label>Inactivity Timeout</label>
                             @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control" } })
@@ -63,6 +62,16 @@
                         <div class="col-lg-2">
                             <label>&nbsp;</label>
                             @Html.EnumDropDownListFor(model => model.Unit, "- Select unit -", new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-lg-6">
+                            @Html.LabelFor(model => model.Address)
+                            @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                        <div class="col-lg-6">
+                            @Html.LabelFor(model => model.ExternalUrl)
+                            @Html.EditorFor(model => model.ExternalUrl, new { htmlAttributes = new { @class = "form-control" } })
                         </div>
                     </div>
                 </div>

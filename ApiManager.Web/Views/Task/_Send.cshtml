@@ -1,0 +1,46 @@
+﻿@model ApiManager.Web.Models.TaskViewModel
+
+<h3>Send</h3>
+
+@Html.EnumDropDownListFor(model => model.SenderViewModel.Type, "Select type", new { @class = "form-control" })
+
+<ul class="nav nav-tabs nav-tabs-line nav-tabs-line-success nav-tabs-bold" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#send_api" role="tab" id="apiSendTab">API</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#send_disk" role="tab" id="diskSendTab">File</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#send_mail" role="tab" id="mailSendTab">Mail</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#send_ftp" role="tab" id="ftpSendTab">FTP</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#send_sql" role="tab" id="sqlSendTab">SQL</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#send_authentication" id="authenticationSendTab" role="tab">Authentication</a>
+    </li>
+</ul>
+<div class="tab-content">
+    <div class="tab-pane" id="send_api" role="tabpanel">
+        @{Html.RenderPartial("_SendAPI", Model); }
+    </div>
+    <div class="tab-pane" id="send_disk" role="tabpanel">
+        @{Html.RenderPartial("_SendFile", Model); }
+    </div>
+    <div class="tab-pane" id="send_mail" role="tabpanel">
+        @{Html.RenderPartial("_SendMail", Model); }
+    </div>
+    <div class="tab-pane" id="send_ftp" role="tabpanel">
+        @{Html.RenderPartial("_SendFTP", Model); }
+    </div>
+    <div class="tab-pane" id="send_sql" role="tabpanel">
+        @{Html.RenderPartial("_SendSQL", Model); }
+    </div>
+    <div class="tab-pane" id="send_authentication" role="tabpanel">
+        @{Html.RenderPartial("_SendAuthentication", Model); }
+    </div>
+</div>

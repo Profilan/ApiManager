@@ -81,20 +81,19 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "../src/assets/js/pages/components/forms/layouts/repeater.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "../src/assets/js/pages/custom/users/changepassword.js");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "../src/assets/js/pages/components/forms/layouts/repeater.js":
-/*!*******************************************************************!*\
-  !*** ../src/assets/js/pages/components/forms/layouts/repeater.js ***!
-  \*******************************************************************/
+/***/ "../src/assets/js/pages/custom/users/changepassword.js":
+/*!*************************************************************!*\
+  !*** ../src/assets/js/pages/custom/users/changepassword.js ***!
+  \*************************************************************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-eval("\r\n\r\n// Class definition\r\n\r\nvar KTRepeaterDemo = function () {\r\n    \r\n    // Private functions\r\n    var demo = function () {\r\n        $('.kt-repeater').each(function(){\r\n            $(this).repeater({\r\n                show: function () {\r\n                    $(this).slideDown();\r\n                },\r\n                // Enable the option below to have a 2-step remove button\r\n                /*\r\n                hide: function (deleteElement) {\r\n                    if(confirm('Are you sure you want to delete this element?')) {\r\n                        $(this).slideUp(deleteElement);\r\n                    }\r\n                },\r\n                */\r\n                isFirstItemUndeletable: true\r\n            });\r\n        });\r\n    }\r\n\r\n    return {\r\n        // public functions\r\n        init: function() {\r\n            demo(); \r\n        }\r\n    };\r\n}();\r\n\r\njQuery(document).ready(function() {    \r\n    KTRepeaterDemo.init();\r\n});\n\n//# sourceURL=webpack:///../src/assets/js/pages/components/forms/layouts/repeater.js?");
+eval("// Class definition\r\nvar KTUsersChangePassword = function () {\r\n    // Base elements\r\n    var formEl;\r\n    var validator;\r\n\r\n    var initValidation = function () {\r\n        validator = formEl.validate({\r\n            // Validate only visible fields\r\n            ignore: \":hidden\",\r\n\r\n            // Validation rules\r\n            rules: {\r\n                Password1: {\r\n                    required: true\r\n                },\r\n                Password2: {\r\n                    required: true,\r\n                    equalTo: \"#Password1\"\r\n                }\r\n            },\r\n\r\n            // Validation messages\r\n            messages: {\r\n                Password2: {\r\n                    equalTo: \"Please enter the same password\"\r\n                }\r\n            },\r\n\r\n\r\n            // Display error  \r\n            invalidHandler: function (event, validator) {\r\n                KTUtil.scrollTop();\r\n\r\n                swal.fire({\r\n                    \"title\": \"\",\r\n                    \"text\": \"An error was encountered while saving the user.\",\r\n                    \"type\": \"error\",\r\n                    \"confirmButtonClass\": \"btn btn-secondary m-btn m-btn--wide\"\r\n                });\r\n            },\r\n\r\n            // Submit valid form\r\n            submitHandler: function (form) {\r\n\r\n            }\r\n        });\r\n    };\r\n\r\n    var initSubmit = function () {\r\n        var btn = formEl.find('[data-ktwizard-action=\"action-submit\"]');\r\n\r\n        btn.on('click', function (e) {\r\n            e.preventDefault();\r\n\r\n            if (validator.form()) {\r\n                // See: src\\js\\framework\\base\\app.js\r\n                KTApp.progress(btn);\r\n                //KTApp.block(formEl);\r\n\r\n                // See: http://malsup.com/jquery/form/#ajaxSubmit\r\n                formEl.ajaxSubmit({\r\n                    url: '/api/user/changepassword',\r\n                    success: function () {\r\n                        KTApp.unprogress(btn);\r\n                        //KTApp.unblock(formEl);\r\n\r\n                        swal.fire({\r\n                            \"title\": \"\",\r\n                            \"text\": \"Password Changed.\",\r\n                            \"type\": \"success\",\r\n                            \"confirmButtonClass\": \"btn btn-secondary\"\r\n                        });\r\n                    }\r\n                });\r\n            }\r\n        });\r\n    };\r\n\r\n    return {\r\n        // public functions\r\n        init: function() {\r\n            formEl = $('#kt_user_form');\r\n\r\n            initValidation();\r\n            initSubmit();\r\n        }\r\n    };\r\n}();\r\n\r\njQuery(document).ready(function() {    \r\n    KTUsersChangePassword.init();\r\n});\n\n//# sourceURL=webpack:///../src/assets/js/pages/custom/users/changepassword.js?");
 
 /***/ })
 

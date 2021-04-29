@@ -26,6 +26,7 @@ namespace ApiManager.Logic.Mappings
             Map(x => x.Duration);
 
             References(x => x.User).Column("userId").LazyLoad().Not.Cascade.SaveUpdate();
+            References(x => x.Task).Column("taskId").LazyLoad().Not.Cascade.SaveUpdate();
         }
     }
 }

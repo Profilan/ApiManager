@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ApiManager.Logic.Common;
+using ApiManager.Web.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,9 +11,14 @@ namespace ApiManager.Web.Controllers
     [Authorize(Roles = "Domain Admins")]
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index(Period period = Period.Month)
         {
-            return View();
+            var viewModel = new DashboardViewModel()
+            {
+                Period = period
+            };
+
+            return View(viewModel);
         }
 
         public ActionResult About()

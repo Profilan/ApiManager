@@ -11,9 +11,10 @@
         new SelectListItem { Selected = false, Text = "Admin", Value = "admin" },
     }, "Value", "Text");
 
-    IEnumerable<ApiManager.Logic.Models.Service> services = ViewBag.Services;
+}
 
-    var serviceList = new SelectList(services, "Id", "Code");
+@section Styles {
+    <link href="~/dist/assets/plugins/jquery-ui/jquery-ui-1.10.0.custom.css" rel="stylesheet" type="text/css" />
 }
 
 <div class="row">
@@ -32,93 +33,112 @@
             {
                 @Html.HiddenFor(model => model.Id)
 
-        <div class="kt-portlet__body">
-            <div class="form-group row">
-                <div class="col-lg-6">
-                    @Html.LabelFor(model => model.Username)
-                    @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
-                </div>
-                <div class="col-lg-6">
-                    @Html.LabelFor(model => model.DisplayName)
-                    @Html.EditorFor(model => model.DisplayName, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.DisplayName, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-lg-6">
-                    @Html.LabelFor(model => model.Email)
-                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                </div>
-                <div class="col-lg-6">
-                    @Html.LabelFor(model => model.Service)
-                    @Html.DropDownList("Service", serviceList, new { @class = "form-control" })
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-lg-6">
-                    @Html.LabelFor(model => model.Apikey)
-                    <div class="input-group">
-                        @Html.EditorFor(model => model.Apikey, new { htmlAttributes = new { @class = "form-control" } })
-                        <div class="input-group-append">
-                            <button id="generate-apikey-btn" class="btn btn-success align-bottom">Generate API Key</button>
+                <div class="kt-portlet__body">
+                    <div class="form-group row">
+                        <div class="col-lg-6">
+                            @Html.LabelFor(model => model.Username)
+                            @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-lg-6">
+                            @Html.LabelFor(model => model.DisplayName)
+                            @Html.EditorFor(model => model.DisplayName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.DisplayName, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    @Html.ValidationMessageFor(model => model.Apikey, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-lg-6">
-                    @Html.LabelFor(model => model.Role)
-                    @Html.DropDownList("Role", roleList, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Role, "", new { @class = "text-danger" })
-                </div>
-                <div class="col-lg-6">
-                    @Html.LabelFor(model => model.AllowedIP)
-                    @Html.EditorFor(model => model.AllowedIP, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.AllowedIP, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-lg-6">
-                    @Html.LabelFor(model => model.Enabled)
-                    <div class="kt-checkbox-inline">
-                        @Html.EditorFor(model => model.Enabled)
-                        @Html.ValidationMessageFor(model => model.Enabled, "", new { @class = "text-danger" })
+                    <div class="form-group row">
+                        <div class="col-lg-6">
+                            @Html.LabelFor(model => model.Email)
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-lg-6">
+                            @Html.LabelFor(model => model.ServiceId)
+                            @Html.DropDownListFor(model => model.ServiceId, new SelectList(Model.Services, "Id", "Code"), "- Select a service -", new { @class = "form-control" })
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-lg-6">
-                    @Html.LabelFor(model => model.Debtors)
-                    <div class="kt-repeater">
-                        <div data-repeater-list="Debtors">
-                            @if (Model.Debtors.Count() > 0)
-                            {
-                                int i = 0;
-                                foreach (var debtor in Model.Debtors)
-                                {
-                                    if (i == 0)
+                    <div class="form-group row">
+                        <div class="col-lg-6">
+                            @Html.LabelFor(model => model.Apikey)
+                            <div class="input-group">
+                                @Html.EditorFor(model => model.Apikey, new { htmlAttributes = new { @class = "form-control" } })
+                                <div class="input-group-append">
+                                    <button id="generate-apikey-btn" class="btn btn-success align-bottom">Generate API Key</button>
+                                </div>
+                            </div>
+                            @Html.ValidationMessageFor(model => model.Apikey, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-lg-6">
+                            @Html.LabelFor(model => model.Role)
+                            @Html.DropDownList("Role", roleList, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Role, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-lg-6">
+                            @Html.LabelFor(model => model.AllowedIP)
+                            @Html.EditorFor(model => model.AllowedIP, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.AllowedIP, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-lg-6">
+                            @Html.LabelFor(model => model.Enabled)
+                            <div class="kt-checkbox-inline">
+                                @Html.EditorFor(model => model.Enabled)
+                                @Html.ValidationMessageFor(model => model.Enabled, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-lg-6">
+                            @Html.LabelFor(model => model.Debtors)
+                            <div id="DebtorRepeater" class="kt-repeater">
+                                <div data-repeater-list="Debtors">
+                                    @if (Model.Debtors.Count() > 0)
                                     {
-                                        <div data-repeater-item class="kt-repeater__item">
-                                            <div class="input-group">
-                                                <input type="text" class="form-control debtorpicker" name="Name" value="@(debtor.DEBITEURNR + " " + debtor.NAAM)" placeholder="Debtor Name">
-                                                <div class="input-group-append">
-                                                    <button data-repeater-delete="" class="btn btn-danger btn-icon">
-                                                        <i class="la la-close kt-font-light"></i>
-                                                    </button>
+                                        int i = 0;
+                                        foreach (var debtor in Model.Debtors)
+                                        {
+                                            if (i == 0)
+                                            {
+                                                <div data-repeater-item class="kt-repeater__item">
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control debtorpicker" name="NAAM" value="@(debtor.DEBITEURNR + " " + debtor.NAAM)" placeholder="Debtor Name">
+                                                        <div class="input-group-append">
+                                                            <button data-repeater-delete="" class="btn btn-danger btn-icon">
+                                                                <i class="la la-close kt-font-light"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="kt-separator kt-separator--space-sm"></div>
                                                 </div>
-                                            </div>
-                                            <div class="kt-separator kt-separator--space-sm"></div>
-                                        </div>
+
+                                            }
+                                            else
+                                            {
+                                                <div data-repeater-item="" class="kt-repeater__item" style="">
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control debtorpicker" name="NAAM" value="@(debtor.DEBITEURNR + " " + debtor.NAAM)" placeholder="Debtor Name">
+                                                        <div class="input-group-append">
+                                                            <button data-repeater-delete="" class="btn btn-danger btn-icon">
+                                                                <i class="la la-close kt-font-light"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="kt-separator kt-separator--space-sm"></div>
+                                                </div>
+
+                                            }
+                                            i++;
+                                        }
 
                                     }
                                     else
                                     {
-                                        <div data-repeater-item="" class="kt-repeater__item" style="">
+                                        <div data-repeater-item class="kt-repeater__item">
                                             <div class="input-group">
-                                                <input type="text" class="form-control debtorpicker" name="Name" value="@(debtor.DEBITEURNR + " " + debtor.NAAM)" placeholder="Debtor Name">
+                                                <input type="text" class="form-control debtorpicker" name="Name" placeholder="Debtor Name">
                                                 <div class="input-group-append">
                                                     <button data-repeater-delete="" class="btn btn-danger btn-icon">
                                                         <i class="la la-close kt-font-light"></i>
@@ -129,64 +149,64 @@
                                         </div>
 
                                     }
-                                    i++;
-                                }
-
-                            }
-                            else
-                            {
-                                <div data-repeater-item class="kt-repeater__item">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control debtorpicker" name="Name" placeholder="Debtor Name">
-                                        <div class="input-group-append">
-                                            <button data-repeater-delete="" class="btn btn-danger btn-icon">
-                                                <i class="la la-close kt-font-light"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="kt-separator kt-separator--space-sm"></div>
                                 </div>
-
-                            }
-                        </div>
-                        <div class="kt-repeater__add-data">
-                            <span data-repeater-create="" class="btn btn-info btn-sm">
-                                <i class="la la-plus"></i> Add
-                            </span>
+                                <div class="kt-repeater__add-data">
+                                    <span data-repeater-create="" class="btn btn-info btn-sm">
+                                        <i class="la la-plus"></i> Add
+                                    </span>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-lg-6">
-                    @Html.LabelFor(model => model.Urls)
-                    <div class="kt-repeater">
-                        <div data-repeater-list="Urls">
-                            @if (Model.Urls.Count() > 0)
-                            {
-                                int i = 0;
-                                foreach (var url in Model.Urls)
-                                {
-                                    if (i == 0)
+                    <div class="form-group row">
+                        <div class="col-lg-6">
+                            @Html.LabelFor(model => model.Urls)
+                            <div id="UrlRepeater" class="kt-repeater">
+                                <div data-repeater-list="Urls">
+                                    @if (Model.Urls.Count() > 0)
                                     {
-                                        <div data-repeater-item class="kt-repeater__item">
-                                            <div class="input-group">
-                                                <input type="text" class="form-control urlpicker" name="Name" value="@url.Name" placeholder="Url Name">
-                                                <div class="input-group-append">
-                                                    <button data-repeater-delete="" class="btn btn-danger btn-icon">
-                                                        <i class="la la-close kt-font-light"></i>
-                                                    </button>
+                                        int i = 0;
+                                        foreach (var url in Model.Urls)
+                                        {
+                                            if (i == 0)
+                                            {
+                                                <div data-repeater-item class="kt-repeater__item">
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control urlpicker" name="Name" value="@url.Name" placeholder="Url Name">
+                                                        <div class="input-group-append">
+                                                            <button data-repeater-delete="" class="btn btn-danger btn-icon">
+                                                                <i class="la la-close kt-font-light"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="kt-separator kt-separator--space-sm"></div>
                                                 </div>
-                                            </div>
-                                            <div class="kt-separator kt-separator--space-sm"></div>
-                                        </div>
+
+                                            }
+                                            else
+                                            {
+                                                <div data-repeater-item="" class="kt-repeater__item" style="">
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control urlpicker" name="Name" value="@url.Name" placeholder="Url Name">
+                                                        <div class="input-group-append">
+                                                            <button data-repeater-delete="" class="btn btn-danger btn-icon">
+                                                                <i class="la la-close kt-font-light"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="kt-separator kt-separator--space-sm"></div>
+                                                </div>
+
+                                            }
+                                            i++;
+                                        }
 
                                     }
                                     else
                                     {
-                                        <div data-repeater-item="" class="kt-repeater__item" style="">
+                                        <div data-repeater-item class="kt-repeater__item">
                                             <div class="input-group">
-                                                <input type="text" class="form-control urlpicker" name="Name" value="@url.Name" placeholder="Url Name">
+                                                <input type="text" class="form-control urlpicker" name="Name" placeholder="Url Name">
                                                 <div class="input-group-append">
                                                     <button data-repeater-delete="" class="btn btn-danger btn-icon">
                                                         <i class="la la-close kt-font-light"></i>
@@ -197,35 +217,16 @@
                                         </div>
 
                                     }
-                                    i++;
-                                }
-
-                            }
-                            else
-                            {
-                                <div data-repeater-item class="kt-repeater__item">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control urlpicker" name="Name" placeholder="Url Name">
-                                        <div class="input-group-append">
-                                            <button data-repeater-delete="" class="btn btn-danger btn-icon">
-                                                <i class="la la-close kt-font-light"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="kt-separator kt-separator--space-sm"></div>
                                 </div>
-
-                            }
-                        </div>
-                        <div class="kt-repeater__add-data">
-                            <span data-repeater-create="" class="btn btn-info btn-sm">
-                                <i class="la la-plus"></i> Add
-                            </span>
+                                <div class="kt-repeater__add-data">
+                                    <span data-repeater-create="" class="btn btn-info btn-sm">
+                                        <i class="la la-plus"></i> Add
+                                    </span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
                 <div class="kt-portlet__foot">
                     <div class="kt-form__actions">
                         <div class="row">
@@ -243,7 +244,7 @@
 </div>
 
 @section Scripts {
-    <script src="~/dist/assets/js/pages/components/forms/layouts/repeater.js" type="text/javascript"></script>
+    <script src="~/dist/assets/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
     <script src="~/dist/assets/js/pages/custom/users/edit.js" type="text/javascript"></script>
     <script type="text/javascript">
 

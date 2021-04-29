@@ -16,6 +16,7 @@ namespace ApiManager.Web.Controllers.Api
     {
         private readonly LogRepository logRepository = new LogRepository();
         private readonly UserRepository userRepository = new UserRepository();
+        private readonly UrlRepository urlRepository = new UrlRepository();
 
         [Route("api/log")]
         [HttpPost]
@@ -23,20 +24,15 @@ namespace ApiManager.Web.Controllers.Api
         {
             string searchString = data["query[generalsearch]"];
             string sortOrder = data["sort[field]"] + "." + data["sort[sort]"];
-            int pageNumber = Convert.ToInt32(data["pagination[page]"]);
-            int pageSize = Convert.ToInt32(data["pagination[perpage]"]);
-            
+            string dateRange = data["query[daterange]"];
 
-            DateTime startDate, endDate;
-            if (String.IsNullOrEmpty(data["StartDate"]) || String.IsNullOrEmpty(data["EndDate"]))
+            DateTime start = DateTime.Today.AddDays(-3);
+            DateTime end = DateTime.Today.AddDays(1).AddSeconds(-1);
+            if (!string.IsNullOrEmpty(dateRange))
             {
-                startDate = DateTime.Now.AddDays(-7).Date;
-                endDate = DateTime.Now.AddDays(1).Date;
-            }
-            else
-            {
-                startDate = Convert.ToDateTime(data["StartDate"]);
-                endDate = Convert.ToDateTime(data["EndDate"]);
+                var dates = dateRange.Split(new char[] { ';' });
+                start = DateTime.Parse(dates[0]);
+                end = DateTime.Parse(dates[1]);
             }
 
             int userId = -1;
@@ -52,7 +48,7 @@ namespace ApiManager.Web.Controllers.Api
 
             try
             {
-                var items = logRepository.List(sortOrder, searchString, pageNumber, pageSize, startDate, endDate, userId, (ErrorType)errorType);
+                var items = logRepository.List(sortOrder, searchString, start, end, userId, (ErrorType)errorType);
 
                 List<LogApiModel> logs = new List<LogApiModel>();
                 foreach (var item in items)
@@ -60,7 +56,7 @@ namespace ApiManager.Web.Controllers.Api
                     logs.Add(new LogApiModel()
                     {
                         Id = item.Id,
-                        TimeStamp = item.TimeStamp.ToString("dd-MM-yyyy hh:mm:ss"),
+                        TimeStamp = item.TimeStamp.ToString("MM-dd-yyyy H:mm:ss"),
                         Message = item.Message,
                         PriorityName = item.PriorityName,
                         Url = item.Url,
@@ -76,5 +72,55 @@ namespace ApiManager.Web.Controllers.Api
                 return BadRequest(e.Message);
             }
          }
+
+        [Route("api/log/{id}")]
+        [HttpGet]
+        public IHttpActionResult Get(int id)
+        {
+            var item = logRepository.GetById(id);
+
+            var username = "";
+           
+            if (item.User != null)
+            {
+                var user = userRepository.GetById(item.User.Id);
+                username = user.Username;
+            }
+
+            var log = new LogApiModel()
+            {
+                Detail = item.Detail,
+                User = new UserApiModel()
+                {
+                    Username = username
+                }
+            };
+
+
+            return Ok(log);
+        }
+
+        [Route("api/log/latest-errors")]
+        [HttpGet]
+        public IHttpActionResult GetLatestErrors(Period period)
+        {
+            var urls = urlRepository.List().Where(x => x.ShowInStatistics == true);
+
+            var logErrors = new List<LatestErrorApiModel>();
+            foreach (var url in urls)
+            {
+                var logs = logRepository.ListByTypeAndUrl(period, ErrorType.ERR, url);
+                if (logs.Count() > 0)
+                {
+                    logErrors.Add(new LatestErrorApiModel()
+                    {
+                        UrlName = url.Name,
+                        ErrorCount = logs.Count()
+                    });
+                }
+            }
+
+            return Ok(logErrors);
+        }
     }
 }

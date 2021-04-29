@@ -2,7 +2,11 @@
 // Global Components And 3rd-party Plugin Customizations
 //
 
-
+.enable-task {
+    &:hover {
+        cursor: pointer;
+    }
+}
 
 // 3rd-party plugins customizations
 @import "integration/plugins/perfect-scrollbar";

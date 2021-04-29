@@ -4,6 +4,14 @@ var KTServicesAdd = function () {
     var formEl;
     var validator;
     
+    var showHtpasswdSection = function (el) {
+        if (el.val() == 1) {
+            $('#HtpasswdSection').show();
+        } else {
+            $('#HtpasswdSection').hide();
+        }
+    };
+
     var initValidation = function () {
         
         validator = formEl.validate({
@@ -69,13 +77,25 @@ var KTServicesAdd = function () {
 
                         swal.fire({
                             "title": "",
-                            "text": "User saved.",
+                            "text": "Service saved.",
                             "type": "success",
                             "confirmButtonClass": "btn btn-secondary"
+                        }).then((result) => {
+                            if (result.value) {
+                                window.location = '/service';
+                            }
                         });
                     }
                 });
             }
+        });
+    };
+
+    var initSections = function () {
+
+        showHtpasswdSection($('#HashingId'));
+        $("#HashingId").on('change', function (e) {
+            showHtpasswdSection($(this));
         });
     };
 
@@ -86,6 +106,7 @@ var KTServicesAdd = function () {
 
             initValidation();
             initSubmit();
+            initSections();
         }
     };
 }();

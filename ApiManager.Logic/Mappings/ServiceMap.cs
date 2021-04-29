@@ -17,7 +17,8 @@ namespace ApiManager.Logic.Mappings
             References(x => x.PasswordHashing).Column("PasswordHashingId").LazyLoad().Not.Cascade.SaveUpdate();
 
             Map(x => x.Code);
-            Map(x => x.ExternalUrl);
+            Map(x => x.ExternalUrl).Nullable();
+            Map(x => x.HTPasswordLocation).Nullable();
         }
     }
 }

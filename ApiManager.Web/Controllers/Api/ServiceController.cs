@@ -109,7 +109,7 @@ namespace ApiManager.Web.Controllers.Api
                 var passwordHashing = passwordHashingRepository.GetById(Convert.ToInt32(data["HashingId"]));
                 service.PasswordHashing = passwordHashing;
                 service.ExternalUrl = data["ExternalUrl"];
-
+                service.HTPasswordLocation = data["HtpasswdLocation"];
                 serviceRepository.Update(service);
 
                 return Ok();

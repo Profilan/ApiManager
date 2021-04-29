@@ -72,5 +72,27 @@ namespace ApiManager.Logic.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public Debtor GetByName(string name)
+        {
+            using (ISession session = SessionFactory.GetNewSession("db1"))
+            {
+                var query = from u in session.Query<Debtor>()
+                            select u;
+
+                query = query.Where(u => u.NAAM == name);
+
+                var users = query.ToList();
+
+                if (users.Count > 0)
+                {
+                    return query.ToList().Last();
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
     }
 }

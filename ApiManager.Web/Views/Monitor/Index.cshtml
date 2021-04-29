@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewBag.Title = "Api Task Monitor";
+}
+
+<div class="card">
+    <div class="card-header">
+        <div class="card-title float-left">
+            <h3 class="card-label">
+                API Task Scheduler
+                <small>Show tasks</small>
+            </h3>
+        </div>
+        <div class="float-right kt-font-lg">
+            <span class="mr-5">Page <span class="page-number">1</span> of <span class="page-total">1</span></span>
+            <a class="btn-previous" href="#" title="Previous"><i class="la la-angle-left"></i></a>
+            <a class="btn-play" href="#" title="Pause/Play"><i class="la la-play"></i></a>
+            <a class="btn-next" href="#" title="Next"><i class="la la-angle-right"></i></a>
+        </div>
+    </div>
+
+    <div class="card-body">
+
+        <!--begin: Task List -->
+        <div class="col-12">
+        <table id="apiTaskMonitorTable" class="table">
+            <thead>
+                <tr>
+                    <th>Task</th>
+                    <th>Enabled</th>
+                    <th>#Queued</th>
+                    <th>Last Run Time</th>
+                    <th>Last Run Result</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        </div>
+        <!--end: Task List -->
+
+    </div>
+</div>
+
+<div id="detailsModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Modal title</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <p></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+@section scripts
+{
+    <script src="~/dist/assets/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="~/dist/assets/plugins/bootstrap-notify/bootstrap-notify.min.js" type="text/javascript"></script>
+    <script src="~/dist/assets/js/pages/custom/monitor/api-task-monitor.js" type="text/javascript"></script>
+}

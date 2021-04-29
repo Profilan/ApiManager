@@ -72,6 +72,10 @@ var KTUrlsEdit = function () {
                             "text": "Url saved.",
                             "type": "success",
                             "confirmButtonClass": "btn btn-secondary"
+                        }).then((result) => {
+                            if (result.value) {
+                                window.location = '/url';
+                            }
                         });
                     }
                 });

@@ -85,6 +85,10 @@ var KTUsersEdit = function () {
                             "text": "User saved.",
                             "type": "success",
                             "confirmButtonClass": "btn btn-secondary"
+                        }).then((result) => {
+                            if (result.value) {
+                                window.location = '/user';
+                            }
                         });
                     }
                 });
@@ -110,6 +114,83 @@ var KTUsersEdit = function () {
         });
     };
 
+    var initAutocomplete = function () {
+        $('.urlpicker').autocomplete({
+            source: function (request, response) {
+                $.getJSON("/api/url/" + request.term, function (data) {
+                    response($.map(data, function (item) {
+                        return item.name;
+                    }));
+                });
+            },
+            minLength: 2
+        });
+
+        $('.debtorpicker').autocomplete({
+            source: function (request, response) {
+                $.getJSON("/api/debtor/" + request.term, function (data) {
+                    response($.map(data, function (item) {
+                        return item.DEBITEURNR + " " + item.NAAM;
+                    }));
+                });
+            },
+            minLength: 2
+        });
+    };
+
+    var initRepeaters = function () {
+
+        $('#UrlRepeater').repeater({
+            show: function () {
+                var input = $(this).find('input').autocomplete({
+                    source: function (request, response) {
+                        $.getJSON("/api/url/" + request.term, function (data) {
+                            response($.map(data, function (item) {
+                                return item.name;
+                            }));
+                        });
+                    },
+                    minLength: 2
+                });
+                $(this).slideDown();
+            },
+            // Enable the option below to have a 2-step remove button
+            /*
+            hide: function (deleteElement) {
+                if(confirm('Are you sure you want to delete this element?')) {
+                    $(this).slideUp(deleteElement);
+                }
+            },
+            */
+            isFirstItemUndeletable: true
+        });
+
+        $('#DebtorRepeater').repeater({
+            show: function () {
+                $(this).find('input').autocomplete({
+                    source: function (request, response) {
+                        $.getJSON("/api/debtor/" + request.term, function (data) {
+                            response($.map(data, function (item) {
+                                return item.DEBITEURNR + " " + item.NAAM;
+                            }));
+                        });
+                    },
+                    minLength: 2
+                });
+                $(this).slideDown();
+            },
+            // Enable the option below to have a 2-step remove button
+            /*
+            hide: function (deleteElement) {
+                if(confirm('Are you sure you want to delete this element?')) {
+                    $(this).slideUp(deleteElement);
+                }
+            },
+            */
+            isFirstItemUndeletable: true
+        });
+    };
+
     return {
         // public functions
         init: function() {
@@ -118,6 +199,8 @@ var KTUsersEdit = function () {
             initValidation();
             initSubmit();
             initApikeyGenerator();
+            initAutocomplete();
+            initRepeaters();
         }
     };
 }();

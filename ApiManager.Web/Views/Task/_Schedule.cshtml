@@ -1,0 +1,153 @@
+﻿@model ApiManager.Web.Models.TaskViewModel
+
+@using ApiManager.Logic.Common
+
+<div class="row">
+
+    <div class="col-lg-3">
+
+        <div class="form-group">
+            <label>Settings</label>
+            <div class="kt-radio-list">
+                <label class="kt-radio">
+                    <input type="radio" id="ScheduleType1" name="ScheduleType" value="0" @(Model.ScheduleViewModel.ScheduleType == ScheduleType.Once ? "checked='checked'" : "")> Once
+                    <span></span>
+                </label>
+                <label class="kt-radio">
+                    <input type="radio" id="ScheduleType2" name="ScheduleType" value="1" @(Model.ScheduleViewModel.ScheduleType == ScheduleType.Daily ? "checked='checked'" : "")> Daily
+                    <span></span>
+                </label>
+                <label class="kt-radio">
+                    <input type="radio" id="ScheduleType3" name="ScheduleType" value="2" @(Model.ScheduleViewModel.ScheduleType == ScheduleType.Weekly ? "checked='checked'" : "")> Weekly
+                    <span></span>
+                </label>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-lg-9">
+
+        <div class="form-group row">
+            <label for="Start" class="col-2 col-form-label" style="text-align: left">Start:</label>
+            <div class="col-3">
+                @Html.EditorFor(model => model.ScheduleViewModel.ScheduleStart, new { htmlAttributes = new { @class = "form-control", @type = "datetime-local" } })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="Start" class="col-2 col-form-label" style="text-align: left">Recur every:</label>
+            <div class="col-1">
+                @Html.EditorFor(model => model.ScheduleViewModel.ScheduleRecurrence, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
+            </div>
+            <div class="col-3">
+                <span id="recurrenceType">weeks</span> on:
+            </div>
+        </div>
+
+        <div id="daysSection">
+            <div class="form-group">
+                <div class="kt-checkbox-inline">
+                    @if (Model.IsEdit && !string.IsNullOrEmpty(Model.ScheduleViewModel.ScheduleDays) )
+                    {
+                        <label class="kt-checkbox">
+                            <input type="checkbox" name="WeekDays" value="Monday" @(Model.ScheduleViewModel.ScheduleDays.Contains("Monday") ? "checked='checked'" : "")> Monday
+                            <span></span>
+                        </label>
+                        <label class="kt-checkbox">
+                            <input type="checkbox" name="WeekDays" value="Tuesday" @(Model.ScheduleViewModel.ScheduleDays.Contains("Tuesday") ? "checked='checked'" : "")> Tuesday
+                            <span></span>
+                        </label>
+                        <label class="kt-checkbox">
+                            <input type="checkbox" name="WeekDays" value="Wednesday" @(Model.ScheduleViewModel.ScheduleDays.Contains("Wednesday") ? "checked='checked'" : "")> Wednesday
+                            <span></span>
+                        </label>
+                        <label class="kt-checkbox">
+                            <input type="checkbox" name="WeekDays" value="Thursday" @(Model.ScheduleViewModel.ScheduleDays.Contains("Thursday") ? "checked='checked'" : "")> Thursday
+                            <span></span>
+                        </label>
+                    }
+                    else
+                    {
+                        <label class="kt-checkbox">
+                            <input type="checkbox" name="WeekDays" value="Monday"> Monday
+                            <span></span>
+                        </label>
+                        <label class="kt-checkbox">
+                            <input type="checkbox" name="WeekDays" value="Tuesday"> Tuesday
+                            <span></span>
+                        </label>
+                        <label class="kt-checkbox">
+                            <input type="checkbox" name="WeekDays" value="Wednesday"> Wednesday
+                            <span></span>
+                        </label>
+                        <label class="kt-checkbox">
+                            <input type="checkbox" name="WeekDays" value="Thursday"> Thursday
+                            <span></span>
+                        </label>
+
+                    }
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <div class="kt-checkbox-inline">
+                    @if (Model.IsEdit && !string.IsNullOrEmpty(Model.ScheduleViewModel.ScheduleDays))
+                    {
+                        <label class="kt-checkbox">
+                            <input type="checkbox" name="WeekDays" value="Friday" @(Model.ScheduleViewModel.ScheduleDays.Contains("Friday") ? "checked='checked'" : "")> Friday
+                            <span></span>
+                        </label>
+                        <label class="kt-checkbox">
+                            <input type="checkbox" name="WeekDays" value="Saturday" @(Model.ScheduleViewModel.ScheduleDays.Contains("Saturday") ? "checked='checked'" : "")> Saturday
+                            <span></span>
+                        </label>
+                        <label class="kt-checkbox">
+                            <input type="checkbox" name="WeekDays" value="Sunday" @(Model.ScheduleViewModel.ScheduleDays.Contains("Sunday") ? "checked='checked'" : "")> Sunday
+                            <span></span>
+                        </label>
+                    }
+                    else
+                    {
+                        <label class="kt-checkbox">
+                            <input type="checkbox" name="WeekDays" value="Friday"> Friday
+                            <span></span>
+                        </label>
+                        <label class="kt-checkbox">
+                            <input type="checkbox" name="WeekDays" value="Saturday"> Saturday
+                            <span></span>
+                        </label>
+                        <label class="kt-checkbox">
+                            <input type="checkbox" name="WeekDays" value="Sunday"> Sunday
+                            <span></span>
+                        </label>
+
+                    }
+                </div>
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="form-group row">
+            <div class="col-lg-5">
+                <label>Interval</label>
+                @Html.EditorFor(model => model.ScheduleViewModel.Amount, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <div class="col-lg-5">
+                <label>&nbsp;</label>
+                @Html.EnumDropDownListFor(model => model.ScheduleViewModel.Unit, "- Select unit -", new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="Start" class="col-2 col-form-label" style="text-align: left">End:</label>
+            <div class="col-3">
+                
+                @Html.EditorFor(model => model.ScheduleViewModel.ScheduleEnd, new { htmlAttributes = new { @class = "form-control", @type = "datetime-local" } })
+            </div>
+        </div>
+
+    </div>
+</div>

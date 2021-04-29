@@ -5,191 +5,163 @@ var KTLogsListDatatable = function() {
 
 	// variables
     var datatable;
-    var currentStartDate;
-    var currentEndDate;
-    var arrows;
-    if (KTUtil.isRTL()) {
-        arrows = {
-            leftArrow: '<i class="la la-angle-right"></i>',
-            rightArrow: '<i class="la la-angle-left"></i>'
-        };
-    } else {
-        arrows = {
-            leftArrow: '<i class="la la-angle-left"></i>',
-            rightArrow: '<i class="la la-angle-right"></i>'
-        };
-    }
+
+    var datatableOptions = {
+        // datasource definition
+        data: {
+            type: 'remote',
+            source: {
+                read: {
+                    url: '/api/log',
+                    timeout: 300000,
+                }
+            },
+            pageSize: 10, // display 20 records per page
+            serverPaging: true,
+            serverFiltering: true,
+            serverSorting: true,
+            saveState: false,
+        },
+
+        // layout definition
+        layout: {
+            scroll: false, // enable/disable datatable scroll both horizontal and vertical when needed.
+            footer: false // display/hide footer
+        },
+
+        // column sorting
+        sortable: true,
+
+        pagination: true,
+
+        search: {
+            input: $('#generalSearch'),
+            delay: 400
+        },
+
+        // columns definition
+        columns: [{
+            field: "timestamp",
+            title: "Date",
+            template: function (row) {
+                return moment(row.timestamp).format('DD-MM-YYYY hh:mm:ss');
+            }
+        }, {
+            field: 'message',
+            title: 'Message'
+        }, {
+            field: 'status',
+            title: 'Status',
+            template: function (row) {
+                var color = "green";
+                if (row.priority_name === "ERR") {
+                    color = "red";
+                }
+                if (row.priority_name === "ALERT") {
+                    color = "purple";
+                }
+
+                return '<span style="color: ' + color + ';">' + row.priority_name + '</span>';
+            }
+        }, {
+            field: 'url',
+            title: 'Destination'
+        }, {
+            field: 'duration',
+            title: 'Duration (ms)'
+        }, {
+            field: "Actions",
+            width: 80,
+            title: "Actions",
+            sortable: false,
+            autoHide: false,
+            overflow: 'visible',
+            template: function (row) {
+                return '\
+							<a href="#" class="btn btn-hover-brand btn-icon btn-pill btn-details" data-record-id="' + row.id + '" data-toggle="modal" data-target="#detailsModal" title="Details">\
+                                    <i class="la la-book"></i>\
+                            </a>\
+						';
+            }
+        }]
+    };
 
 	// init
     var init = function () {
         // init the datatables. Learn more: https://keenthemes.com/keen/?page=docs&section=datatable
-        datatable = $('#kt_apps_log_list_datatable').KTDatatable({
-            // datasource definition
-            data: {
-                type: 'remote',
-                source: {
-                    read: {
-                        url: '/api/log',
-                        timeout: 300000
-                    }
-                },
-                pageSize: 10, // display 20 records per page
-                serverPaging: true,
-                serverFiltering: true,
-                serverSorting: true
-            },
+        datatable = $('#kt_apps_log_list_datatable').KTDatatable(datatableOptions);
 
-            // layout definition
-            layout: {
-                scroll: false, // enable/disable datatable scroll both horizontal and vertical when needed.
-                footer: false // display/hide footer
-            },
+        var modal = $('#detailsModal');
 
-            // column sorting
-            sortable: true,
+        modal.on('show.bs.modal', function (e) {
+            var link = $(e.relatedTarget);
+            var id = link.data('record-id');
 
-            pagination: true,
-
-            search: {
-                input: $('#generalSearch'),
-                delay: 400
-            },
-
-            // columns definition
-            columns: [{
-                field: "timestamp",
-                title: "Date",
-                type: 'date',
-                format: 'DD-MM-YYYY hh:mm:ss'
-            }, {
-                field: 'message',
-                title: 'Message'
-            }, {
-                field: 'status',
-                title: 'Status',
-                    template: function (row) {
-                        var color = "green";
-                        if (row.priority_name === "ERR") {
-                            color = "red";
-                        }
-
-                        return '<span style="color: ' + color + ';">' + row.priority_name + '</span>';
-                    } 
-            }, {
-                field: 'url',
-                title: 'Destination'
-            }, {
-                field: 'duration',
-                title: 'Duration (ms)'
-            }, {
-                field: "Actions",
-                width: 80,
-                title: "Actions",
-                sortable: false,
-                autoHide: false,
-                overflow: 'visible',
-                template: function (row) {
-                    return '\
-							<div class="dropdown">\
-								<a href="javascript:;" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="dropdown">\
-									<i class="flaticon-more-1"></i>\
-								</a>\
-								<div class="dropdown-menu dropdown-menu-right">\
-									<ul class="kt-nav">\
-										<li class="kt-nav__item">\
-											<a href="/log/details/' + row.id + '" class="kt-nav__link">\
-												<i class="kt-nav__link-icon flaticon2-expand"></i>\
-												<span class="kt-nav__link-text">Details</span>\
-											</a>\
-										</li>\
-									</ul>\
-								</div>\
-							</div>\
-						';
-                }
-            }]
+            $.getJSON('/api/log/' + id)
+                .done(function (data) {
+                    
+                    modal.find('.modal-body > p').text(data.user.username + ': ' + data.detail);
+                });
         });
-    };
-
-    var dateRangeValid = function () {
-        var startDate = new Date($("#kt_form_start_date").val());
-        var endDate = new Date($("#kt_form_end_date").val());
-
-        if (startDate >= endDate) {
-            return false;
-        } else {
-            return true;
-        }
     };
 
 	// search
     var search = function () {
-        $('#kt_form_user').on('change', function () {
-            datatable.search($(this).val().toLowerCase(), 'UserId');
+        //$('#kt_form_user').on('change', function () {
+        //   datatable.search($(this).val().toLowerCase(), 'UserId');
+        //});
+        $('#kt_form_user').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
+            console.log($(this).val());
+            datatable.search($(this).val(), 'UserId');
         });
 
-        $('#kt_form_error_type').on('change', function () {
-            datatable.search($(this).val().toLowerCase(), 'Type');
+        //$('#kt_form_error_type').on('change', function () {
+        //    datatable.search($(this).val().toLowerCase(), 'Type');
+        //});
+        $('#kt_form_error_type').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
+            datatable.search($(this).val(), 'Type');
         });
 
+        addDateRangeSelector();
 
-        $("#kt_form_start_date").change(function (e) {
-            if (dateRangeValid()) {
-                currentStartDate = $(this).val();
-                //datatable.search($("#kt_form_start_date").val().toLowerCase(), 'StartDate');
-                //datatable.search($("#kt_form_end_date").val().toLowerCase(), 'EndDate');
-                datatable.setDataSourceParam('StartDate', $("#kt_form_start_date").val().toLowerCase());
-                datatable.setDataSourceParam('EndDate', $("#kt_form_end_date").val().toLowerCase());
-                datatable.load();
-                
-            } else {
-                $("#kt_form_start_date").val(currentStartDate);
-                swal.fire({
-                    "title": "",
-                    "text": "Start Date should be less than End Date.",
-                    "type": "error",
-                    "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
-                });
-            }
-        });
+        $('#clearFilterBtn').click(function (e) {
+            e.preventDefault();
 
-        $("#kt_form_end_date").change(function (e) {
-            if (dateRangeValid()) {
-                currentEndDate = $(this).val();
-                datatable.setDataSourceParam('StartDate', $("#kt_form_start_date").val().toLowerCase());
-                datatable.setDataSourceParam('EndDate', $("#kt_form_end_date").val().toLowerCase());
-                datatable.load();
-                
-            } else {
-                $("#kt_form_end_date").val(currentEndDate);
-                swal.fire({
-                    "title": "",
-                    "text": "End Date should be greater than Start Date.",
-                    "type": "error",
-                    "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
-                });
-            }
+            //$("#generalSearch").val("");
+            //$("#kt_form_user").selectpicker('val', '');
+            //$('#kt_form_user').selectpicker('render'); 
+            //$("#kt_form_error_type").selectpicker('val', '');
+            //$("#kt_form_error_type").selectpicker('render');
+
+            // datatable.reload();
+            //$('#kt_form_user').selectpicker('refresh'); 
+
+
+            //datatable.load();
+
+            location.reload(true);
         });
 
     };
+
+    var addDateRangeSelector = function () {
+        $('#DateRange').daterangepicker({
+            opens: 'left',
+            startDate: moment().subtract(3, "days"),
+            endDate: moment(),
+            locale: {
+                format: 'DD-MM-YYYY'
+            }
+        }, function (start, end, label) {
+            datatable.search(start.format('YYYY-MM-DD 00:00:00') + ';' + end.format('YYYY-MM-DD 23:59:59'), 'daterange');
+        });
+    }
 
 	// selection
     var selection = function () {
         // init form controls
         //$('#kt_form_status, #kt_form_type').selectpicker();
         $('#kt_form_user, #kt_form_error_type').selectpicker();
-
-        $('#kt_form_start_date, #kt_form_end_date').datepicker({
-            rtl: KTUtil.isRTL(),
-            todayHighlight: true,
-            orientation: "bottom left",
-            templates: arrows,
-            format: 'dd-mm-yyyy'
-        });
-
-        currentStartDate = $("#kt_form_start_date").val();
-        currentEndDate = $("#kt_form_end_date").val();
-
     };
 
 	return {

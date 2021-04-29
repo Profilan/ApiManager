@@ -11,7 +11,10 @@ namespace ApiManager.Web.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        [Display(Name = "Destination")]
         public string Address { get; set; }
+        [Display(Name = "External Hostname")]
+        public string ExternalUrl { get; set; }
         public int Amount { get; set; }
         public Unit Unit { get; set; }
         [Display(Name = "Monitor Activity")]
@@ -21,5 +24,6 @@ namespace ApiManager.Web.Models
         public bool ShowInStatistics { get; set; }
         [Display(Name = "Service")]
         public int ServiceId { get; set; }
+        public AccessType AccessType { get; set; }
     }
 }

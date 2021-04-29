@@ -19,7 +19,8 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort>44354</IISExpressSSLPort>
+    <IISExpressSSLPort>
+    </IISExpressSSLPort>
     <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
     <IISExpressWindowsAuthentication>enabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode />
@@ -50,17 +51,29 @@
     <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
       <HintPath>..\packages\Antlr3.Runtime.3.5.1\lib\net40-client\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="CryptSharp, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CryptSharpOfficial.2.1.0.0\lib\CryptSharp.dll</HintPath>
+    </Reference>
     <Reference Include="Flash.Mvc5, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Flash.Mvc5.1.0.0\lib\net46\Flash.Mvc5.dll</HintPath>
     </Reference>
     <Reference Include="Iesi.Collections, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <HintPath>..\packages\Iesi.Collections.4.0.4\lib\net461\Iesi.Collections.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=2.0.12.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.12\lib\net45\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.3\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.3\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.4.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.4.1\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.4.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.4.1\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
@@ -78,14 +91,14 @@
     <Reference Include="Microsoft.Owin.Security.Cookies, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.Security.Cookies.4.1.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin.Security.OAuth, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.4.1.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate, Version=5.2.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-      <HintPath>..\packages\NHibernate.5.2.6\lib\net461\NHibernate.dll</HintPath>
+      <HintPath>..\packages\NHibernate.5.2.7\lib\net461\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
@@ -101,6 +114,8 @@
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.DirectoryServices.AccountManagement" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web.DynamicData" />
@@ -176,30 +191,69 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Api\DebtorController.cs" />
     <Compile Include="Controllers\Api\LogController.cs" />
+    <Compile Include="Controllers\Api\MonitorController.cs" />
+    <Compile Include="Controllers\Api\QueueController.cs" />
     <Compile Include="Controllers\Api\ServiceController.cs" />
+    <Compile Include="Controllers\Api\ShareController.cs" />
+    <Compile Include="Controllers\Api\TaskController.cs" />
     <Compile Include="Controllers\Api\UrlController.cs" />
     <Compile Include="Controllers\Api\UserController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LogController.cs" />
+    <Compile Include="Controllers\MonitorController.cs" />
+    <Compile Include="Controllers\QueueController.cs" />
     <Compile Include="Controllers\ServiceController.cs" />
+    <Compile Include="Controllers\ShareController.cs" />
+    <Compile Include="Controllers\StatisticsController.cs" />
+    <Compile Include="Controllers\TaskController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\UrlController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\UserModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\BcryptHasher.cs" />
+    <Compile Include="Helpers\MD5ApachePasswordHasher.cs" />
+    <Compile Include="Helpers\SHA1ZF1PasswordHasher.cs" />
+    <Compile Include="Models\Api\ChartDataApiModel.cs" />
+    <Compile Include="Models\Api\ChartDataset.cs" />
+    <Compile Include="Models\Api\LatestErrorApiModel.cs" />
     <Compile Include="Models\Api\LogApiModel.cs" />
     <Compile Include="Models\Api\PasswordHashingApiModel.cs" />
+    <Compile Include="Models\Api\QueueApiModel.cs" />
+    <Compile Include="Models\Api\ShareApiModel.cs" />
+    <Compile Include="Models\Api\TaskApiModel.cs" />
     <Compile Include="Models\Api\UrlApiModel.cs" />
+    <Compile Include="Models\DashboardViewModel.cs" />
+    <Compile Include="Models\DebtorViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\PasswordHashingModel.cs" />
     <Compile Include="Models\Api\ServiceApiModel.cs" />
+    <Compile Include="Models\PasswordViewModel.cs" />
+    <Compile Include="Models\TaskActionViewModel.cs" />
     <Compile Include="Models\ServiceViewModel.cs" />
     <Compile Include="Models\Api\UserApiModel.cs" />
+    <Compile Include="Models\ShareViewModel.cs" />
+    <Compile Include="Models\TaskApiViewModel.cs" />
+    <Compile Include="Models\TaskAuthenticationViewModel.cs" />
+    <Compile Include="Models\TaskFileViewModel.cs" />
+    <Compile Include="Models\TaskFTPViewModel.cs" />
+    <Compile Include="Models\TaskMailViewModel.cs" />
+    <Compile Include="Models\TaskScheduleViewModel.cs" />
+    <Compile Include="Models\TaskViewModel.cs" />
+    <Compile Include="Models\UrlStatisticsViewModel.cs" />
     <Compile Include="Models\UrlViewModel.cs" />
+    <Compile Include="Models\UserStatisticsViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
+    <Compile Include="Models\VisitorViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ADAuthenticationService.cs" />
+    <Compile Include="Services\DashboardService.cs" />
+    <Compile Include="Services\DataPoint.cs" />
+    <Compile Include="Services\HtpasswdService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="dist\assets\css\pages\blog\grid-v2.css" />
@@ -292,6 +346,7 @@
     <Content Include="dist\assets\js\global\layout\demo-panel.js" />
     <Content Include="dist\assets\js\global\layout\layout.js" />
     <Content Include="dist\assets\js\global\layout\lib.js" />
+    <Content Include="dist\assets\js\global\layout\notifications.js" />
     <Content Include="dist\assets\js\global\layout\offcanvas-panel.js" />
     <Content Include="dist\assets\js\global\layout\quick-panel.js" />
     <Content Include="dist\assets\js\global\layout\quick-search.js" />
@@ -347,7 +402,6 @@
     <Content Include="dist\assets\js\pages\components\forms\controls\avatar.js" />
     <Content Include="dist\assets\js\pages\components\forms\file-upload\dropzonejs.js" />
     <Content Include="dist\assets\js\pages\components\forms\file-upload\uppy.js" />
-    <Content Include="dist\assets\js\pages\components\forms\layouts\repeater.js" />
     <Content Include="dist\assets\js\pages\components\forms\validation\controls.js" />
     <Content Include="dist\assets\js\pages\components\forms\validation\widgets.js" />
     <Content Include="dist\assets\js\pages\components\forms\widgets\autosize.js" />
@@ -390,13 +444,25 @@
     <Content Include="dist\assets\js\pages\components\keen-datatable\scrolling\vertical.js" />
     <Content Include="dist\assets\js\pages\components\portlets\draggable.js" />
     <Content Include="dist\assets\js\pages\components\portlets\tools.js" />
+    <Content Include="dist\assets\js\pages\custom\home\dashboard.js" />
     <Content Include="dist\assets\js\pages\custom\inbox.php" />
     <Content Include="dist\assets\js\pages\custom\inbox\inbox.js" />
+    <Content Include="dist\assets\js\pages\custom\logs\list-datatable.js" />
+    <Content Include="dist\assets\js\pages\custom\monitor\api-queue-table.js" />
+    <Content Include="dist\assets\js\pages\custom\monitor\api-task-monitor.js" />
+    <Content Include="dist\assets\js\pages\custom\monitor\api-task-scheduler-table.js" />
     <Content Include="dist\assets\js\pages\custom\profile\overview-1.js" />
     <Content Include="dist\assets\js\pages\custom\profile\overview-2.js" />
     <Content Include="dist\assets\js\pages\custom\profile\overview-3.js" />
     <Content Include="dist\assets\js\pages\custom\profile\profile.js" />
     <Content Include="dist\assets\js\pages\custom\services\list-datatable.js" />
+    <Content Include="dist\assets\js\pages\custom\tasks\add.js" />
+    <Content Include="dist\assets\js\pages\custom\tasks\edit.js" />
+    <Content Include="dist\assets\js\pages\custom\tasks\list-datatable.js" />
+    <Content Include="dist\assets\js\pages\custom\urls\add.js" />
+    <Content Include="dist\assets\js\pages\custom\urls\edit.js" />
+    <Content Include="dist\assets\js\pages\custom\urls\list-datatable.js" />
+    <Content Include="dist\assets\js\pages\custom\urls\visits-table.js" />
     <Content Include="dist\assets\js\pages\custom\users\add.js" />
     <Content Include="dist\assets\js\pages\custom\users\edit.js" />
     <Content Include="dist\assets\js\pages\custom\users\list-columns.js" />
@@ -498,6 +564,7 @@
     <Content Include="dist\assets\media\layout\footer-bg-demo4.jpg" />
     <Content Include="dist\assets\media\layout\header-bg-demo3.jpg" />
     <Content Include="dist\assets\media\layout\header-bg-demo4.jpg" />
+    <Content Include="dist\assets\media\layout\visgraat.jpg" />
     <Content Include="dist\assets\media\logos\favicon.ico" />
     <Content Include="dist\assets\media\logos\eekhoorn-logo-wit.png" />
     <Content Include="dist\assets\media\logos\logo-1.png" />
@@ -513,6 +580,7 @@
     <Content Include="dist\assets\media\logos\logo-launcher-1.png" />
     <Content Include="dist\assets\media\logos\logo-launcher-2.png" />
     <Content Include="dist\assets\media\logos\eekhoorn-logo.jpg" />
+    <Content Include="dist\assets\media\logos\logo_eekhoorn_nieuw.png" />
     <Content Include="dist\assets\media\misc\404-bg1.jpg" />
     <Content Include="dist\assets\media\misc\404-bg2.jpg" />
     <Content Include="dist\assets\media\misc\404-bg3.jpg" />
@@ -531,6 +599,7 @@
     <Content Include="dist\assets\media\misc\invoice1-logo.png" />
     <Content Include="dist\assets\media\misc\invoice2-logo.png" />
     <Content Include="dist\assets\media\misc\owl.video.play.png" />
+    <Content Include="dist\assets\media\misc\visgraat.jpg" />
     <Content Include="dist\assets\media\plugins\jstree\32px.png" />
     <Content Include="dist\assets\media\product-logos\logo1.png" />
     <Content Include="dist\assets\media\product-logos\logo2.png" />
@@ -590,6 +659,8 @@
     <Content Include="dist\assets\media\wizard\undraw_resume_folder_2_arse.svg" />
     <Content Include="dist\assets\plugins\bootstrap-multiselectsplitter\bootstrap-multiselectsplitter.js" />
     <Content Include="dist\assets\plugins\bootstrap-multiselectsplitter\bootstrap-multiselectsplitter.min.js" />
+    <Content Include="dist\assets\plugins\bootstrap-notify\bootstrap-notify.js" />
+    <Content Include="dist\assets\plugins\bootstrap-notify\bootstrap-notify.min.js" />
     <Content Include="dist\assets\plugins\bootstrap-session-timeout\dist\bootstrap-session-timeout.js" />
     <Content Include="dist\assets\plugins\bootstrap-session-timeout\dist\bootstrap-session-timeout.min.js" />
     <Content Include="dist\assets\plugins\bootstrap-session-timeout\examples\basic.html" />
@@ -647,6 +718,7 @@
     <Content Include="dist\assets\plugins\jquery-ui\images\ui-icons_777777_256x240.png" />
     <Content Include="dist\assets\plugins\jquery-ui\images\ui-icons_cc0000_256x240.png" />
     <Content Include="dist\assets\plugins\jquery-ui\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="dist\assets\plugins\jquery-ui\jquery-ui-1.10.0.custom.css" />
     <Content Include="dist\assets\plugins\jquery-ui\jquery-ui.min.css" />
     <Content Include="dist\assets\plugins\jquery-ui\jquery-ui.min.js" />
     <Content Include="dist\assets\plugins\jquery-ui\jquery-ui.min.rtl.css" />
@@ -897,11 +969,54 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="dist\assets\plugins\bootstrap-notify\LICENSE" />
+    <Content Include="dist\assets\plugins\bootstrap-notify\package.json" />
+    <Content Include="dist\assets\plugins\bootstrap-notify\README.md" />
+    <None Include="Properties\PublishProfiles\Prod.pubxml" />
+    <None Include="Properties\PublishProfiles\Production.pubxml" />
+    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="keen_v1.4.2\theme\demo1\src\assets\js\global\layout\notifications.js" />
+    <Content Include="keen_v1.4.2\theme\demo1\src\assets\js\pages\custom\home\dashboard.js" />
+    <Content Include="keen_v1.4.2\theme\demo1\src\assets\js\pages\custom\logs\list-datatable.js" />
+    <Content Include="keen_v1.4.2\theme\demo1\src\assets\js\pages\custom\monitor\api-queue-table.js" />
+    <Content Include="keen_v1.4.2\theme\demo1\src\assets\js\pages\custom\monitor\api-task-monitor - Copy.js" />
+    <Content Include="keen_v1.4.2\theme\demo1\src\assets\js\pages\custom\monitor\api-task-monitor.js" />
+    <Content Include="keen_v1.4.2\theme\demo1\src\assets\js\pages\custom\monitor\api-task-scheduler-table.js" />
+    <Content Include="keen_v1.4.2\theme\demo1\src\assets\js\pages\custom\tasks\add.js" />
+    <Content Include="keen_v1.4.2\theme\demo1\src\assets\js\pages\custom\tasks\edit.js" />
+    <Content Include="keen_v1.4.2\theme\demo1\src\assets\js\pages\custom\tasks\list-datatable.js" />
+    <Content Include="keen_v1.4.2\theme\demo1\src\assets\js\pages\custom\urls\visits-table.js" />
+    <Content Include="keen_v1.4.2\theme\demo1\src\assets\js\pages\custom\users\visits-table.js" />
+    <Content Include="keen_v1.4.2\theme\demo1\src\assets\media\company-logos\logo_eekhoorn_nieuw.png" />
+    <Content Include="keen_v1.4.2\theme\demo1\src\assets\media\layout\visgraat.jpg" />
+    <Content Include="keen_v1.4.2\theme\demo1\src\assets\media\misc\visgraat.jpg" />
+    <Content Include="keen_v1.4.2\theme\demo1\src\assets\plugins\jquery-ui\images\ui-icons_444444_256x240.png" />
+    <Content Include="keen_v1.4.2\theme\demo1\src\assets\plugins\jquery-ui\images\ui-icons_555555_256x240.png" />
+    <Content Include="keen_v1.4.2\theme\demo1\src\assets\plugins\jquery-ui\images\ui-icons_777620_256x240.png" />
+    <Content Include="keen_v1.4.2\theme\demo1\src\assets\plugins\jquery-ui\images\ui-icons_777777_256x240.png" />
+    <Content Include="keen_v1.4.2\theme\demo1\src\assets\plugins\jquery-ui\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="keen_v1.4.2\theme\demo1\src\assets\plugins\jquery-ui\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="keen_v1.4.2\theme\demo1\src\assets\plugins\jquery-ui\jquery-ui-1.10.0.custom.css" />
+    <Content Include="keen_v1.4.2\theme\demo1\src\assets\plugins\jquery-ui\jquery-ui.min.css" />
+    <Content Include="keen_v1.4.2\theme\demo1\src\assets\plugins\jquery-ui\jquery-ui.min.js" />
+    <Content Include="keen_v1.4.2\theme\demo1\src\assets\plugins\jquery-ui\jquery-ui.min.rtl.css" />
+    <Content Include="keen_v1.4.2\theme\demo1\src\assets\plugins\jquery-ui\LICENSE.txt" />
+    <Content Include="Scripts\jquery-3.4.1.js" />
+    <Content Include="Scripts\jquery-3.4.1.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <Content Include="Scripts\jquery.signalR-2.4.1.js" />
+    <Content Include="Scripts\jquery.signalR-2.4.1.min.js" />
     <Content Include="Views\Service\Index.cshtml" />
     <Content Include="Views\Service\Edit.cshtml" />
     <Content Include="Views\Service\Create.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Log\Index.cshtml" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.4.1.min.map" />
+    <Content Include="Views\Monitor\ApiTaskScheduler.cshtml" />
+    <Content Include="Views\Monitor\ApiQueue.cshtml" />
+    <Content Include="Views\Monitor\Index.cshtml" />
     <None Include="Views\Shared\partials\_footer\base.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -923,10 +1038,46 @@
     <Content Include="Views\Url\Index.cshtml" />
     <Content Include="Views\Url\Edit.cshtml" />
     <Content Include="Views\Url\Create.cshtml" />
+    <Content Include="Views\Task\Index.cshtml" />
+    <Content Include="Views\Task\Edit.cshtml" />
+    <Content Include="Views\Task\_API.cshtml" />
+    <Content Include="Views\Task\_Authentication.cshtml" />
+    <Content Include="Views\Task\_File.cshtml" />
+    <Content Include="Views\Task\_FTP.cshtml" />
+    <Content Include="Views\Task\_General.cshtml" />
+    <Content Include="Views\Task\_Mail.cshtml" />
+    <Content Include="Views\Task\_Schedule.cshtml" />
+    <Content Include="Views\User\ChangePassword.cshtml" />
+    <Content Include="Views\Statistics\UrlVisits.cshtml" />
+    <Content Include="Views\Shared\partials\_PeriodPicker.cshtml" />
+    <Content Include="Views\Statistics\UserVisits.cshtml" />
+    <Content Include="Views\Task\Create.cshtml" />
+    <Content Include="Views\Share\Index.cshtml" />
+    <Content Include="Views\Share\Edit.cshtml" />
+    <Content Include="Views\Task\_ReceiveSend.cshtml" />
+    <Content Include="Views\Task\_Send.cshtml" />
+    <Content Include="Views\Task\_Receive.cshtml" />
+    <Content Include="Views\Task\_ReceiveAPI.cshtml" />
+    <Content Include="Views\Task\_ReceiveFile.cshtml" />
+    <Content Include="Views\Task\_ReceiveMail.cshtml" />
+    <Content Include="Views\Task\_ReceiveFTP.cshtml" />
+    <Content Include="Views\Task\_ReceiveAuthentication.cshtml" />
+    <Content Include="Views\Task\_SendAPI.cshtml" />
+    <Content Include="Views\Task\_SendFile.cshtml" />
+    <Content Include="Views\Task\_SendMail.cshtml" />
+    <Content Include="Views\Task\_SendFTP.cshtml" />
+    <Content Include="Views\Task\_SendAuthentication.cshtml" />
+    <Content Include="Views\Task\_SendSQL.cshtml" />
+    <Content Include="Views\Task\_ReceiveSQL.cshtml" />
+    <Content Include="Views\Task\Test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="dist\assets\js\pages\components\forms\layouts\" />
     <Folder Include="dist\assets\js\users\" />
+    <Folder Include="keen_v1.4.2\theme\demo1\src\assets\js\pages\custom\shares\" />
+    <Folder Include="Views\Queue\" />
+    <Folder Include="Views\Test\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="package.json" />
@@ -1220,9 +1371,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>58022</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44354/</IISUrl>
-          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
-          <IISAppRootUrl>https://localhost:44354/</IISAppRootUrl>
+          <IISUrl>http://localhost:58022/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

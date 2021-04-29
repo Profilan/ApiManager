@@ -40,7 +40,9 @@ namespace ApiManager.Web.Models
         
         public string Description { get; set; }
 
-        public Service Service { get; set; }
+        [Display(Name = "Services")]
+        public IEnumerable<Service> Services { get; set; }
+        public int ServiceId { get; set; }
         
         public DateTime SysCreated { get; set; }
         

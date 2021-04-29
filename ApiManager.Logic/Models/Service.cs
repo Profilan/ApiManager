@@ -10,6 +10,7 @@ namespace ApiManager.Logic.Models
         public virtual string Code { get; set; }
         public virtual PasswordHashing PasswordHashing { get; set; }
         public virtual string ExternalUrl { get; set; }
+        public virtual string HTPasswordLocation { get; set; }
 
         protected Service() { }
 

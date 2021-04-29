@@ -40,6 +40,10 @@
                             @Html.LabelFor(model => model.ExternalUrl)
                             @Html.EditorFor(model => model.ExternalUrl, new { htmlAttributes = new { @class = "form-control" } })
                         </div>
+                        <div class="col-lg-6" id="HtpasswdSection">
+                            @Html.LabelFor(model => model.HTPasswdLocation)
+                            @Html.EditorFor(model => model.HTPasswdLocation, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
                     </div>
                 </div>
                 <div class="kt-portlet__foot">

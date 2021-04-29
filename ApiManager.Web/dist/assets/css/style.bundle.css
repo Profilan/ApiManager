@@ -11022,6 +11022,9 @@ code {
 .tooltip.tooltip-brand.bs-tooltip-left .arrow::before, .tooltip.tooltip-brand.bs-tooltip-auto[x-placement^="left"] .arrow::before {
   border-left-color: #5d78ff/*rtl:ignore*/; }
 
+.enable-task:hover {
+  cursor: pointer; }
+
 .kt-scroll.kt-scroll--pull {
   padding-right: 12px;
   margin-right: -12px; }
@@ -25659,7 +25662,7 @@ strong {
     font-size: 5rem;
     position: relative; }
     .kt-iconbox .kt-iconbox__icon .kt-iconbox__icon-bg {
-      background-image: url(../../media/misc/iconbox_bg.png);
+      background-image: url(../../assets/media/misc/iconbox_bg.png);
       background-size: contain;
       background-position: center;
       background-repeat: no-repeat;
@@ -29812,7 +29815,7 @@ code {
           font-size: 1rem; } }
 
 body {
-  background-color: #f2f3f8; }
+  background: #333 url(../../assets/media/misc/visgraat.jpg) repeat left bottom; }
 
 .kt-subheader.kt-subheader--clear {
   margin-bottom: 0 !important; }

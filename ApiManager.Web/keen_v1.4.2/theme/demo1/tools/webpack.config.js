@@ -343,7 +343,7 @@ const mainConfig = function () {
                                 if (nodeMedia[url]) {
                                     return "images/" + url;
                                 }
-                                return "../../media/misc/" + url;
+                                return "../../assets/media/misc/" + url;
                             },
                         }
                     }]

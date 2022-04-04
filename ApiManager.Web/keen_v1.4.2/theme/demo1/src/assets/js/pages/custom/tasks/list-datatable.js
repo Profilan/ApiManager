@@ -4,7 +4,8 @@
 var KTTasksListDatatable = function() {
 
 	// variables
-	var datatable;
+    var datatable;
+    var scheduleTable;
 
 	// init
     var init = function () {
@@ -35,6 +36,11 @@ var KTTasksListDatatable = function() {
 
             pagination: true,
 
+            detail: {
+                title: 'Load schedules',
+                content: scheduleTableInit
+            },
+
             search: {
                 input: $('#generalSearch'),
                 delay: 400
@@ -43,53 +49,159 @@ var KTTasksListDatatable = function() {
             // columns definition
             columns: [{
                 field: 'id',
-                title: '#',
+                title: '',
                 sortable: false,
-                width: 20,
-                selector: {
-                    class: 'kt-checkbox--solid'
-                },
+                width: 30,
                 textAlign: 'center'
             }, {
                 field: "title",
-                title: "Title"
+                title: "Title",
+                template: function (row) {
+                    return `
+                        ${row.title}<br><small>${row.id}</small>
+                    `;
+                }
             }, {
                 field: "type",
                 title: "Type"
             }, {
                 field: "Actions",
-                width: 80,
+                width: 120,
                 title: "Actions",
                 sortable: false,
                 autoHide: false,
                 overflow: 'visible',
                 template: function (row) {
                     return '\
-							<div class="dropdown">\
-								<a href="javascript:;" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="dropdown">\
-									<i class="flaticon-more-1"></i>\
-								</a>\
-								<div class="dropdown-menu dropdown-menu-right">\
-									<ul class="kt-nav">\
-										<li class="kt-nav__item">\
-											<a href="/Task/edit/' + row.id + '" class="kt-nav__link">\
-												<i class="kt-nav__link-icon flaticon2-contract"></i>\
-												<span class="kt-nav__link-text">Edit</span>\
-											</a>\
-										</li>\
-										<li class="kt-nav__item">\
-											<a href="/Task/delete/' + row.id + '" class="kt-nav__link">\
-												<i class="kt-nav__link-icon flaticon2-trash"></i>\
-												<span class="kt-nav__link-text">Delete</span>\
-											</a>\
-										</li>\
-									</ul>\
-								</div>\
-							</div>\
-						';
+                                <a href="/task/edit/' + row.id + '" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="Edit Details">\
+                                    <i class="flaticon-list-1"></i>\
+                                </a>\
+                                <a href="/api/task/delete/' + row.id + '" class="btn-delete btn btn-sm btn-clean btn-icon btn-icon-sm" title="Delete">\
+                                    <i class="flaticon-delete"></i>\
+                                </a>\
+                                <a href="/schedule/create?taskId=' + row.id + '" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="Add Schedule">\
+                                    <i class="flaticon-time-2"></i>\
+                                </a>\
+                            ';
                 }
             }]
+        }).on('kt-datatable--on-layout-updated', function (e, options) {
+            console.log('datatable-on-layout-updated');
+
+            $('.btn-delete').click(function (event) {
+                event.preventDefault();
+
+                var btn = $(this);
+
+                var url = btn.attr('href');
+
+                $('#deleteModal .btn-ok').data('url', url);
+
+                $('#deleteModal').modal('show');
+
+            });
         });
+
+        $('#deleteModal .btn-ok').click(function (event) {
+            event.preventDefault();
+
+            var url = $(this).data('url');
+
+            $.post(url, function () {
+                datatable.reload();
+                scheduleTable.reload();
+                $('#deleteModal').modal('hide');
+
+                Swal.fire("Schedule deleted!");
+            });
+        });
+    };
+
+    var scheduleTableInit = function (e) {
+        scheduleTable = $('<div/>').attr('id', 'child_data_ajax_' + e.data.id).appendTo(e.detailCell).KTDatatable({
+            data: {
+                type: 'remote',
+                source: {
+                    read: {
+                        url: '/api/schedule',
+                        params: {
+                            // custom query params
+                            query: {
+                                generalSearch: '',
+                                taskId: e.data.id,
+                            },
+                        },
+                    },
+                },
+                pageSize: 5,
+                serverPaging: true,
+                serverFiltering: false,
+                serverSorting: true,
+            },
+
+            layout: {
+                scroll: false,
+                footer: false,
+            },
+
+            sortable: true,
+
+            columns: [
+                {
+                    field: 'start',
+                    title: 'Start',
+                },
+                {
+                    field: 'type',
+                    title: 'Type'
+                },
+                {
+                    field: 'enabled',
+                    title: 'State',
+                    // callback function support for column rendering
+                    template: function (row) {
+                        var state = {
+                            false: { 'title': 'Disabled', 'class': 'label-light-danger' },
+                            true: { 'title': 'Enabled', 'class': ' label-light-primary' },
+                        };
+                        return '<span class="label ' + state[row.enabled].class + ' label-inline label-bold">' + state[row.enabled].title + '</span>';
+                    },
+                },
+                {
+                    field: "Actions",
+                    width: 80,
+                    title: "Actions",
+                    sortable: false,
+                    autoHide: false,
+                    overflow: 'visible',
+                    template: function (row) {
+                        return '\
+                                <a href="/schedule/edit/' + row.id + '" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="Edit Details">\
+                                    <i class="flaticon-list-1"></i>\
+                                </a>\
+                                <a href="/api/schedule/delete/' + row.id + '" class="btn-schedule-delete btn btn-sm btn-clean btn-icon btn-icon-sm" title="Delete">\
+                                    <i class="flaticon-delete"></i>\
+                                </a>\
+                            ';
+                    }
+                }
+
+            ]
+        }).on('kt-datatable--on-layout-updated', function (e, options) {
+            console.log('datatable-on-layout-updated');
+            $('.btn-schedule-delete').click(function (event) {
+                event.preventDefault();
+
+                var btn = $(this);
+
+                var url = btn.attr('href');
+
+                $('#deleteModal .btn-ok').data('url', url);
+
+                $('#deleteModal').modal('show');
+            });
+        });
+
     };
 
 	// search

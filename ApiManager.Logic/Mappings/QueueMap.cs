@@ -13,6 +13,7 @@ namespace ApiManager.Logic.Mappings
 
             Map(x => x.Key).Column("`key`");
             Map(x => x.TryCount);
+            Map(x => x.Error).Column("ErrorData").Nullable();
             Map(x => x.SysCreated);
 
             References(x => x.Task).Column("TaskId").LazyLoad().Not.Cascade.SaveUpdate();

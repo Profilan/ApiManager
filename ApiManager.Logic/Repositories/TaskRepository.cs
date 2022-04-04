@@ -31,6 +31,9 @@ namespace ApiManager.Logic.Repositories
                 var query = from l in session.Query<SchedulerTask>()
                             select l;
 
+                query = query.FetchMany(x => x.HttpHeaders)
+                    .FetchMany(x => x.Schedules);
+
                 if (!String.IsNullOrEmpty(searchString))
                 {
                     query = query.Where(x => x.Title.Contains(searchString));
@@ -51,6 +54,22 @@ namespace ApiManager.Logic.Repositories
             }
         }
 
+        public IEnumerable<SchedulerTask> ListByScheduler(int schedulerId)
+        {
+
+            using (ISession session = SessionFactory.GetNewSession("db1"))
+            {
+                var query = session.Query<SchedulerTask>()
+                    .Where(x => x.Scheduler.Id == schedulerId)
+                    .FetchMany(x => x.HttpHeaders)
+                    .FetchMany(x => x.Schedules)
+                    .OrderBy(x => x.Title);
+
+                return query.ToList();
+
+            }
+        }
+
         public SchedulerTask GetById(Guid id)
         {
             using (ISession session = SessionFactory.GetNewSession("db1"))
@@ -58,14 +77,17 @@ namespace ApiManager.Logic.Repositories
                 var task = session.Get<SchedulerTask>(id);
                 if (task != null)
                 {
-                    NHibernateUtil.Initialize(task.HttpHeaders);
-                    NHibernateUtil.Initialize(task.Shares);
-                    NHibernateUtil.Initialize(task.Url);
+                    NHibernateUtil.Initialize(task.Schedules);
 
-                    if (task.GetType() == typeof(ReceiveSendTask))
+                    if (task.GetType() == typeof(FILETask))
                     {
-                        NHibernateUtil.Initialize(((ReceiveSendTask)task).Receiver);
-                        NHibernateUtil.Initialize(((ReceiveSendTask)task).Sender);
+                        NHibernateUtil.Initialize(task.Shares);
+                    }
+
+                    if (task.GetType() == typeof(APITask) || task.GetType() == typeof(RECEIVESENDTask))
+                    {
+                        NHibernateUtil.Initialize(task.HttpHeaders);
+                        NHibernateUtil.Initialize(task.Url);
                     }
                 }
                 return task;
@@ -90,6 +112,7 @@ namespace ApiManager.Logic.Repositories
             {
                 var query = session.Query<SchedulerTask>()
                     .FetchMany(x => x.HttpHeaders)
+                    .FetchMany(x => x.Schedules)
                     .OrderBy(x => x.Title);
 
                 return query.ToList();

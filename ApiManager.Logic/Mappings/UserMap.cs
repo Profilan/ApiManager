@@ -17,8 +17,8 @@ namespace ApiManager.Logic.Mappings
             Map(x => x.Username);
             Map(x => x.DisplayName);
             Map(x => x.Email);
-            Map(x => x.HashedPassword).Column("password");
-            Map(x => x.RawPassword).Column("rawPassword");
+            Map(x => x.HashedPassword).Column("password").Nullable();
+            Map(x => x.RawPassword).Column("rawPassword").Nullable();
             Map(x => x.Apikey);
             Map(x => x.Role);
             Map(x => x.AllowedIP).Column("ip_from");

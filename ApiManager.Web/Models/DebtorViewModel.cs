@@ -9,6 +9,6 @@ namespace ApiManager.Web.Models
     public class DebtorViewModel
     {
         [JsonProperty("Name")]
-        public string NAAM { get; set; }
+        public string Name { get; set; }
     }
 }

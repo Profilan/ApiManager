@@ -14,10 +14,9 @@ namespace ApiManager.Logic.Models
         }
 
         public MAILTask(string title,
-            Schedule schedule,
             Authentication authentication,
             bool enabled
-            ) : base(title, schedule, authentication, enabled)
+            ) : base(title, authentication, enabled)
         {
 
         }

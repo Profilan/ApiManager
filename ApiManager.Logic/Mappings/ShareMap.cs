@@ -32,14 +32,6 @@ namespace ApiManager.Logic.Mappings
                .Inverse()
                .Not.LazyLoad()
                .Cascade.SaveUpdate();
-
-            HasManyToMany(x => x.TaskActions)
-               .Table("EEK_API_ACTION_SHARES")
-               .ParentKeyColumn("ShareId")
-               .ChildKeyColumn("ActionId")
-               .Inverse()
-               .Not.LazyLoad()
-               .Cascade.SaveUpdate();
         }
     }
 }

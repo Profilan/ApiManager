@@ -1,0 +1,174 @@
+﻿@model ApiManager.Web.Models.ScheduleViewModel
+
+@{
+    ViewBag.Title = "Create Schedule";
+}
+
+@using (Html.BeginForm("Create", "Schedule", FormMethod.Post, new { @class = "form", @id = "schedule_form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.TaskId)
+
+    <div class="d-flec flex-column-fluid">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card card-custom gutter-b">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <h3 class="card-label">
+                                    Schedule
+                                    <small>create</small>
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="card-body">
+
+                            <!--begin::settingsSection-->
+                            <div id="settings-section" class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group row">
+                                        <labell for="Type" class="col-2 col-form-label" style="text-align: left">Schedule Type</labell>
+                                        <div class="col-4">
+                                            @Html.EnumDropDownListFor(model => model.Type, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="Start" class="col-2 col-form-label" style="text-align: left">Start:</label>
+                                        <div class="col-4">
+                                            @Html.EditorFor(model => model.StartBoundery, new { htmlAttributes = new { @class = "form-control", @type = "datetime-local" } })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end::settingsSection-->
+                            <!--begin::scheduleSection-->
+                            <div id="schedule-section" class="row" style="display: none">
+
+                                <div class="col-lg-12">
+
+                                    <div id="recurrenceSection" style="display: none">
+                                        <div class="form-group row">
+                                            <label for="Start" class="col-2 col-form-label" style="text-align: left">Recur every:</label>
+                                            <div class="col-1">
+                                                @Html.EditorFor(model => model.Interval, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
+                                            </div>
+                                            <div class="col-3">
+                                                <span id="recurrenceType">weeks on:</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div id="daysSection" style="display: none">
+                                        <div class="form-group">
+                                            <div class="checkbox-inline">
+                                                <label class="checkbox">
+                                                    <input type="checkbox" name="Days" value="2" checked><span></span> Monday
+
+                                                </label>
+                                                <label class="checkbox">
+                                                    <input type="checkbox" name="Days" value="4" checked><span></span> Tuesday
+
+                                                </label>
+                                                <label class="checkbox">
+                                                    <input type="checkbox" name="Days" value="8" checked><span></span> Wednesday
+
+                                                </label>
+                                                <label class="checkbox">
+                                                    <input type="checkbox" name="Days" value="16" checked><span></span> Thursday
+
+                                                </label>
+                                                <label class="checkbox">
+                                                    <input type="checkbox" name="Days" value="32" checked><span></span> Friday
+
+                                                </label>
+                                                <label class="checkbox">
+                                                    <input type="checkbox" name="Days" value="64" checked><span></span> Saturday
+
+                                                </label>
+                                                <label class="checkbox">
+                                                    <input type="checkbox" name="Days" value="1" checked><span></span> Sunday
+
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+
+                            </div>
+                            <!--end::scheduleSection-->
+
+                            <hr />
+
+                            <!--begin::advancedSection-->
+                            <div id="advanced-settings" class="row">
+
+                                <div class="col-lg-12">
+
+                                    <div class="form-group row">
+                                        <div class="col-lg-1">
+                                            @Html.CheckBoxFor(model => model.Repeat, new { htmlAttributes = new { @class = "form-control" } })
+                                        </div>
+                                        <div class="col-lg-3">
+                                            Repeat task every:
+                                        </div>
+                                        <div class="col-lg-2">
+                                            @Html.EditorFor(model => model.RepeatAmount, new { htmlAttributes = new { @class = "form-control" } })
+                                        </div>
+                                        <div class="col-lg-2">
+                                            @Html.EnumDropDownListFor(model => model.RepeatUnit, "- Select unit -", new { @class = "form-control" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="Start" class="col-2 col-form-label" style="text-align: left">Expire:</label>
+                                        <div class="col-4">
+
+                                            @Html.EditorFor(model => model.EndBoundery, new { htmlAttributes = new { @class = "form-control", @type = "datetime-local" } })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-2 col-form-label">Enabled</label>
+                                        <div class="col-3">
+                                            <span class="switch">
+                                                <label>
+                                                    @Html.CheckBoxFor(model => model.Enabled, new { htmlAttributes = new { @class = "form-control" } })
+                                                    <span></span>
+                                                </label>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!--end::advancedSection-->
+
+                        </div>
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <button type="submit" class="btn btn-primary" data-ktwizard-action="action-submit">Save</button>
+                                    <a href="/task" class="btn btn-light-primary font-weight-bold">Cancel</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    <script src="~/dist/assets/js/pages/custom/schedules/add.js" type="text/javascript"></script>
+    <script type="text/javascript">
+
+
+
+    </script>
+}

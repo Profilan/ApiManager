@@ -22,7 +22,5 @@ namespace ApiManager.Web.Models
         public IEnumerable<Url> Urls { get; set; }
 
         public IEnumerable<HttpHeader> Headers { get; set; }
-
-        public IEnumerable<ActionHttpHeader> ActionHeaders { get; set; }
     }
 }

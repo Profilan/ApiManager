@@ -43,6 +43,13 @@ namespace ApiManager.Logic.Common
         GraphQL = 2
     }
 
+    public enum Format
+    {
+        JSON = 1,
+        XML = 2,
+        TXT = 3
+    }
+
     public enum HttpMethod
     {
         Get = 1,

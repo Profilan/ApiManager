@@ -43,32 +43,6 @@ License: You must have a valid license purchased only from https://themes.getboo
     <!--end::Layout Skins -->
     <link rel="shortcut icon" href="~/favicon.ico" />
 
-    <!-- Hotjar Tracking Code for keenthemes.com -->
-    <script>
-    (function (h, o, t, j, a, r) {
-            h.hj = h.hj || function () {
-                (h.hj.q = h.hj.q || []).push(arguments)
-            };
-            h._hjSettings = {
-                hjid: 1070954,
-                hjsv: 6
-            };
-            a = o.getElementsByTagName('head')[0];
-            r = o.createElement('script');
-            r.async = 1;
-            r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
-            a.appendChild(r);
-        })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');</script>
-
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-37564768-1"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-        gtag('config', 'UA-37564768-1');</script>
 </head>
 
 <!-- end::Head -->
@@ -124,6 +98,8 @@ License: You must have a valid license purchased only from https://themes.getboo
     @Html.Partial("~/Views/Shared/partials/_quick-panel.cshtml")
     @Html.Partial("~/Views/Shared/partials/_scrolltop.cshtml")
     <!-- begin::Global Config(global config for global JS sciprts) -->
+
+    @Html.Partial("~/Views/Shared/partials/_DeleteDialog.cshtml")
     <script>
         var KTAppOptions = {
             "colors": {

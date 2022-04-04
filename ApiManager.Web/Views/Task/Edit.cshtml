@@ -38,19 +38,19 @@
                         <li class="nav-item">
                             <a class="nav-link active" data-toggle="tab" href="#general" role="tab">General</a>
                         </li>
-                        @if (Model.TaskType == TaskType.API)
+                        @if (Model.TaskType == TaskType.API || Model.TaskType == TaskType.RECEIVESEND)
                         {
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#api" role="tab" id="apiTab">API</a>
                             </li>
                         }
-                        @if (Model.TaskType == TaskType.FILE)
+                        @if (Model.TaskType == TaskType.FILE || Model.TaskType == TaskType.RECEIVESEND)
                         {
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#disk" role="tab" id="diskTab">File</a>
                             </li>
                         }
-                        @if (Model.TaskType == TaskType.MAIL)
+                        @if (Model.TaskType == TaskType.MAIL || Model.TaskType == TaskType.RECEIVESEND)
                         {
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#mail" role="tab" id="mailTab">Mail</a>
@@ -62,36 +62,27 @@
                                 <a class="nav-link" data-toggle="tab" href="#ftp" role="tab" id="ftpTab">FTP</a>
                             </li>
                         }
-                        @if (Model.TaskType == TaskType.RECEIVESEND)
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#receivesend" role="tab" id="receivesendTab">Receive/Send</a>
-                            </li>
-                        }
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#authentication" id="authenticationTab" role="tab">Authentication</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#schedule" role="tab">Schedule</a>
                         </li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="general" role="tabpanel">
                             @{Html.RenderPartial("_General", Model); }
                         </div>
-                        @if (Model.TaskType == TaskType.API)
+                        @if (Model.TaskType == TaskType.API || Model.TaskType == TaskType.RECEIVESEND)
                         {
                             <div class="tab-pane" id="api" role="tabpanel">
                                 @{Html.RenderPartial("_API", Model); }
                             </div>
                         }
-                        @if (Model.TaskType == TaskType.FILE)
+                        @if (Model.TaskType == TaskType.FILE || Model.TaskType == TaskType.RECEIVESEND)
                         {
                             <div class="tab-pane" id="disk" role="tabpanel">
                                 @{Html.RenderPartial("_File", Model); }
                             </div>
                         }
-                        @if (Model.TaskType == TaskType.MAIL)
+                        @if (Model.TaskType == TaskType.MAIL || Model.TaskType == TaskType.RECEIVESEND)
                         {
                             <div class="tab-pane" id="mail" role="tabpanel">
                                 @{Html.RenderPartial("_Mail", Model); }
@@ -103,17 +94,8 @@
                                 @{Html.RenderPartial("_FTP", Model); }
                             </div>
                         }
-                        @if (Model.TaskType == TaskType.RECEIVESEND)
-                        {
-                            <div class="tab-pane" id="receivesend" role="tabpanel">
-                                @{Html.RenderPartial("_ReceiveSend", Model); }
-                            </div>
-                        }
                         <div class="tab-pane" id="authentication" role="tabpanel">
                             @{Html.RenderPartial("_Authentication", Model); }
-                        </div>
-                        <div class="tab-pane" id="schedule" role="tabpanel">
-                            @{Html.RenderPartial("_Schedule", Model); }
                         </div>
                     </div>
                 </div>

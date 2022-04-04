@@ -70,7 +70,8 @@ namespace ApiManager.Web.Controllers.Api
                     TaskTitle = item.Task.Title,
                     Created = item.SysCreated.ToString("dd-MM-yyyy hh:mm:ss"),
                     TryCount = item.TryCount,
-                    Key = item.Key
+                    Key = item.Key,
+                    Error = item.Error
                 });
             }
 

@@ -46,13 +46,7 @@
                             <a class="nav-link" data-toggle="tab" href="#ftp" role="tab" id="ftpTab">FTP</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#receivesend" role="tab" id="receivesendTab">Receive/Send</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#authentication" id="authenticationTab" role="tab">Authentication</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#schedule" role="tab">Schedule</a>
                         </li>
                     </ul>
                     <div class="tab-content">
@@ -71,14 +65,8 @@
                         <div class="tab-pane" id="ftp" role="tabpanel">
                             @{Html.RenderPartial("_FTP", Model); }
                         </div>
-                        <div class="tab-pane" id="receivesend" role="tabpanel">
-                            @{Html.RenderPartial("_ReceiveSend", Model); }
-                        </div>
                         <div class="tab-pane" id="authentication" role="tabpanel">
                             @{Html.RenderPartial("_Authentication", Model); }
-                        </div>
-                        <div class="tab-pane" id="schedule" role="tabpanel">
-                            @{Html.RenderPartial("_Schedule", Model); }
                         </div>
                     </div>
                 </div>

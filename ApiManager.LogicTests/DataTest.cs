@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.Remoting.Messaging;
 using ApiManager.Logic.Repositories;
 using ApiManager.Web.Services;
 using CryptSharp;
@@ -39,6 +40,7 @@ namespace ApiManager.LogicTests
         {
             var rep = new LogRepository();
 
+            var logs = rep.List("", 0, 25, DateTime.Now.AddDays(-2), DateTime.Now);
             //var logs = rep.List("timestamp.desc", "", 1, 10, "");
         }
 
@@ -120,6 +122,14 @@ namespace ApiManager.LogicTests
             var rep = new TaskRepository();
 
             var task = rep.GetById(new Guid("E7145A24-82FB-4768-A405-AD10007BFC11"));
+        }
+
+        [TestMethod]
+        public void GetQueueItems()
+        {
+            var rep = new QueueRepository();
+
+            var items = rep.List();
         }
     }
 }

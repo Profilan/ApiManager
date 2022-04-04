@@ -45,34 +45,7 @@ namespace ApiManager.Web.Controllers
                 {
                     Shares = shares,
                     Formats = formats,
-                    SelectedShares = new HashSet<int>(),
-                },
-                ReceiverViewModel = new TaskActionViewModel
-                {
-                    FileViewModel = new TaskFileViewModel
-                    {
-                        Shares = shares,
-                        SelectedShares = new HashSet<int>()
-                    },
-                    ApiViewModel = new TaskApiViewModel
-                    { 
-                        Urls = urls,
-                        ActionHeaders = new HashSet<ActionHttpHeader>()
-                    }
-
-                },
-                SenderViewModel = new TaskActionViewModel
-                {
-                    FileViewModel = new TaskFileViewModel
-                    {
-                        Shares = shares,
-                        SelectedShares = new HashSet<int>(),
-                    },
-                    ApiViewModel = new TaskApiViewModel
-                    {
-                        Urls = urls,
-                        ActionHeaders = new HashSet<ActionHttpHeader>()
-                    }
+                    SelectedShares = new HashSet<int>()
                 },
                 ScheduleViewModel = new TaskScheduleViewModel
                 {
@@ -92,12 +65,55 @@ namespace ApiManager.Web.Controllers
         {
             var task = taskRepository.GetById(id);
 
-            var formats = new[]
+            TaskFileViewModel fileViewModel = null;
+            TaskApiViewModel apiViewModel = null;
+            TaskMailViewModel mailViewModel = null; 
+
+            if (task.GetType() == typeof(FILETask) || task.GetType() == typeof(RECEIVESENDTask))
             {
+                var formats = new[]
+                {
                 new SelectListItem { Value = "1", Text = "JSON" },
                 new SelectListItem { Value = "2", Text = "XML" },
                 new SelectListItem { Value = "3", Text = "TXT" }
-            };
+                };
+
+                ICollection<int> selectedShares = new HashSet<int>();
+                foreach (var selectedShare in task.Shares)
+                {
+                    selectedShares.Add(selectedShare.Id);
+                }
+
+                fileViewModel = new TaskFileViewModel
+                {
+                    SelectedShares = selectedShares,
+                    Shares = shareRepository.List(),
+                    Formats = formats,
+                    SelectedFormats = GetFormats(task.ContentFormats)
+                };
+            }
+
+            if (task.GetType() == typeof(APITask) || task.GetType() == typeof(RECEIVESENDTask))
+            {
+                apiViewModel = new TaskApiViewModel
+                {
+                    HttpMethod = task.HttpMethod,
+                    ApiType = task.ApiType,
+                    Headers = task.HttpHeaders,
+                    Urls = urlRepository.List(),
+                    UrlId = task.Url != null ? task.Url.Id : 0,
+                    Url = task.Url != null ? task.Url.Address : ""
+                };
+            }
+
+            if (task.GetType() == typeof(MAILTask) || task.GetType() == typeof(RECEIVESENDTask))
+            {
+                mailViewModel = new TaskMailViewModel
+                {
+                    MailSender = task.MailSender,
+                    MailRecipient = task.MailRecipient
+                };
+            }
 
             string classname;
             try
@@ -109,26 +125,15 @@ namespace ApiManager.Web.Controllers
                 classname = "";
             }
 
-            var scheduleEnd = task.Schedule.End.ToString("yyyy-MM-ddTHH:mm");
-
-            ICollection<int> selectedShares = new HashSet<int>();
-            foreach (var selectedShare in task.Shares)
-            {
-                selectedShares.Add(selectedShare.Id);
-            }
+            // var scheduleEnd = task.Schedule.End.ToString("yyyy-MM-ddTHH:mm");
+            // TODO: Add multiple schedules
 
             var taskViewModel = new TaskViewModel
             {
                 Id = task.Id,
                 Title = task.Title,
-                ApiViewModel = new TaskApiViewModel
-                {
-                    HttpMethod = task.HttpMethod,
-                    Headers = task.HttpHeaders,
-                    Urls = urlRepository.List(),
-                    UrlId = task.Url.Id,
-                    Url = task.Url.Address
-                },
+                SPLogger = task.SPLogger,
+                ApiViewModel = apiViewModel,
                 AuthenticationViewModel = new TaskAuthenticationViewModel
                 {
                     Username = task.Authentication.Username,
@@ -141,31 +146,23 @@ namespace ApiManager.Web.Controllers
                     ApiKey = task.Authentication.ApiKey
                 },
                 TaskType = task.TaskType,
-                ScheduleViewModel = new TaskScheduleViewModel
-                {
-                    Amount = task.Schedule.Interval.Amount,
-                    Unit = task.Schedule.Interval.Unit,
-                    ScheduleType = task.Schedule.Type,
-                    ScheduleStart = task.Schedule.Start.ToString("yyyy-MM-ddTHH:mm"),
-                    ScheduleEnd = scheduleEnd == "0001-01-01T00:00" ? DateTime.MaxValue.ToString("yyyy-MM-ddTHH:mm") : scheduleEnd,
-                    ScheduleDays = task.Schedule.Days,
-                    ScheduleRecurrence = task.Schedule.Recurrence,
-                },
+                // TODO: Add multiple schedules
+
+                //ScheduleViewModel = new TaskScheduleViewModel
+                //{
+                //    Amount = task.Schedule.Interval.Amount,
+                //    Unit = task.Schedule.Interval.Unit,
+                //    ScheduleType = task.Schedule.Type,
+                //    ScheduleStart = task.Schedule.Start.ToString("yyyy-MM-ddTHH:mm"),
+                //    ScheduleEnd = scheduleEnd == "0001-01-01T00:00" ? DateTime.MaxValue.ToString("yyyy-MM-ddTHH:mm") : scheduleEnd,
+                //    ScheduleDays = task.Schedule.Days,
+                //    ScheduleRecurrence = task.Schedule.Recurrence,
+                //},
                 MaxErrors = task.MaxErrors,
                 Classname = classname,
-                FileViewModel = new TaskFileViewModel
-                {
-                    SelectedShares = selectedShares,
-                    Shares = shareRepository.List(),
-                    Formats = formats,
-                    SelectedFormats = GetFormats(task.ContentFormats)
-                },
+                FileViewModel = fileViewModel,
                 TotalProcessedItems = task.TotalProcessedItems,
-                MailViewModel = new TaskMailViewModel
-                {
-                    MailSender = task.MailSender,
-                    MailRecipient = task.MailRecipient
-                },
+                MailViewModel = mailViewModel,
                 IsEdit = true
             };
 

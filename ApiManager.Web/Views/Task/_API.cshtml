@@ -1,13 +1,23 @@
-﻿"@model ApiManager.Web.Models.TaskViewModel
+﻿@model ApiManager.Web.Models.TaskViewModel
 
 <div class="form-group row">
     <div class="col-lg-6">
-        @Html.LabelFor(model => model.ApiViewModel.Url)
-        @Html.DropDownListFor(x => Model.ApiViewModel.UrlId, new SelectList(Model.ApiViewModel.Urls, "Id", "Name"), "- Select an url -", htmlAttributes: new { @class = "form-control" })
+        @Html.LabelFor(model => model.ApiViewModel.ApiType)
+        @Html.EnumDropDownListFor(model => model.ApiViewModel.ApiType, "Select API type", new { @class = "form-control" })
     </div>
-    <div class="col-lg-6">
+</div>
+<div class="form-group row">
+    <div class="col-lg-6" id="restSection">
         @Html.LabelFor(model => model.ApiViewModel.HttpMethod)
         @Html.EnumDropDownListFor(model => model.ApiViewModel.HttpMethod, "Select method", new { @class = "form-control" })
+    </div>
+    <div class="col-lg-6" id="graphqlSection">
+        @Html.LabelFor(model => model.ApiViewModel.GraphQLMethod)
+        @Html.EnumDropDownListFor(model => model.ApiViewModel.GraphQLMethod, "Select method", new { @class = "form-control" })
+    </div>
+    <div class="col-lg-6">
+        @Html.LabelFor(model => model.ApiViewModel.Url)
+        @Html.DropDownListFor(x => Model.ApiViewModel.UrlId, new SelectList(Model.ApiViewModel.Urls, "Id", "Name"), "- Select an url -", htmlAttributes: new { @class = "form-control" })
     </div>
 </div>
 
@@ -21,23 +31,23 @@
                     int i = 0;
                     foreach (var header in Model.ApiViewModel.Headers)
                     {
-                            <div data-repeater-item class="kt-repeater__item" style="margin-bottom: 15px;">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <input type="hidden" data-name class="form-control" name="Id" value="@header.Id" />
-                                        <input type="text" data-name class="form-control" name="Name" value="@header.Name" placeholder="Header Name" />
-                                    </div>
-                                    <div class="col-md-4">
-                                        <input type="text" data-name class="form-control" name="Value" value="@header.Value" placeholder="Header Value" />
-                                    </div>
-                                    <div class="col-md-4">
-                                        <button data-repeater-delete="" class="btn btn-danger btn-rm">
-                                            <i class="la la-close kt-font-light"></i> Remove
-                                        </button>
-                                    </div>
+                        <div data-repeater-item class="kt-repeater__item" style="margin-bottom: 15px;">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <input type="hidden" data-name class="form-control" name="Id" value="@header.Id" />
+                                    <input type="text" data-name class="form-control" name="Name" value="@header.Name" placeholder="Header Name" />
                                 </div>
-                                
+                                <div class="col-md-4">
+                                    <input type="text" data-name class="form-control" name="Value" value="@header.Value" placeholder="Header Value" />
+                                </div>
+                                <div class="col-md-4">
+                                    <button data-repeater-delete="" class="btn btn-danger btn-rm">
+                                        <i class="la la-close kt-font-light"></i> Remove
+                                    </button>
+                                </div>
                             </div>
+
+                        </div>
 
                         i++;
                     }
@@ -59,7 +69,7 @@
                                 </button>
                             </div>
                         </div>
-                        
+
                     </div>
 
                 }

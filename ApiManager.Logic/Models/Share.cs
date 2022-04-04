@@ -17,8 +17,6 @@ namespace ApiManager.Logic.Models
 
         public virtual ISet<SchedulerTask> Tasks { get; set; }
 
-        public virtual ISet<TaskReceiver> TaskActions { get; set; }
-
         public Share()
         {
             Tasks = new HashSet<SchedulerTask>();

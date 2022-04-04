@@ -15,7 +15,7 @@ namespace ApiManager.Logic.Models
         public virtual double Duration { get; set; }
 
         public virtual User User { get; set; }
-         public virtual SchedulerTask Task { get; set; }
+        public virtual SchedulerTask Task { get; set; }
 
         // Needed for NHibernate
         public Log()

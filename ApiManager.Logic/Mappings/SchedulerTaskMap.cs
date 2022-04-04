@@ -1,13 +1,6 @@
 ﻿using ApiManager.Logic.Common;
 using ApiManager.Logic.Models;
 using FluentNHibernate.Mapping;
-using NHibernate.Mapping;
-using NHibernate.Util;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ApiManager.Logic.Mappings
 {
@@ -32,6 +25,9 @@ namespace ApiManager.Logic.Mappings
             Map(x => x.LastRunResult).Nullable();
             Map(x => x.LastRunDetails).Nullable();
             Map(x => x.TotalProcessedItems).Nullable();
+            Map(x => x.Active).Nullable();
+
+            References(x => x.Scheduler).Column("ScheduleId");
 
             Component(x => x.Authentication, m =>
             {
@@ -51,34 +47,12 @@ namespace ApiManager.Logic.Mappings
                 m.Map(x => x.Description).Column("StatusDescription").Nullable();
             });
 
-            Component(c => c.Schedule, m =>
-            {
-                m.Map(x => x.Type).Column("ScheduleType").CustomType(typeof(ScheduleType)).Nullable();
-                m.Map(x => x.Start).Column("ScheduleStart").Nullable();
-                m.Map(x => x.End).Column("ScheduleEnd").Nullable();
-                m.Map(x => x.Days).Column("ScheduleDays").Nullable();
-                m.Map(x => x.Recurrence).Column("ScheduleRecurrence").Nullable();
 
-                m.Component(cp => cp.Interval, m2 =>
-                {
-                    m2.Map(x => x.Seconds).Column("Interval");
-                });
-            });
-        }
-    }
-
-    public class ReceiveSendTaskMap : SubclassMap<ReceiveSendTask>
-    {
-        public ReceiveSendTaskMap()
-        {
-            DiscriminatorValue("RECEIVESEND");
-
-            HasOne(x => x.Receiver)
-                .PropertyRef(r => r.Task)
-                .Cascade.SaveUpdate();
-
-            HasOne(x => x.Sender)
-                .PropertyRef(r => r.Task)
+            HasMany(x => x.Schedules)
+                .Table("EEK_API_SCHEDULES")
+                .KeyColumn("TaskId")
+                // .Inverse()
+                .Not.LazyLoad()
                 .Cascade.SaveUpdate();
 
         }
@@ -90,6 +64,7 @@ namespace ApiManager.Logic.Mappings
         {
             DiscriminatorValue("API");
 
+            Map(x => x.ApiType).CustomType(typeof(ActionType));
             Map(x => x.QueueName).Nullable();
             Map(x => x.HttpMethod).CustomType(typeof(HttpMethod));
 
@@ -104,14 +79,42 @@ namespace ApiManager.Logic.Mappings
         }
     }
 
+    public class RECEIVESENDTaskMap : SubclassMap<RECEIVESENDTask>
+    {
+        public RECEIVESENDTaskMap()
+        {
+            DiscriminatorValue("RECEIVESEND");
+
+            Map(x => x.ApiType).CustomType(typeof(ActionType));
+            Map(x => x.QueueName).Nullable();
+            Map(x => x.GraphQLMethod).CustomType(typeof(GraphQLMethod));
+
+            References(x => x.Url).Column("UrlId");
+
+            HasMany(x => x.HttpHeaders)
+                .Table("EEK_API_TASK_HEADERS")
+                .KeyColumn("TaskId")
+                // .Inverse()
+                .Not.LazyLoad()
+                .Cascade.SaveUpdate();
+
+            HasManyToMany(x => x.Shares)
+                .Table("EEK_API_TASK_SHARES")
+                .ParentKeyColumn("TaskId")
+                .ChildKeyColumn("ShareId")
+                .Not.LazyLoad()
+                .Cascade.SaveUpdate();
+        }
+    }
+
     public class MAILTaskMap : SubclassMap<MAILTask>
     {
         public MAILTaskMap()
         {
             DiscriminatorValue("MAIL");
 
-            Map(x => x.MailSender);
-            Map(x => x.MailRecipient);
+            Map(x => x.MailSender).Nullable();
+            Map(x => x.MailRecipient).Nullable();
         }
     }
 

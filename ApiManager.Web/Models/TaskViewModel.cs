@@ -65,11 +65,5 @@ namespace ApiManager.Web.Models
 
         // Mail fields
         public TaskMailViewModel MailViewModel { get; set; }
-
-        // Receiver
-        public TaskActionViewModel ReceiverViewModel { get; set; }
-
-        // Send
-        public TaskActionViewModel SenderViewModel { get; set; }
     }
 }

@@ -27,5 +27,8 @@ namespace ApiManager.Web.Models.Api
 
         [JsonProperty("queued")]
         public int Queued { get; set; }
+
+        [JsonProperty("active")]
+        public bool Active { get; set; }
     }
 }

@@ -9,6 +9,7 @@ namespace ApiManager.Logic.Models
         public virtual int TryCount { get; set; }
         public virtual DateTime SysCreated { get; set; }
         public virtual SchedulerTask Task { get; set; }
+        public virtual string Error { get; set; }
 
         protected Queue()
         {

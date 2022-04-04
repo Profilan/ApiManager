@@ -54,6 +54,10 @@ var ApiQueueDatatable = function () {
                     title: 'Try Count'
                 },
                 {
+                    field: 'error',
+                    title: 'Error'
+                },
+                {
                     field: 'actions',
                     title: 'Actions',
                     width: 130,

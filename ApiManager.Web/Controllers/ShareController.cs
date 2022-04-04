@@ -43,5 +43,10 @@ namespace ApiManager.Web.Controllers
             }
         }
 
+        public ActionResult Create()
+        {
+            return View();
+        }
+
     }
 }

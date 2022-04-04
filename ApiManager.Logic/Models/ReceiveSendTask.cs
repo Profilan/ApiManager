@@ -1,11 +1,20 @@
 ﻿
 namespace ApiManager.Logic.Models
 {
-    public class ReceiveSendTask : SchedulerTask
+    public class RECEIVESENDTask : SchedulerTask
     {
-        public virtual TaskReceiver Receiver { get; set; }
-        public virtual TaskSender Sender { get; set; }
+        protected RECEIVESENDTask()
+        {
 
-        public ReceiveSendTask() { }
+        }
+
+        public RECEIVESENDTask(string title,
+            Authentication authentication,
+            bool enabled,
+            int totalProcesseditems = 100
+            ) : base(title, authentication, enabled, totalProcesseditems)
+        {
+
+        }
     }
 }

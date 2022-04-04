@@ -1,6 +1,7 @@
 ﻿using ApiManager.Logic.Common;
 using ApiManager.Logic.Models;
 using NHibernate;
+using NHibernate.Criterion;
 using NHibernate.Linq;
 using System;
 using System.Collections.Generic;
@@ -36,66 +37,98 @@ namespace ApiManager.Logic.Repositories
         {
             throw new NotImplementedException();
         }
-        public IEnumerable<Log> List(string sortOrder, string searchString, DateTime startDate, DateTime endDate, int userId = -1, ErrorType errorType = ErrorType.NONE)
+
+
+        public IEnumerable<Log> List(string searchString, int page, int length, DateTime startDate, DateTime endDate, string sortOrder = "TimeStamp.desc", int userId = -1, ErrorType errorType = ErrorType.NONE, Guid taskId = new Guid())
         {
             using (ISession session = SessionFactory.GetNewSession("db1"))
             {
-                var query = from l in session.Query<Log>()
-                            select l;
+                var items = session.CreateCriteria<Log>()
+                    .SetMaxResults(length)
+                    .SetFirstResult((page - 1) * length);
 
-                // query = query.Skip(pageSize * (pageNumber - 1)).Take(pageSize);
+                items.Add(Expression.Ge("TimeStamp", startDate));
+                items.Add(Expression.Le("TimeStamp", endDate));
 
                 if (!String.IsNullOrEmpty(searchString))
                 {
-                    query = query.Where(x => x.Url.Like("%" + searchString + "%")
-                        || x.Message.Like("%" + searchString + "%")
-                        || x.Detail.Like("%" + searchString + "%")
-                        || x.PriorityName.Like("%" + searchString + "%"));
+                    items.Add(Expression.Disjunction()
+                        .Add(Expression.Like("Url", "%" + searchString + "%"))
+                        .Add(Expression.Like("Message", "%" + searchString + "%"))
+                        .Add(Expression.Like("Detail", "%" + searchString + "%"))
+                        .Add(Expression.Like("PriorityName", "%" + searchString + "%"))
+                        );
                 }
 
-                query = query.Where(l => l.TimeStamp >= startDate && l.TimeStamp <= endDate);
+                if (taskId != Guid.Empty)
+                {
+                    items.Add(Expression.Eq("Task.Id", taskId));
+                }
 
                 if (errorType != ErrorType.NONE)
                 {
-                    query = query.Where(l => l.PriorityName == errorType.ToString());
+                    items.Add(Expression.Eq("PriorityName", errorType.ToString()));
                 }
 
                 if (userId != -1)
                 {
-                    query = query.Where(l => l.User.Id == userId);
+                    items.Add(Expression.Eq("User.Id", userId));
                 }
 
-                switch (sortOrder)
+                var sort = sortOrder.Split('.');
+                if (sort[1] == "desc")
                 {
-                    case "timestamp.asc":
-                        query = query.OrderBy(x => x.TimeStamp);
-                        break;
-                    case "priority.asc":
-                        query = query.OrderBy(x => x.PriorityName);
-                        break;
-                    case "priority.desc":
-                        query = query.OrderByDescending(x => x.PriorityName);
-                        break;
-                    case "message.asc":
-                        query = query.OrderBy(x => x.Message);
-                        break;
-                    case "message.desc":
-                        query = query.OrderByDescending(x => x.Message);
-                        break;
-                    case "destination.asc":
-                        query = query.OrderBy(x => x.Url);
-                        break;
-                    case "destination.desc":
-                        query = query.OrderByDescending(x => x.Url);
-                        break;
-                    case "timestamp.desc":
-                    default:
-                        query = query.OrderByDescending(x => x.TimeStamp);
-                        break;
+                    items.AddOrder(Order.Desc(sort[0]));
+                }
+                else
+                {
+                    items.AddOrder(Order.Asc(sort[0]));
+                }
+ 
+                return items.List<Log>();
+            }
+        }
+
+        public int GetTotal(string searchString, DateTime startDate, DateTime endDate, int userId = -1, ErrorType errorType = ErrorType.NONE, Guid taskId = new Guid())
+        {
+            using (ISession session = SessionFactory.GetNewSession("db1"))
+            {
+                var items = session.CreateCriteria<Log>()
+                                .SetProjection(
+                                    Projections.Count(Projections.Id())
+                                );
+
+                items.Add(Expression.Ge("TimeStamp", startDate));
+                items.Add(Expression.Le("TimeStamp", endDate));
+
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    items.Add(Expression.Disjunction()
+                        .Add(Expression.Like("Url", "%" + searchString + "%"))
+                        .Add(Expression.Like("Message", "%" + searchString + "%"))
+                        .Add(Expression.Like("Detail", "%" + searchString + "%"))
+                        .Add(Expression.Like("PriorityName", "%" + searchString + "%"))
+                        );
                 }
 
-                return query.ToList();
+                if (errorType != ErrorType.NONE)
+                {
+                    items.Add(Expression.Eq("PriorityName", errorType.ToString()));
+                }
+
+                if (userId != -1)
+                {
+                    items.Add(Expression.Eq("User.Id", userId));
+                }
+
+                if (taskId != Guid.Empty)
+                {
+                    items.Add(Expression.Eq("Task.Id", taskId));
+                }
+
+                return items.UniqueResult<int>();
             }
+
         }
 
         public IEnumerable<Log> ListByTypeAndTask(Period period, ErrorType errorType, SchedulerTask task, bool acknowledged = false)

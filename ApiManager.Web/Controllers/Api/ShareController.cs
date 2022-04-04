@@ -41,6 +41,39 @@ namespace ApiManager.Web.Controllers.Api
         }
 
 
+        [Route("api/share/create")]
+        [HttpPost]
+        public IHttpActionResult Create(FormDataCollection data)
+        {
+            try
+            {
+
+                var share = new Share();
+
+                var monitorInactivity = false;
+                if (data["MonitorInactivity"] == "true,false")
+                {
+                    monitorInactivity = true;
+                }
+
+                share.Name = data["Name"];
+                share.UNCPath = data["UNCPath"];
+                var inactivityTimeout = new Interval(Convert.ToInt32(data["Amount"]), (Unit)Enum.Parse(typeof(Unit), data["Unit"]));
+                share.InactivityTimeout = inactivityTimeout;
+                share.MonitorInactivity = monitorInactivity;
+
+                shareRepository.Insert(share);
+
+                return Ok();
+
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e.Message);
+            }
+        }
+
         [Route("api/share/edit")]
         [HttpPost]
         public IHttpActionResult Edit(FormDataCollection data)

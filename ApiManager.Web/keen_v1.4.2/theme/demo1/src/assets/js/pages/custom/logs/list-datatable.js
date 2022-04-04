@@ -16,7 +16,7 @@ var KTLogsListDatatable = function() {
                     timeout: 300000,
                 }
             },
-            pageSize: 10, // display 20 records per page
+            pageSize: 20, // display 20 records per page
             serverPaging: true,
             serverFiltering: true,
             serverSorting: true,
@@ -41,33 +41,36 @@ var KTLogsListDatatable = function() {
 
         // columns definition
         columns: [{
-            field: "timestamp",
+            field: "TimeStamp",
             title: "Date",
             template: function (row) {
-                return moment(row.timestamp).format('DD-MM-YYYY hh:mm:ss');
+                return row.TimeStamp;
             }
         }, {
-            field: 'message',
+            field: 'Message',
             title: 'Message'
         }, {
-            field: 'status',
+            field: 'PriorityName',
             title: 'Status',
             template: function (row) {
                 var color = "green";
-                if (row.priority_name === "ERR") {
+                if (row.PriorityName === "ERR") {
                     color = "red";
                 }
-                if (row.priority_name === "ALERT") {
+                if (row.PriorityName === "ALERT") {
                     color = "purple";
                 }
 
-                return '<span style="color: ' + color + ';">' + row.priority_name + '</span>';
+                return '<span style="color: ' + color + ';">' + row.PriorityName + '</span>';
             }
         }, {
-            field: 'url',
+            field: 'Url',
             title: 'Destination'
         }, {
-            field: 'duration',
+            field: 'UserName',
+            title: 'Username'
+        }, {
+            field: 'Duration',
             title: 'Duration (ms)'
         }, {
             field: "Actions",
@@ -78,7 +81,7 @@ var KTLogsListDatatable = function() {
             overflow: 'visible',
             template: function (row) {
                 return '\
-							<a href="#" class="btn btn-hover-brand btn-icon btn-pill btn-details" data-record-id="' + row.id + '" data-toggle="modal" data-target="#detailsModal" title="Details">\
+							<a href="#" class="btn btn-hover-brand btn-icon btn-pill btn-details" data-record-id="' + row.Id + '" data-toggle="modal" data-target="#detailsModal" title="Details">\
                                     <i class="la la-book"></i>\
                             </a>\
 						';
@@ -100,7 +103,7 @@ var KTLogsListDatatable = function() {
             $.getJSON('/api/log/' + id)
                 .done(function (data) {
                     
-                    modal.find('.modal-body > p').text(data.user.username + ': ' + data.detail);
+                    modal.find('.modal-body > p').text(data.User.username + ': ' + data.Detail);
                 });
         });
     };
@@ -113,6 +116,11 @@ var KTLogsListDatatable = function() {
         $('#kt_form_user').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
             console.log($(this).val());
             datatable.search($(this).val(), 'UserId');
+        });
+
+        $('#kt_form_task').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
+            console.log($(this).val());
+            datatable.search($(this).val(), 'TaskId');
         });
 
         //$('#kt_form_error_type').on('change', function () {
@@ -162,6 +170,7 @@ var KTLogsListDatatable = function() {
         // init form controls
         //$('#kt_form_status, #kt_form_type').selectpicker();
         $('#kt_form_user, #kt_form_error_type').selectpicker();
+        $('#kt_form_task, #kt_form_error_type').selectpicker();
     };
 
 	return {

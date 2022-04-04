@@ -10,13 +10,20 @@ namespace ApiManager.Web.Models.Api
     {
         [JsonProperty("id")]
         public int Id { get; set; }
+
         [JsonProperty("key")]
         public int Key { get; set; }
+
         [JsonProperty("try_count")]
         public int TryCount { get; set; }
+
         [JsonProperty("created")]
         public string Created { get; set; }
+
         [JsonProperty("title")]
         public string TaskTitle { get; set; }
+
+        [JsonProperty("error")]
+        public string Error { get; set; }
     }
 }

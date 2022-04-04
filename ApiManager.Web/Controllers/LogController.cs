@@ -1,4 +1,5 @@
 ﻿using ApiManager.Logic.Repositories;
+using ApiManager.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,20 +12,24 @@ namespace ApiManager.Web.Controllers
     public class LogController : Controller
     {
         private readonly UserRepository userRepository = new UserRepository();
+        private readonly TaskRepository taskRepository = new TaskRepository();
 
         public ActionResult Index()
         {
-            ViewBag.Users = userRepository.List();
-
             DateTime start, end;
 
             start = DateTime.Now.AddDays(-3).Date;
             end = DateTime.Now.AddDays(1).Date;
 
-            ViewBag.StartDate = start.ToString("dd-MM-yyyy");
-            ViewBag.EndDate = end.ToString("dd-MM-yyyy");
+            LogViewModel viewModel = new LogViewModel
+            {
+                StartDate = start.ToString("dd-MM-yyyy"),
+                EndDate = end.ToString("dd-MM-yyyy"),
+                Tasks = taskRepository.List(),
+                Users = userRepository.List()
+            };
 
-            return View();
+            return View(viewModel);
         }
     }
 }

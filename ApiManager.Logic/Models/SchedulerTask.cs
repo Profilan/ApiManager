@@ -8,11 +8,13 @@ namespace ApiManager.Logic.Models
     public class SchedulerTask : Entity<Guid>
     {
         public virtual string Title { get; set; }
+        public virtual TaskType TaskType { get; set; }
         public virtual int ScheduleId { get; set; }
+        public virtual Scheduler Scheduler { get; set; }
 
         public virtual Status Status { get; protected set; }
 
-        public virtual Schedule Schedule { get; set; }
+        // public virtual Schedule Schedule { get; set; }
 
         public virtual Authentication Authentication { get; set; }
 
@@ -20,7 +22,9 @@ namespace ApiManager.Logic.Models
         public virtual bool Enabled { get; set; }
         public virtual string QueueName { get; set; }
         public virtual HttpMethod HttpMethod { get; set; }
-        public virtual TaskType TaskType { get; set; }
+
+        public virtual ApiType ApiType { get; set; }
+        public virtual GraphQLMethod GraphQLMethod { get; set; }
 
         public virtual string ContentFormats { get; set; }
         public virtual string Classname { get; set; }
@@ -39,16 +43,16 @@ namespace ApiManager.Logic.Models
 
         public virtual ISet<Share> Shares { get; set; }
         public virtual ISet<HttpHeader> HttpHeaders { get; set; }
-
+        public virtual ISet<Schedule> Schedules { get; set; }
 
         public SchedulerTask()
         {
             Shares = new HashSet<Share>();
             HttpHeaders = new HashSet<HttpHeader>();
+            Schedules = new HashSet<Schedule>();
         }
 
         public SchedulerTask(string title,
-            Schedule schedule,
             Authentication authentication,
             bool enabled,
             int totalProcessedItems = 100
@@ -58,7 +62,6 @@ namespace ApiManager.Logic.Models
 
             Title = title;
             ScheduleId = 1;
-            Schedule = schedule;
             Authentication = authentication;
             Enabled = enabled;
             LastRunTime = DateTime.Now;
@@ -68,6 +71,7 @@ namespace ApiManager.Logic.Models
 
             Shares = new HashSet<Share>();
             HttpHeaders = new HashSet<HttpHeader>();
+            Schedules = new HashSet<Schedule>();
         }
         public virtual bool AddHeader(HttpHeader newHeader)
         {
@@ -88,7 +92,26 @@ namespace ApiManager.Logic.Models
             }
             return false;
         }
+        public virtual bool AddSchedule(Schedule newSchedule)
+        {
+            if (newSchedule != null && Schedules.Add(newSchedule))
+            {
+                newSchedule.SetTask(this);
+                return true;
+            }
+            return false;
+        }
 
+        public virtual bool RemoveSchedule(Schedule scheduleToRemove)
+        {
+            if (scheduleToRemove != null && Schedules.Remove(scheduleToRemove))
+            {
+                scheduleToRemove.SetTask(null);
+                return true;
+            }
+            return false;
+        }
     }
 }
+
 

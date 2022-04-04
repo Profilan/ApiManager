@@ -11,7 +11,7 @@ var KTTasksEdit = function () {
 
             // Validation rules
             rules: {
-                
+
                 Title: {
                     required: true
                 },
@@ -61,75 +61,21 @@ var KTTasksEdit = function () {
         }
     };
 
-    var showReceiveAuthSection = function (el) {
-        if (el.val() == 1 || el.val() == 2 || el.val() == 3 || el.val() == 4) {
-            $('#basicReceiveSection').show();
-        } else {
-            $('#basicReceiveSection').hide();
-        }
-        if (el.val() == 2) {
-            $('#oAuthReceiveSection').show();
-        } else {
-            $('#oAuthReceiveSection').hide();
-        }
-        if (el.val() == 4) {
-            $('#apiKeyReceiveSection').show();
-        } else {
-            $('#apiKeyReceiveSection').hide();
-        }
-    };
-
-    var showSendAuthSection = function (el) {
-        if (el.val() == 1 || el.val() == 2 || el.val() == 3 || el.val() == 4) {
-            $('#basicSendSection').show();
-        } else {
-            $('#basicSendSection').hide();
-        }
-        if (el.val() == 2) {
-            $('#oAuthSendSection').show();
-        } else {
-            $('#oAuthSendSection').hide();
-        }
-        if (el.val() == 4) {
-            $('#apiKeySendSection').show();
-        } else {
-            $('#apiKeySendSection').hide();
-        }
-    };
-
-    var showReceiveApiTypeSection = function (el) {
+    var showApiTypeSection = function (el) {
         if (el.val() == 0) {
-            $('#restReceiveSection').hide();
-            $('#graphqlReceiveSection').hide();
+            $('#restSection').hide();
+            $('#graphqlSection').hide();
         }
         if (el.val() == 1) { // Rest
-            $('#restReceiveSection').show();
+            $('#restSection').show();
         } else {
-            $('#restReceiveSection').hide();
+            $('#restSection').hide();
         }
 
         if (el.val() == 2) { // GraphQL
-            $('#graphqlReceiveSection').show();
+            $('#graphqlSection').show();
         } else {
-            $('#graphqlReceiveSection').hide();
-        }
-    };
-
-    var showSendApiTypeSection = function (el) {
-        if (el.val() == 0) {
-            $('#restSendSection').hide();
-            $('#graphqlSendSection').hide();
-        }
-        if (el.val() == 1) { // Rest
-            $('#restSendSection').show();
-        } else {
-            $('#restSendSection').hide();
-        }
-
-        if (el.val() == 2) { // GraphQL
-            $('#graphqlSendSection').show();
-        } else {
-            $('#graphqlSendSection').hide();
+            $('#graphqlSection').hide();
         }
     };
 
@@ -138,7 +84,6 @@ var KTTasksEdit = function () {
         $('#ftpTab').parent().addClass('d-none');
         $('#diskTab').parent().addClass('d-none');
         $('#mailTab').parent().addClass('d-none');
-        $('#receivesendTab').parent().addClass('d-none');
         $('#authenticationTab').parent().removeClass('d-none');
         if (el.val() == 1) {
             $('#apiTab').parent().removeClass('d-none');
@@ -161,99 +106,20 @@ var KTTasksEdit = function () {
             $('#mailTab').parent().addClass('d-none');
         }
         if (el.val() == 5) {
-            $('#receivesendTab').parent().removeClass('d-none');
-            $('#authenticationTab').parent().addClass('d-none');
-        } else {
-            $('#receivesendTab').parent().addClass('d-none');
+            if (el.val() != 1) {
+                $('#apiTab').parent().addClass('d-none');
+            }
+            $('#diskTab').parent().removeClass('d-none');
+            $('#mailTab').parent().removeClass('d-none');
         }
     };
-
-    var showReceiveTab = function (el) {
-        console.log(el.val());
-        $('#apiReceiveTab').parent().addClass('d-none');
-        $('#ftpReceiveTab').parent().addClass('d-none');
-        $('#diskReceiveTab').parent().addClass('d-none');
-        $('#mailReceiveTab').parent().addClass('d-none');
-        $('#sqlReceiveTab').parent().addClass('d-none');
-        $('#authenticationReceiveTab').parent().removeClass('d-none');
-        if (el.val() == 1) {
-            $('#apiReceiveTab').parent().removeClass('d-none');
-            $('#apiReceiveTab').tab('show');
-        } else {
-            $('#apiReceiveTab').parent().addClass('d-none');
-        }
-        if (el.val() == 2) {
-            $('#ftpReceiveTab').parent().removeClass('d-none');
-            $('#ftpReceiveTab').tab('show');
-        } else {
-            $('#ftpReceiveTab').parent().addClass('d-none');
-        }
-        if (el.val() == 3) {
-            $('#diskReceiveTab').parent().removeClass('d-none');
-            $('#diskReceiveTab').tab('show');
-        } else {
-            $('#diskReceiveTab').parent().addClass('d-none');
-        }
-        if (el.val() == 4) {
-            $('#mailReceiveTab').parent().removeClass('d-none');
-            $('#mailReceiveTab').tab('show');
-        } else {
-            $('#mailReceiveTab').parent().addClass('d-none');
-        }
-        if (el.val() == 5) {
-            $('#sqlReceiveTab').parent().removeClass('d-none');
-            $('#sqlReceiveTab').tab('show');
-        } else {
-            $('#sqlReceiveTab').parent().addClass('d-none');
-        }
-    };
-
-    var showSendTab = function (el) {
-        console.log(el.val());
-        $('#apiSendTab').parent().addClass('d-none');
-        $('#ftpSendTab').parent().addClass('d-none');
-        $('#diskSendTab').parent().addClass('d-none');
-        $('#mailSendTab').parent().addClass('d-none');
-        $('#sqlSendTab').parent().addClass('d-none');
-        $('#authenticationSendTab').parent().removeClass('d-none');
-        if (el.val() == 1) {
-            $('#apiSendTab').parent().removeClass('d-none');
-            $('#apiSendTab').tab('show');
-        } else {
-            $('#apiSendTab').parent().addClass('d-none');
-        }
-        if (el.val() == 2) {
-            $('#ftpSendTab').parent().removeClass('d-none');
-            $('#ftpSendTab').tab('show');
-        } else {
-            $('#ftpSendTab').parent().addClass('d-none');
-        }
-        if (el.val() == 3) {
-            $('#diskSendTab').parent().removeClass('d-none');
-            $('#diskSendTab').tab('show');
-        } else {
-            $('#diskSendTab').parent().addClass('d-none');
-        }
-        if (el.val() == 4) {
-            $('#mailSendTab').parent().removeClass('d-none');
-            $('#mailSendTab').tab('show');
-        } else {
-            $('#mailSendTab').parent().addClass('d-none');
-        }
-        if (el.val() == 5) {
-            $('#sqlSendTab').parent().removeClass('d-none');
-            $('sqlSendTab').tab('show');
-        } else {
-            $('#sqlSendTab').parent().addClass('d-none');
-        }
-    };
-
 
     var initTabs = function () {
-        showAuthSection($('#AuthenticationType'));
+        showAuthSection($('#AuthenticationViewModel_AuthenticationType'));
         showTab($('#TaskType'));
+        showApiTypeSection($('#ApiViewModel_ApiType'));
 
-        $('#AuthenticationType').change(function (e) {
+        $('#AuthenticationViewModel_AuthenticationType').change(function (e) {
             showAuthSection($(this));
         });
 
@@ -261,38 +127,8 @@ var KTTasksEdit = function () {
             showTab($(this));
         });
 
-        // Receive tabs
-        showReceiveAuthSection($('#ReceiverViewModel_AuthenticationViewModel_AuthenticationType'));
-        showReceiveApiTypeSection($('#ReceiveApiType'));
-        showReceiveTab($('#ReceiveType'));
-
-        $('#ReceiverViewModel_AuthenticationViewModel_AuthenticationType').change(function (e) {
-            showReceiveAuthSection($(this));
-        });
-
-        $('#ReceiverViewModel_ApiViewModel_ApiType').change(function (e) {
-            showReceiveApiTypeSection($(this));
-        });
-
-        $('#ReceiverViewModel_Type').change(function (e) {
-            showReceiveTab($(this));
-        });
-
-        // Send Tabs
-        showSendAuthSection($('#SenderViewModel_AuthenticationViewModel_AuthenticationType'));
-        showSendApiTypeSection($('#SendApiType'));
-        showSendTab($('#SendType'));
-
-        $('#SenderViewModel_AuthenticationViewModel_AuthenticationType').change(function (e) {
-            showSendAuthSection($(this));
-        });
-
-        $('#SenderViewModel_ApiViewModel_ApiType').change(function (e) {
-            showSendApiTypeSection($(this));
-        });
-
-        $('#SenderViewModel_Type').change(function (e) {
-            showSendTab($(this));
+        $('#ApiViewModel_ApiType').change(function (e) {
+            showApiTypeSection($(this));
         });
 
         // Schedule tab
@@ -361,25 +197,11 @@ var KTTasksEdit = function () {
             isFirstItemUndeletable: true
         });
 
-        $('#ReceiveHeaderRepeater').repeater({
-            show: function () {
-                $(this).slideDown();
-            },
-            isFirstItemUndeletable: true
-        });
-
-        $('#SendHeaderRepeater').repeater({
-            show: function () {
-                $(this).slideDown();
-            },
-            isFirstItemUndeletable: true
-        });
-
     };
 
     return {
         // public functions
-        init: function() {
+        init: function () {
             formEl = $('#kt_task_form');
 
             initTabs();
@@ -390,6 +212,6 @@ var KTTasksEdit = function () {
     };
 }();
 
-jQuery(document).ready(function() {    
+jQuery(document).ready(function () {
     KTTasksEdit.init();
 });

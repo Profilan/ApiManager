@@ -1,4 +1,5 @@
 ﻿using ApiManager.Logic.Common;
+using ApiManager.Logic.Models;
 using ApiManager.Logic.Repositories;
 using ApiManager.Web.Models.Api;
 using System;
@@ -24,7 +25,19 @@ namespace ApiManager.Web.Controllers.Api
         {
             string searchString = data["query[generalsearch]"];
             string sortOrder = data["sort[field]"] + "." + data["sort[sort]"];
+            if (sortOrder == ".") // default order
+            {
+                sortOrder = "TimeStamp.desc";
+            }
             string dateRange = data["query[daterange]"];
+            Guid taskId = Guid.Empty;
+            if (!string.IsNullOrEmpty(data["query[taskId]"]))
+            {
+                taskId = new Guid(data["query[taskId]"]);
+            }
+
+            int page = Convert.ToInt32(data["pagination[page]"]);
+            int pageSize = Convert.ToInt32(data["pagination[perpage]"]);
 
             DateTime start = DateTime.Today.AddDays(-3);
             DateTime end = DateTime.Today.AddDays(1).AddSeconds(-1);
@@ -48,23 +61,40 @@ namespace ApiManager.Web.Controllers.Api
 
             try
             {
-                var items = logRepository.List(sortOrder, searchString, start, end, userId, (ErrorType)errorType);
+                var items = logRepository.List(searchString, page, pageSize, start, end, sortOrder, userId, (ErrorType)errorType, taskId);
 
                 List<LogApiModel> logs = new List<LogApiModel>();
                 foreach (var item in items)
                 {
+
                     logs.Add(new LogApiModel()
                     {
                         Id = item.Id,
-                        TimeStamp = item.TimeStamp.ToString("MM-dd-yyyy H:mm:ss"),
+                        TimeStamp = item.TimeStamp.ToString("dd-MM-yyyy HH:mm:ss"),
                         Message = item.Message,
                         PriorityName = item.PriorityName,
                         Url = item.Url,
                         Duration = item.Duration,
+                        UserName = item.User != null ? userRepository.GetById(item.User.Id).Username : ""
                     });
                 }
 
-                return Ok(logs);
+                int total = logRepository.GetTotal(searchString, start, end, userId, (ErrorType)errorType, taskId);
+                var sort = sortOrder.Split('.');
+
+                return Ok(new ResponseApiModel<LogApiModel>
+                {
+                    Meta = new ResponseMetaApiModel
+                    {
+                        Page = page,
+                        Pages = (total + pageSize - 1) / pageSize,
+                        PerPage = pageSize,
+                        Total = total,
+                        Sort = sort[1],
+                        Field = sort[0]
+                    },
+                    Data = logs
+                });
 
             }
             catch (Exception e)

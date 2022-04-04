@@ -119,20 +119,26 @@ namespace ApiManager.Web.Controllers.Api
                 user.Urls.Clear();
                 foreach (var urlItem in data.Urls)
                 {
-                    var url = urlRepository.GetByName(urlItem.Name);
-                    user.Urls.Add(url);
+                    if (!string.IsNullOrEmpty(urlItem.Name))
+                    {
+                        var url = urlRepository.GetByName(urlItem.Name);
+                        user.Urls.Add(url);
+                    }
                 }
 
                 user.Debtors.Clear();
                 foreach (var debtor in data.Debtors)
                 {
-                    var id = debtor.NAAM.Split(new char[] { ' ' })[0];
-                    user.Debtors.Add(debtorRepository.GetById(id));
+                    if (!string.IsNullOrEmpty(debtor.Name))
+                    {
+                        var id = debtor.Name.Split(new char[] { ' ' })[0];
+                        user.Debtors.Add(debtorRepository.GetById(id));
+                    }
                 }
 
 
                 var sysCreated = user.SysCreated.ToShortDateString();
-                if (sysCreated == "01/01/0001")
+                if (sysCreated == DateTime.MinValue.ToShortDateString())
                 {
                     user.SysCreated = DateTime.Now;
                 }
@@ -192,16 +198,23 @@ namespace ApiManager.Web.Controllers.Api
             user.HashedPassword = hasher.HashPassword(data.Password);
             user.RawPassword = data.Password;
 
-            foreach (var debtor in data.Debtors)
+
+            foreach (var urlItem in data.Urls)
             {
-                var id = debtor.NAAM.Split(new char[] { ' ' })[0];
-                user.Debtors.Add(debtorRepository.GetById(id));
+                if (!string.IsNullOrEmpty(urlItem.Name))
+                {
+                    var url = urlRepository.GetByName(urlItem.Name);
+                    user.Urls.Add(url);
+                }
             }
 
-            foreach (var url in data.Urls)
-
+            foreach (var debtor in data.Debtors)
             {
-                user.Urls.Add(urlRepository.GetByName(url.Name));
+                if (!string.IsNullOrEmpty(debtor.Name))
+                {
+                    var id = debtor.Name.Split(new char[] { ' ' })[0];
+                    user.Debtors.Add(debtorRepository.GetById(id));
+                }
             }
 
             user.SysCreated = DateTime.Now;

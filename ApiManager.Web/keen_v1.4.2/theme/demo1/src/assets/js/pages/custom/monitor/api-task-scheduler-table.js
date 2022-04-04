@@ -212,6 +212,8 @@ var ApiTaskSchedulerDatatable = function () {
     };
 
     var showNotification = function (title, message, type) {
+
+        /*
         $.notify({
             title: title,
             message: message
@@ -232,6 +234,36 @@ var ApiTaskSchedulerDatatable = function () {
                     </div>
                 `
             });
+        */
+        var color = "green";
+        if (type == "danger") {
+            color = "red";
+        }
+
+        var template = `
+              <div class="toast fade" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
+                <div class="toast-header">
+                  <svg class="bd-placeholder-img rounded mr-2" width="20" height="20" xmlns="http://www.w3.org/2000/svg" role="img" aria-label=" :  " preserveAspectRatio="xMidYMid slice" focusable="false"><title> </title><rect width="100%" height="100%" fill="${color}"></rect><text x="50%" y="50%" fill="#dee2e6" dy=".3em"> </text></svg>
+                  <strong class="mr-auto">${title}</strong>
+                   <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="toast-body">
+                  ${message}
+                </div>
+              </div>
+        `;
+
+        var message = $(template);
+        message.toast();
+        message.on('hidden.bs.toast', function () {
+            $(this).remove();
+        });
+
+        $('#notifications').prepend(message);
+
+        message.toast('show');
     }
 
     var initSignalr = function () {

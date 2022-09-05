@@ -46,9 +46,9 @@ namespace ApiManager.Web.Controllers.Api
             return Ok(tasks);
         }
 
-        [Route("api/Task")]
+        [Route("api/task")]
         [HttpGet]
-        public IHttpActionResult Get(int schedulerId)
+        public IHttpActionResult GetTasks(int schedulerId = 1)
         {
             try
             {

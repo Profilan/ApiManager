@@ -13,7 +13,7 @@ var ApiTaskMonitor = function () {
     var detailsModal;
     var paused = true;
     var pageScroller;
-    var tasks = [];
+    var tasks;
 
     var status = {
         true: { 'title': 'Enabled', 'class': 'kt-badge--success', 'enabled': 1 },
@@ -24,10 +24,6 @@ var ApiTaskMonitor = function () {
     var notificationPanel = $('.kt_quick_panel_tab_notifications');
 
     var initDatatable = function () {
-
-        var hostName = $('#HostName option:selected').text().toLowerCase();
-        initSignalr(hostName);
-
         datatable = $('#apiTaskMonitorTable');
 
         $('.btn-next').click(function (e) {
@@ -42,8 +38,7 @@ var ApiTaskMonitor = function () {
             show(currentPage);
         });
 
-        $.get('/api/task', { schedulerId: $('#HostName').val() }, function (response) {
-
+        $.get('/api/task', function (response) {
             tasks = response;
             pageTotal = Math.ceil(tasks.length / length);
             $('.page-total').text(pageTotal);
@@ -98,12 +93,31 @@ var ApiTaskMonitor = function () {
 
         });
 
-        $('#HostName').change(function (e) {
-            initDatatable();
-
-        });
-
         detailsModal = $('#detailsModal');
+    };
+
+    var showPage = function (page) {
+
+        datatable.find('tbody').empty();
+        clearInterval(refreshTasks);
+
+        $.get('/api/task', function (response) {
+            var pageTotal = Math.ceil(response.length / 10);
+
+
+            $.each(response, function (idx, task) {
+                if (idx < currentPage * 10 && idx >= (currentPage - 1) * 10) {
+                    addTask(task);
+                }
+            });
+
+            if (currentPage < pageTotal) {
+                ++currentPage;
+            } else {
+                currentPage = 1;
+            }
+            
+        });
     };
 
     var addTask = function (task) {
@@ -200,7 +214,6 @@ var ApiTaskMonitor = function () {
     var refreshTasks = function () {
         $.getJSON("/api/task")
             .done(function (data) {
-
                 $.each(data, function (idx, task) {
                     var color = 'secondary';
                     if (task.queued > 0) {
@@ -270,14 +283,11 @@ var ApiTaskMonitor = function () {
         message.toast('show');
     }
 
-    var initSignalr = function (hostName) {
+    var initSignalr = function () {
 
 
         // Define url where the api task management service is running
-        // $.connection.hub.url = hubConnectionUrl;
-        var connectionUrl = 'http://' + hostName + ':8082/';
-        console.log(connectionUrl);
-        $.connection.hub.url = connectionUrl;
+        $.connection.hub.url = hubConnectionUrl + "signalr";
 
         // Connect to signalR hub
         scheduler = $.connection.taskSchedulerHub;
@@ -345,6 +355,7 @@ var ApiTaskMonitor = function () {
     return {
         init: function () {
             
+            initSignalr();
             init();
             initDatatable();
 
